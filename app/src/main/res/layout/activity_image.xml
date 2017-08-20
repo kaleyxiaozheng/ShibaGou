@@ -80,8 +80,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90px"
-        android:background="#45104502"
+        android:layout_height="180px"
+        android:background="#FF104502"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -94,8 +94,8 @@
 
             <Button
                 android:id="@+id/goGeoLocation"
-                android:layout_width="70px"
-                android:layout_height="80px"
+                android:layout_width="90px"
+                android:layout_height="100px"
                 android:background="@drawable/back"
                 android:onClick="toGoBack" />
         </LinearLayout>
@@ -110,8 +110,8 @@
 
             <Button
                 android:id="@+id/findPlant"
-                android:layout_width="70px"
-                android:layout_height="80px"
+                android:layout_width="90px"
+                android:layout_height="100px"
                 android:background="@drawable/flowr"
                 android:onClick="toImagePage" />
         </LinearLayout>
@@ -126,8 +126,8 @@
 
             <Button
                 android:id="@+id/plantList"
-                android:layout_width="90px"
-                android:layout_height="100px"
+                android:layout_width="110px"
+                android:layout_height="120px"
                 android:background="@drawable/list" />
         </LinearLayout>
     </LinearLayout>

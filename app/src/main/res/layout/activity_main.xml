@@ -49,7 +49,7 @@
             android:id="@+id/mapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="52dp"
+            android:layout_marginBottom="42dp"
             android:background="@drawable/shape"
             android:elegantTextHeight="true"
             android:text="Plants  Near  Me"
@@ -57,8 +57,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/topTextView"
             android:layout_alignStart="@+id/topTextView" />
