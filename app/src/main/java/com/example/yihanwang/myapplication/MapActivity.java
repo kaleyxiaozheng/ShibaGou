@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,11 @@ public class MapActivity extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
 //                Intent image = new Intent(MapActivity.this,ImageActivity.class);
 //                startActivity(image);
+                Fragment fragment = new ImageActivity();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.map_fragment, fragment).addToBackStack(null).commit();
+
             }
         });
 
