@@ -15,7 +15,7 @@
 
         <fragment
             android:id="@+id/map_fragment"
-            android:name="com.google.android.gms.maps.MapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
 
 
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180px"
+        android:layout_height="120px"
         android:background="#45104502"
         android:orientation="horizontal">
 
