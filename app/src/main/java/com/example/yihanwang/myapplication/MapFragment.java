@@ -38,7 +38,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
             return tempView;
         }
 
-        View view = inflater.inflate(R.layout.activity_map, container, false);
+        View view = inflater.inflate(R.layout.map_fragment, container, false);
         tempView = view;
                 // Get access to our MapFragment
         SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment);
