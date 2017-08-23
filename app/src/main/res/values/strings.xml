@@ -4,13 +4,8 @@
     <string name="drawer_close">Close</string>
     <string-array name="planets_array">
         <item></item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Instruction</item>
+        <item>Gallery</item>
+        <item>About Us</item>
     </string-array>
 </resources>
