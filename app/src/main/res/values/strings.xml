@@ -4,6 +4,7 @@
     <string name="drawer_close">Close</string>
     <string-array name="planets_array">
         <item></item>
+        <item>demo</item>
         <item>Instruction</item>
         <item>Gallery</item>
         <item>About Us</item>
