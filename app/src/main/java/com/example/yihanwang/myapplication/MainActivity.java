@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, fragment).addToBackStack("Home").commit();
+                .add(R.id.frame_container, fragment).addToBackStack("Home").commit();
 
     }
 

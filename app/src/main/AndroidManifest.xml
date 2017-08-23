@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity" />
+        <activity android:name=".MapFragment" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -35,7 +35,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
-        <activity android:name=".ImageActivity" />
+        <activity android:name=".ImageFragment" />
         <activity android:name=".ImageInformationActivity"></activity>
     </application>
 
