@@ -27,7 +27,11 @@ public class ImageFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Fragment fragment = new ImageFragment();
+                Bundle args = new Bundle();
+                args.putString("Plant","Plant 1");
+
+                Fragment fragment = new ImageInformationFragment();
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
@@ -38,8 +42,11 @@ public class ImageFragment extends Fragment {
         imageBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("Plant","Plant 2");
 
-                Fragment fragment = new ImageFragment();
+                Fragment fragment = new ImageInformationFragment();
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
@@ -50,8 +57,11 @@ public class ImageFragment extends Fragment {
         imageBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("Plant","Plant 3");
 
-                Fragment fragment = new ImageFragment();
+                Fragment fragment = new ImageInformationFragment();
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
@@ -62,8 +72,11 @@ public class ImageFragment extends Fragment {
         imageBtn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("Plant","Plant 4");
 
-                Fragment fragment = new ImageFragment();
+                Fragment fragment = new ImageInformationFragment();
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(null).commit();

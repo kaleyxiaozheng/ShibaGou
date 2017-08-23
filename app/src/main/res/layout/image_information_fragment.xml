@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yihanwang.myapplication.ImageInformationActivity">
+    tools:context="com.example.yihanwang.myapplication.ImageInformationFragment">
 
     <TextView
         android:id="@+id/plantText"

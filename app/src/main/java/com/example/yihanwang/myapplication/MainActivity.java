@@ -78,10 +78,19 @@ public class MainActivity extends AppCompatActivity {
 
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            selectItem(position);
-//            System.out.println("xxx");
+            if(id == 1){
+                Fragment fragment = new InstructionFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+            } else if(id == 2) {
+
+            } else {
+
+            }
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 }

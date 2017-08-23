@@ -36,7 +36,7 @@
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
         <activity android:name=".ImageFragment" />
-        <activity android:name=".ImageInformationActivity"></activity>
+        <activity android:name=".ImageInformationFragment"></activity>
     </application>
 
 </manifest>
