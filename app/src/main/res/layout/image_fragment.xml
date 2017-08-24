@@ -26,87 +26,10 @@
         android:layout_marginTop="115dp"
         android:layout_marginBottom="25dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="40dp">
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginRight="20dp" >
-
-                <ImageButton
-                    android:id="@+id/imageBtn1"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    app:srcCompat="@drawable/golddust_wattle"
-                    app:layout_constraintRight_toLeftOf="@+id/imageBtn2"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/imageBtn3"
-                    app:layout_constraintLeft_toLeftOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/imageBtn2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    app:srcCompat="@drawable/lightwood"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/imageBtn4" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp" >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_marginRight="20dp" >
-
-                <ImageButton
-                    android:id="@+id/imageBtn3"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    app:srcCompat="@drawable/spike_watte"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/imageBtn4" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/imageBtn4"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    app:srcCompat="@drawable/pincushiionlily"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
-            </LinearLayout>
-
-        </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:layout_height = "match_parent"
+            android:layout_width = "match_parent"
+            android:id = "@+id/viewPager"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -124,13 +47,13 @@
             <!--android:layout_marginTop="8dp"-->
             <!--android:layout_marginLeft="24dp"/>-->
 
-        <Button
-            android:id="@+id/plantList"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="13dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/plantList"-->
+            <!--android:layout_width="65dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/list"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="13dp"/>-->
     </RelativeLayout>
 
 </LinearLayout>
