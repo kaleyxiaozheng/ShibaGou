@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.frame_container, fragment).addToBackStack("Home").commit();
+                .add(R.id.frame_container, fragment).addToBackStack(HomeFragment.class.getName()).commit();
 
     }
 
@@ -81,14 +81,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             if(id == 1){
-                Fragment fragment = new InstructionFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+                String name = InstructionFragment.class.getName();
+                Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
+                if(tag == null) {
+                    Fragment fragment = new InstructionFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_container, fragment, name).addToBackStack(name).commit();
+                }
             } else if(id == 2) {
 
             } else {
-
+                String name = InstructionFragment.class.getName();
+                Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
+                if(tag == null) {
+                    Fragment fragment = new AboutUsFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_container, fragment, name).addToBackStack(name).commit();
+                }
             }
             mDrawerLayout.closeDrawer(GravityCompat.START);
         }

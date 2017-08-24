@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
                 Fragment fragment = new MapFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
             }
         });
 

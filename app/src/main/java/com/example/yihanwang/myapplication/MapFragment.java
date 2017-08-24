@@ -53,7 +53,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
                 Fragment fragment = new ImageFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
             }
         });
 
