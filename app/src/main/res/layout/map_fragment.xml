@@ -33,7 +33,6 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/flowr"
-                android:onClick="toImagePage"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="24dp"/>

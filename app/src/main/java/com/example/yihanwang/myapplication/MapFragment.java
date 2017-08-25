@@ -1,9 +1,9 @@
 package com.example.yihanwang.myapplication;
 
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.*;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapFragment extends Fragment implements OnMapReadyCallback, FragmentManager.OnBackStackChangedListener{
     private GoogleMap m_cGoogleMap;
     private Button toImage;
+    private Button toList;
     private View tempView;
 
     private static final LatLng LOCATION_GRAMPIANS
@@ -54,6 +55,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
+            }
+        });
+
+        toList = (Button)view.findViewById(R.id.plantList);
+        toList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Fragment fragment = new ListFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
             }
         });
 
