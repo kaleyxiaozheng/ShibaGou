@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             if(id == 1){
+
                 String name = InstructionFragment.class.getName();
                 Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
                 if(tag == null) {
@@ -90,9 +91,19 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.frame_container, fragment, name).addToBackStack(name).commit();
                 }
+
             } else if(id == 2) {
 
+                String name = GalleryFragment.class.getName();
+                Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
+                if(tag == null) {
+                    Fragment fragment = new GalleryFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_container, fragment, name).addToBackStack(name).commit();
+                }
+
             } else {
+
                 String name = InstructionFragment.class.getName();
                 Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
                 if(tag == null) {
