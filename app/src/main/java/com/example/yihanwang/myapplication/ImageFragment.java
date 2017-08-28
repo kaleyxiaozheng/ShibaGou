@@ -2,7 +2,9 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -14,6 +16,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 
 public class ImageFragment extends Fragment {
     private ViewPager viewPager;
@@ -73,12 +79,36 @@ public class ImageFragment extends Fragment {
         public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 
-        if(data.getExtras() != null) {
+        if(data != null && data.getExtras() != null) {
             Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-            if(imageView != null) {
-                imageView.setImageBitmap(bitmap);
-                // line 47 imageView is null
-            }
+            SaveImage(bitmap);
+
+//            if(imageView != null) {
+//                imageView.setImageBitmap(bitmap);
+//                // line 47 imageView is null
+//            }
+        }
+    }
+
+    private void SaveImage(Bitmap finalBitmap) {
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = "Image-"+ n +".jpg";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
