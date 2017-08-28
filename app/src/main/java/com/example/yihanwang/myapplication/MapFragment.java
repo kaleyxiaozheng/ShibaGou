@@ -1,5 +1,7 @@
 package com.example.yihanwang.myapplication;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.*;
 import android.os.Bundle;
@@ -84,6 +86,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         m_cGoogleMap.addMarker(new MarkerOptions().position(LOCATION_GRAMPIANS).title("You Are Here"));
         //set map to satellite map
         m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        m_cGoogleMap.setMyLocationEnabled(true);
 
     }
 
