@@ -35,7 +35,7 @@
             android:id="@+id/findPlant"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/flowr"
+            android:background="@drawable/ic_show_flora_button"
             android:onClick="toImagePage"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="15dp"
@@ -45,7 +45,7 @@
             android:id="@+id/plantList"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/list"
+            android:background="@drawable/ic_show_list_button"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"/>
     </RelativeLayout>

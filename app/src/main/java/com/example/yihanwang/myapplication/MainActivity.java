@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        // Set the adapter for the list view
+        // Set the adapter for the ic_show_list_button view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mPlanetTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());

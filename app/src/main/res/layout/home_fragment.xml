@@ -4,60 +4,33 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/home_fragment"
-    android:background="@drawable/homepage">
+    android:background="@drawable/app_backroud">
+    //android:background="#FFE4E1"
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        tools:context="com.example.yihanwang.myapplication.MainActivity">
 
-        <TextView
-            android:id="@+id/topTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="165dp"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:text="HikingMate"
-            android:textColor="#FEFEFE"
-            android:textSize="55sp"
-            android:textStyle="bold"
-            android:typeface="serif" />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="290dp"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/app_logo" />
 
-        <TextView
-            android:id="@+id/subTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Hikers best friend"
-            android:textColor="#FEFEFE"
-            android:textSize="30sp"
-            android:layout_below="@+id/topTextView"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:id="@+id/mapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="52dp"
-            android:background="@drawable/shape"
-            android:elegantTextHeight="true"
-            android:text="Plants  Near  Me"
-            android:textColor="#0C640F"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/topTextView"
-            android:layout_alignStart="@+id/topTextView" />
-    </RelativeLayout>
-
+    <Button
+        android:id="@+id/findPlant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:elegantTextHeight="true"
+        android:text="Plants  Near  Me"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="150dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

@@ -16,11 +16,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
     private Button button;
-    private TextView topText;
-    private TextView subText;
-    private Typeface tf1;
-    private Typeface tf2;
-    private Typeface tf3;
+    private Typeface tf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,26 +30,22 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
-        button = (Button) view.findViewById(R.id.mapButton);
+        button = (Button) view.findViewById(R.id.findPlant);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new MapFragment();
+                //Fragment fragment = new MapFragment();
+                Fragment fragment = new ImageFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
             }
         });
 
-        topText = (TextView) view.findViewById(R.id.topTextView);
-        subText = (TextView) view.findViewById(R.id.subTextView);
-        tf1 = Typeface.createFromAsset(getActivity().getAssets(), "Bauhaus-93.ttf");
-        tf2 = Typeface.createFromAsset(getActivity().getAssets(), "Abadi_MT Condensed_Light.ttf");
-        tf3 = Typeface.createFromAsset(getActivity().getAssets(), "Aclonica.ttf");
-        topText.setTypeface(tf1);
-        subText.setTypeface(tf2);
-        button.setTypeface(tf3);
+        tf = Typeface.createFromAsset(getActivity().getAssets(), "Aclonica.ttf");
+
+        button.setTypeface(tf);
 
         return view;
     }
