@@ -77,6 +77,7 @@ public class ImageFragment extends Fragment {
             Bitmap bitmap = (Bitmap)data.getExtras().get("data");
             if(imageView != null) {
                 imageView.setImageBitmap(bitmap);
+                // line 47 imageView is null
             }
         }
     }
