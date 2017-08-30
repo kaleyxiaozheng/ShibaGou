@@ -34,11 +34,10 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Fragment fragment = new MapFragment();
-                Fragment fragment = new ImageFragment();
+                Fragment fragment = new MapFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
             }
         });
 

@@ -54,6 +54,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
             public void onClick(View v) {
 
                 Fragment fragment = new ImageFragment();
+                Bundle args = new Bundle();
+                args.putDouble("location_lat", LOCATION_GRAMPIANS.latitude);
+                args.putDouble("location_lon", LOCATION_GRAMPIANS.longitude);
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
