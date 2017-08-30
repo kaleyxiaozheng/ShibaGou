@@ -6,11 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,9 +21,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Random;
 
+import static com.example.yihanwang.myapplication.R.id.viewPager;
+
 public class ImageFragment extends Fragment {
     View view;
     ListView mListView;
+    private Button button;
     String[] plants = {"Gold Dust Wattle", "Hickory Wattle", "Spike Wattle", " PincushiionLily"
     };
     String[] plantInfo = {"Typically a straggly shrub reaching 2 metres in height. The ‘leaves’ (phyllodes) are variable in shape but are generally rounded oblongs or ovals (some forms may have linear phyllodes). The golden-yellow, globular flower heads are produced singly or in pairs on stalks from the phyllode bases. These are followed by distinctive spiral-shaped or twisted pods which become brown and papery at maturity.",
@@ -41,52 +46,15 @@ public class ImageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.list_fragment, container, false);
+        button = (Button)view.findViewById(R.id.plantList);
 
-        setContentView(R.layout.activity_main);
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Listview of Plants");
-        mListView = (ListView) findViewById(R.id.listview);
-        Myadapter myadapter = new Myadapter(MainActivity.this, plants, plantNums);
-        mListView.setAdapter(myadapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent mIntent = new Intent(MainActivity.this, ListDetailActivity.class);
-                mIntent.putExtra("PlantName",plants[i]);
-                mIntent.putExtra("Description",plantInfo[i]);
-                startActivity(mIntent);
-            }
-        });
-
-
-
-
-        view = inflater.inflate(R.layout.image_fragment, container, false);
-        viewPager =  (ViewPager)view.findViewById(R.id.viewPager);
-        customSwip = new CustomSwip(getActivity());
-        viewPager.setAdapter(customSwip);
-
-
-        picture = (Button)view.findViewById(R.id.takePhoto);
-        imageView = (ImageView)view.findViewById(R.id.image);
-        picture.setOnClickListener(new OnClickListener(){
-
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
-            }
-        });
-
-        location = (Button)view.findViewById(R.id.locatePoint);
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new MapFragment();
+                Fragment fragment = new ListFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
             }
         });
 

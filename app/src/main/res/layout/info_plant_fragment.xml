@@ -50,6 +50,7 @@
             android:layout_height="fill_parent"
             android:background="@drawable/ic_point_location_button"
             android:layout_centerHorizontal="true" />
+            //android:layout_alignBottom="@+id/point_location"
 
 
 
@@ -57,7 +58,7 @@
             android:id="@+id/plantInfo"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_info"
+            android:background="@drawable/ic_show_list_button"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"/>
     </RelativeLayout>
