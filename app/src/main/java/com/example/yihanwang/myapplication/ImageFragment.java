@@ -62,11 +62,11 @@ public class ImageFragment extends Fragment {
         Bundle args = getArguments();
         double lat = args.getDouble("location_lat");
         double lon = args.getDouble("location_lon");
+        ImageStorage.getInstance().clearImage();
         getPlantImagesInfo(lat, lon);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         customSwip = new CustomSwip(getActivity());
         viewPager.setAdapter(customSwip);
-
 
         picture = (Button) view.findViewById(R.id.takePhoto);
         imageView = (ImageView) view.findViewById(R.id.image);
@@ -140,7 +140,6 @@ public class ImageFragment extends Fragment {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject jsonObject = response.getJSONObject(i);
                         ImageInfo imageInfo = new ImageInfo(jsonObject);
-                        ImageStorage.getInstance().addImage(imageInfo);
                         getImageUrl(imageInfo);
                     }
                 } catch (JSONException e) {
@@ -154,6 +153,13 @@ public class ImageFragment extends Fragment {
             }
         });
         queue.add(jsonObjectRequest);
+        queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                Log.i("http", "request has finished");
+                customSwip.notifyDataSetChanged();
+            }
+        });
     }
 
     private void getImageUrl(final ImageInfo imageInfo) {
@@ -166,6 +172,11 @@ public class ImageFragment extends Fragment {
                         JSONObject jsonObject = results.getJSONObject(i);
                         ImageInfo.Image image = new ImageInfo.Image(jsonObject);
                         imageInfo.addImage(image);
+                    }
+                    if (imageInfo.getImages().size() > 0
+                            && imageInfo.getImages().get(0).getThumbUrl() != null
+                            && imageInfo.getImages().get(0).getImageUrl() != null) {
+                        ImageStorage.getInstance().addImage(imageInfo);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

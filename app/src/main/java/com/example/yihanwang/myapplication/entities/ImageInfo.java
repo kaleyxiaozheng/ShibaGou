@@ -74,6 +74,9 @@ public class ImageInfo {
         return rank;
     }
 
+    public List<Image> getImages() {
+        return new ArrayList<>(images);
+    }
 
     public static class Image {
         private String id;

@@ -21,7 +21,22 @@ public class ImageStorage {
         return instance;
     }
 
-    public void addImage(ImageInfo imageInfo){
+    public void clearImage() {
+        this.images.clear();
+    }
+
+    public void addImage(ImageInfo imageInfo) {
         this.images.add(imageInfo);
+    }
+
+    public int getImageCount() {
+        return images.size();
+    }
+
+    public ImageInfo getImageInfo(int position) {
+        if (position < this.images.size()) {
+            return this.images.get(position);
+        }
+        return null;
     }
 }
