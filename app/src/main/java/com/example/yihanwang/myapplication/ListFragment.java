@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ import java.util.Random;
 
 import static com.example.yihanwang.myapplication.R.id.viewPager;
 
-public class ImageFragment extends Fragment {
+public class ListFragment extends Fragment {
     View view;
     ListView mListView;
     private Button button;
@@ -40,27 +39,27 @@ public class ImageFragment extends Fragment {
             R.drawable.pincushiionlily
     };
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.list_fragment, container, false);
-        button = (Button)view.findViewById(R.id.plantList);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new ListFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
-            }
-        });
-
-        return view;
-
-    }
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+//        View view = inflater.inflate(R.layouts.list_fragment, container, false);
+//        button = (Button)view.findViewById(R.id.plantList);
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Fragment fragment = new ListFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
+//            }
+//        });
+//
+//        return view;
+//
+//    }
 
 
 }
