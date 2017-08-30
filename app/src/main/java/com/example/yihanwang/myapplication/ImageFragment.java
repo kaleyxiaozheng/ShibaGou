@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +41,10 @@ public class ImageFragment extends Fragment {
     private ViewPager viewPager;
     private Button picture;
     private Button location;
+    private Button infoBtn;
     private ImageView imageView;
     private RequestQueue queue;
+    private int currentPosition;
 
     CustomSwip customSwip;
     View view;
@@ -67,6 +72,12 @@ public class ImageFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         customSwip = new CustomSwip(getActivity());
         viewPager.setAdapter(customSwip);
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                currentPosition = position;
+            }
+        });
 
         picture = (Button) view.findViewById(R.id.takePhoto);
         imageView = (ImageView) view.findViewById(R.id.image);
@@ -87,6 +98,19 @@ public class ImageFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
+            }
+        });
+
+        infoBtn = (Button) view.findViewById(R.id.plantInfo);
+        infoBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(imageInfo.getName())
+                        .setMessage(imageInfo.getCommonName())
+                        .show();
+
             }
         });
 
