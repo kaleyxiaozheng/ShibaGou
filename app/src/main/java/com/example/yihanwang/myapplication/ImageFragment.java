@@ -9,12 +9,26 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.yihanwang.myapplication.entities.ImageInfo;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +39,8 @@ public class ImageFragment extends Fragment {
     private Button picture;
     private Button location;
     private ImageView imageView;
+    private RequestQueue queue;
+
     CustomSwip customSwip;
     View view;
     /*
@@ -41,25 +57,29 @@ public class ImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        queue = Volley.newRequestQueue(this.getContext());
         view = inflater.inflate(R.layout.image_fragment, container, false);
-        viewPager =  (ViewPager)view.findViewById(R.id.viewPager);
+        Bundle args = getArguments();
+        double lat = args.getDouble("location_lat");
+        double lon = args.getDouble("location_lon");
+        getPlantImagesInfo(lat, lon);
+        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         customSwip = new CustomSwip(getActivity());
         viewPager.setAdapter(customSwip);
 
 
-        picture = (Button)view.findViewById(R.id.takePhoto);
-        imageView = (ImageView)view.findViewById(R.id.image);
-        picture.setOnClickListener(new OnClickListener(){
+        picture = (Button) view.findViewById(R.id.takePhoto);
+        imageView = (ImageView) view.findViewById(R.id.image);
+        picture.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
             }
         });
 
-        location = (Button)view.findViewById(R.id.locatePoint);
+        location = (Button) view.findViewById(R.id.locatePoint);
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,11 +95,11 @@ public class ImageFragment extends Fragment {
     }
 
     @Override
-        public void onActivityResult(int requestCode,int resultCode,Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(data != null && data.getExtras() != null) {
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        if (data != null && data.getExtras() != null) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             SaveImage(bitmap);
 
 //            if(imageView != null) {
@@ -97,9 +117,9 @@ public class ImageFragment extends Fragment {
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname = "Image-"+ n +".jpg";
-        File file = new File (myDir, fname);
-        if (file.exists ()) file.delete ();
+        String fname = "Image-" + n + ".jpg";
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete();
         try {
             FileOutputStream out = new FileOutputStream(file);
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
@@ -109,6 +129,55 @@ public class ImageFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void getPlantImagesInfo(double lat, double lon) {
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, APIUrl.getPlantsList(lat, lon, 50, 1), null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("http", response.toString());
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        ImageInfo imageInfo = new ImageInfo(jsonObject);
+                        ImageStorage.getInstance().addImage(imageInfo);
+                        getImageUrl(imageInfo);
+                    }
+                } catch (JSONException e) {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("http", error.getMessage());
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
+    private void getImageUrl(final ImageInfo imageInfo) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, APIUrl.getImageSearch(imageInfo.getGuid()), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray results = response.getJSONObject("searchResults").getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject jsonObject = results.getJSONObject(i);
+                        ImageInfo.Image image = new ImageInfo.Image(jsonObject);
+                        imageInfo.addImage(image);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("http", error.getMessage());
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 }
 
