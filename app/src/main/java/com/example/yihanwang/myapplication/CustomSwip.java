@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Kaley on 24/8/17.
- */
 
 public class CustomSwip extends PagerAdapter {
 

@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import com.felipecsl.gifimageview.library.GifImageView;
-
-
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

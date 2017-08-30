@@ -30,16 +30,16 @@
 
             <Button
                 android:id="@+id/findPlant"
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
                 android:background="@drawable/ic_show_flora_button"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"/>
 
             <Button
                 android:id="@+id/plantList"
-                android:layout_width="65dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_show_list_button"
                 android:layout_alignParentRight="true"

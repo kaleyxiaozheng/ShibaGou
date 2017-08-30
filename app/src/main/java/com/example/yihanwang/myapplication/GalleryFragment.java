@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class GalleryFragment extends Fragment {
-    private Button toImage;
+    //private Button toImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,17 +23,17 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.instruction_fragment, container, false);
 
-        toImage = (Button)view.findViewById(R.id.findPlant);
-        toImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Fragment fragment = new ImageFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
-            }
-        });
+//        toImage = (Button)view.findViewById(R.id.findPlant);
+//        toImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Fragment fragment = new ImageFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+//            }
+//        });
         return view;
 
     }
