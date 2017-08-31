@@ -26,10 +26,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -38,7 +40,7 @@ import static android.content.Context.LOCATION_SERVICE;
 public class MapFragment extends Fragment implements OnMapReadyCallback, FragmentManager.OnBackStackChangedListener {
     private GoogleMap m_cGoogleMap;
     private Location location;
-    private Double latitude,longitude;
+    private Double mLatitude,mLongitude;
     private LocationTracker locationTracker;
     private Button toImage;
     private Button toList;
@@ -62,8 +64,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
         locationTracker = new LocationTracker(getActivity());
         location = locationTracker.getLocation();
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+      //  latitude = location.getLatitude();
+        // longitude = location.getLongitude();
 
         if (tempView != null) {
             return tempView;
@@ -180,16 +182,46 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         });
 
 
+        m_cGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng point) {
+                //myMap.addMarker(new MarkerOptions().position(point).title(point.toString()));
+
+                //The code below demonstrate how to convert between LatLng and Location
+
+                //Convert LatLng to Location
+                Location location = new Location("Test");
+                location.setLatitude(point.latitude);
+                location.setLongitude(point.longitude);
+                location.setTime(new Date().getTime()); //Set time as current Date
+                //txtinfo.setText(location.toString());
+
+                //Convert Location to LatLng
+                LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(newLatLng)
+                        .title(newLatLng.toString());
+
+                m_cGoogleMap.addMarker(markerOptions);
+
+            }
+        });
+
+
         return view;
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Function is called once the map has fully loaded.
         // Set our map object to reference the loaded map
         m_cGoogleMap = googleMap;
-
-        LatLng latLng = new LatLng(latitude,longitude);
+        //latitude = 37.8770;
+        //longitude = 145.0443;
+        LatLng latLng = new LatLng(mLatitude,mLongitude);
         // Move the focus of the map to be on the Grampians park. 15 is for zoom
          m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
