@@ -42,21 +42,11 @@ public class ImageFragment extends Fragment {
     private Button picture;
     private Button location;
     private Button infoBtn;
-    private ImageView imageView;
     private RequestQueue queue;
     private int currentPosition;
 
     CustomSwip customSwip;
     View view;
-    /*
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        viewPager = (ViewPager)viewPager.findViewById(R.id.viewPager);
-        customSwip = new CustomSwip(getActivity());
-        viewPager.setAdapter(customSwip);
-    }
-    */
 
     @Nullable
     @Override
@@ -80,7 +70,6 @@ public class ImageFragment extends Fragment {
         });
 
         picture = (Button) view.findViewById(R.id.takePhoto);
-        imageView = (ImageView) view.findViewById(R.id.image);
         picture.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -105,16 +94,20 @@ public class ImageFragment extends Fragment {
         infoBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Fragment fragment = new InfoFragment();
+                Bundle args = new Bundle();
+                args.putInt("current_position", currentPosition);
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
 
-                ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(imageInfo.getName())
-                        .setMessage(imageInfo.getCommonName())
-                        .show();
+//                ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle(imageInfo.getName())
+//                        .setMessage(imageInfo.getCommonName())
+//                        .show();
 
             }
         });
@@ -130,11 +123,6 @@ public class ImageFragment extends Fragment {
         if (data != null && data.getExtras() != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             SaveImage(bitmap);
-
-//            if(imageView != null) {
-//                imageView.setImageBitmap(bitmap);
-//                // line 47 imageView is null
-//            }
         }
     }
 
