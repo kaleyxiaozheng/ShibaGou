@@ -63,8 +63,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
         locationTracker = new LocationTracker(getActivity());
         location = locationTracker.getLocation();
-      //  latitude = location.getLatitude();
-        // longitude = location.getLongitude();
+        //mLatitude = location.getLatitude();
+        //mLongitude = location.getLongitude();
 
         if (tempView != null) {
             return tempView;
@@ -185,6 +185,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         });
 
 
+
+        return view;
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // Function is called once the map has fully loaded.
+        // Set our map object to reference the loaded map
+        m_cGoogleMap = googleMap;
+        //latitude = 37.8770;
+        //longitude = 145.0443;
+        //LatLng latLng = new LatLng(mLatitude,mLongitude);
+        // Move the focus of the map to be on the Grampians park. 15 is for zoom
+        //m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+
+        //m_cGoogleMap.addMarker(new MarkerOptions().position(latLng).title("You Are Here"));
+        // set map to satellite map
+         m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         m_cGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -211,27 +230,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
             }
         });
-
-
-        return view;
-    }
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        // Function is called once the map has fully loaded.
-        // Set our map object to reference the loaded map
-        m_cGoogleMap = googleMap;
-        //latitude = 37.8770;
-        //longitude = 145.0443;
-        LatLng latLng = new LatLng(mLatitude,mLongitude);
-        // Move the focus of the map to be on the Grampians park. 15 is for zoom
-         m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-
-        m_cGoogleMap.addMarker(new MarkerOptions().position(latLng).title("You Are Here"));
-        // set map to satellite map
-        // m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
 /*
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
