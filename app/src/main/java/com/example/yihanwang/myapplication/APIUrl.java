@@ -13,4 +13,8 @@ public class APIUrl {
     public static String getImageSearch(String guid) {
         return "http://bie.ala.org.au/ws/imageSearch/" + guid;
     }
+
+    public static String getPlantInfo(String title) {
+        return "https://en.wikipedia.org/w/api.php?action=query&format=json&titles=" + title + "&explaintext=&prop=extracts";
+    }
 }
