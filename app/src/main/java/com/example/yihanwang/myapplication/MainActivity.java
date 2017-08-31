@@ -15,40 +15,41 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private String[] mPlanetTitles;
+    //private ListView mDrawerList;
+    //private String[] mPlanetTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer_button);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+//        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
         // Set the adapter for the ic_show_list_button view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerClosed(View view) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setHomeAsUpIndicator(null);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        });
+//        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+//                R.layout.drawer_list_item, mPlanetTitles));
+//        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+//        mDrawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+//            @Override
+//            public void onDrawerClosed(View view) {
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer_button);
+//            }
+//
+//            @Override
+//            public void onDrawerOpened(View drawerView) {
+//                getSupportActionBar().setHomeAsUpIndicator(null);
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//        });
 
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -57,21 +58,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-            }
-            else {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-            return true;
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+//                mDrawerLayout.closeDrawer(GravityCompat.START);
+//            }
+//            else {
+//                mDrawerLayout.openDrawer(GravityCompat.START);
+//            }
+//            return true;
+//        }
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

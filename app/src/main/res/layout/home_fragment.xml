@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="290dp"
-        android:layout_height="250dp"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:scaleType="fitXY"
         android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal"
@@ -22,12 +22,28 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape"
         android:elegantTextHeight="true"
-        android:text="Plants  Near  Me"
+        android:text="Locate Yourself"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/dragLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:elegantTextHeight="true"
+        android:text="Choose Location"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="60dp"
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal" />

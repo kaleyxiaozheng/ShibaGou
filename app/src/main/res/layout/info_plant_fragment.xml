@@ -1,66 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.example.yihanwang.myapplication.MapFragment">
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginTop="115dp"
-        android:layout_marginBottom="25dp">
-
-        <android.support.v4.view.ViewPager
-            android:layout_height = "match_parent"
-            android:layout_width = "match_parent"
-            android:id = "@+id/viewPager"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/PlantPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#000000"
-        android:layout_height="50dp">
+    <!--<ScrollView-->
+        <!--android:id="@+id/itemRecord"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:lines="7"-->
+        <!--android:scrollbars="vertical">-->
 
-        <Button
-            android:id="@+id/takePhoto"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_camera_button"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_alignParentLeft="true" />
-            //android:layout_alignBottom="@+id/plantList"
-
-
-        <Button
-            android:id="@+id/locatePoint"
-            android:layout_width="30dp"
-            android:layout_height="fill_parent"
-            android:background="@drawable/ic_point_location_button"
-            android:layout_centerHorizontal="true" />
-            //android:layout_alignBottom="@+id/point_location"
-
-
-
-        <Button
-            android:id="@+id/plantInfo"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_show_list_button"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="13dp"/>
-    </RelativeLayout>
-
+        <TextView
+            android:id="@+id/PlantRecord"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            android:maxLines="10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+    <!--</ScrollView>-->
 </LinearLayout>

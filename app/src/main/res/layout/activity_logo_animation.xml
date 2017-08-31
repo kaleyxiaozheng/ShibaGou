@@ -13,6 +13,7 @@
     <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/gifImageView"
         android:scaleType="fitCenter"
+        android:layout_marginBottom="190dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
