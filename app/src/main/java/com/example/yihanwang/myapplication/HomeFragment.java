@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomeFragment extends Fragment {
-    private Button button;
+    private Button locateYourself;
+    private Button chooseLocation;
     private Typeface tf;
 
     @Override
@@ -25,9 +26,10 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
-        button = (Button) view.findViewById(R.id.findPlant);
+        locateYourself = (Button) view.findViewById(R.id.findPlant);
+        chooseLocation = (Button) view.findViewById(R.id.dragLocation);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        locateYourself.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new MapFragment();
@@ -39,7 +41,8 @@ public class HomeFragment extends Fragment {
 
         tf = Typeface.createFromAsset(getActivity().getAssets(), "Aclonica.ttf");
 
-        button.setTypeface(tf);
+        locateYourself.setTypeface(tf);
+        chooseLocation.setTypeface(tf);
 
         return view;
     }

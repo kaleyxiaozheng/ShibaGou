@@ -22,7 +22,6 @@ import java.net.URL;
 
 public class CustomSwip extends PagerAdapter {
 
-    private int[] imageResource = {R.drawable.golddust_wattle, R.drawable.lightwood, R.drawable.pincushiionlily, R.drawable.spike_watte};
     private Context ctx;
     private LayoutInflater layoutInflater;
 

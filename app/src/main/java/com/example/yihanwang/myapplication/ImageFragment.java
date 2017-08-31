@@ -105,6 +105,11 @@ public class ImageFragment extends Fragment {
         infoBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Fragment fragment = new InfoFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
+
                 ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle(imageInfo.getName())

@@ -33,11 +33,7 @@ public class ListFragment extends Fragment {
             "A prickly, dense shrub 1-3 m high by 2 m across, small trees are also known. Rigid, dark green phyllodes to 2 cm with sharp point. Flowers in cream spikes occur in winter and spring.",
             "Small tufted plant of the family Liliaceae endemic to western Victoria, in the Grampians National Park, where it grows in low open shrubland on sandstone outcrops."
     };
-    int[] plantNums = {R.drawable.golddust_wattle,
-            R.drawable.heath_wattle,
-            R.drawable.spike_watte,
-            R.drawable.pincushiionlily
-    };
+
 
 //    @Nullable
 //    @Override
