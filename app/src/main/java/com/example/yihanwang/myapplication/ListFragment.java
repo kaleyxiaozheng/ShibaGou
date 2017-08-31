@@ -1,26 +1,17 @@
 package com.example.yihanwang.myapplication;
 
-import android.content.Intent;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Random;
-
-import static com.example.yihanwang.myapplication.R.id.viewPager;
+import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 public class ListFragment extends Fragment {
     View view;
@@ -35,27 +26,19 @@ public class ListFragment extends Fragment {
     };
 
 
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//        View view = inflater.inflate(R.layouts.list_fragment, container, false);
-//        button = (Button)view.findViewById(R.id.plantList);
-//
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment fragment = new ListFragment();
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
-//            }
-//        });
-//
-//        return view;
-//
-//    }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.image_list, container, false);
+        mListView = (ListView) view.findViewById(R.id.image_list);
+//        ImageStorage.getInstance().getImageInfo()
+//        new ArrayAdapter<ImageInfo>(this.getContext(), R.layout.list_fragment,);
+
+        return view;
+
+    }
 
 
 }

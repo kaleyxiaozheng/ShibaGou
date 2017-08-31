@@ -1,6 +1,5 @@
 package com.example.yihanwang.myapplication;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -78,8 +78,6 @@ public class InfoFragment extends Fragment {
         item = (TextView) view.findViewById(R.id.PlantRecord);
         item.setMovementMethod(new ScrollingMovementMethod());
 
-
-//        item.setText(imageInfo.getName());
         return view;
     }
 
@@ -94,6 +92,7 @@ public class InfoFragment extends Fragment {
             Log.e("http", "image info url is null");
             return;
         }
+        Log.i("http", "load image info " + url);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -118,6 +117,9 @@ public class InfoFragment extends Fragment {
                 Log.e("http", error.getMessage());
             }
         });
+        request.setRetryPolicy(new DefaultRetryPolicy(20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
 }

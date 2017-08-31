@@ -18,23 +18,13 @@
             android:adjustViewBounds="true" />
     </RelativeLayout>
 
-    <!--<ScrollView-->
-        <!--android:id="@+id/itemRecord"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginBottom="5dp"-->
-        <!--android:lines="7"-->
-        <!--android:scrollbars="vertical">-->
-
-        <TextView
-            android:id="@+id/PlantRecord"
-            android:layout_width="match_parent"
-            android:scrollbars="vertical"
-            android:maxLines="10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
-    <!--</ScrollView>-->
+    <TextView
+        android:id="@+id/PlantRecord"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="0.5"
+        android:maxLines="10"
+        android:scrollbars="vertical" />
 </LinearLayout>
