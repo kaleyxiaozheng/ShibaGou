@@ -42,13 +42,6 @@ public class ImageLoader {
             }
         });
         queue.add(jsonObjectRequest);
-//        queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-//            @Override
-//            public void onRequestFinished(Request<Object> request) {
-//                Log.i("http", "request has finished");
-//                customSwip.notifyDataSetChanged();
-//            }
-//        });
     }
 
     private static void getImageUrl(final ImageInfo imageInfo, RequestQueue queue) {
