@@ -46,7 +46,7 @@ public class CustomSwip extends PagerAdapter {
         ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
         textView.setText("Image :" + (position+1) + "/" + ImageStorage.getInstance().getImageCount());
         if (imageInfo != null && imageInfo.getImages().size() > 0) {
-            final String url = imageInfo.getImages().get(0).getThumbUrl();
+            final String url = imageInfo.getImages().get(0).getImageUrl();
             ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
             if(imageGalery != null){
                 ImageView compare = (ImageView) itemView.findViewById(R.id.compare_image_view);
