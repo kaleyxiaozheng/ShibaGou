@@ -6,35 +6,33 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.*;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.yihanwang.myapplication.entities.LocationTracker;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.LOCATION_SERVICE;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, FragmentManager.OnBackStackChangedListener {
     private GoogleMap m_cGoogleMap;
@@ -48,6 +46,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
     private static final LatLng LOCATION_GRAMPIANS
             = new LatLng(-37.6145, 142.3244);
+    private Marker marker;
+    private LocationManager locationManager;
 
 
     @Override
@@ -61,15 +61,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        locationTracker = new LocationTracker(getActivity());
-        location = locationTracker.getLocation();
-        //mLatitude = location.getLatitude();
-        //mLongitude = location.getLongitude();
+
 
         if (tempView != null) {
             return tempView;
         }
-
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         tempView = view;
         // Get access to our MapFragment
@@ -77,7 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         // Set up an asyncronous callback to let us know when the map has loaded
         mapFrag.getMapAsync(this);
         /*
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -159,8 +155,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
                 Fragment fragment = new ImageFragment();
                 Bundle args = new Bundle();
-                args.putDouble("location_lat", LOCATION_GRAMPIANS.latitude);
-                args.putDouble("location_lon", LOCATION_GRAMPIANS.longitude);
+                args.putDouble("location_lat", mLatitude);
+                args.putDouble("location_lon", mLongitude);
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
@@ -190,18 +186,52 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     }
 
 
+    private void addMarkerOnMap(double lat, double lon) {
+        LatLng latLng = new LatLng(lat, lon);
+        Address currentLocation = getCurrentLocation(lat, lon);
+        if(currentLocation == null || !"Victoria".equals(currentLocation.getAdminArea())){
+            return;
+        }
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(latLng)
+                .title("");
+        if(marker != null){
+            marker.remove();
+        }
+        mLongitude = lon;
+        mLatitude = lat;
+        marker = m_cGoogleMap.addMarker(markerOptions);
+        m_cGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+    }
+
+    private Address getCurrentLocation(double lat, double lon){
+        try {
+            Geocoder geocoder = new Geocoder(getContext(), Locale.ENGLISH);
+            List<Address> fromLocation = geocoder.getFromLocation(lat, lon, 1);
+            if(fromLocation.size() > 0){
+                return fromLocation.get(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Function is called once the map has fully loaded.
         // Set our map object to reference the loaded map
         m_cGoogleMap = googleMap;
-        //latitude = 37.8770;
-        //longitude = 145.0443;
-        //LatLng latLng = new LatLng(mLatitude,mLongitude);
-        // Move the focus of the map to be on the Grampians park. 15 is for zoom
-        //m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-
-        //m_cGoogleMap.addMarker(new MarkerOptions().position(latLng).title("You Are Here"));
+        locationTracker = new LocationTracker(getActivity());
+        location = locationTracker.getLocation();
+        if(location != null) {
+            mLatitude = location.getLatitude();
+            mLongitude = location.getLongitude();
+        } else {
+            mLatitude = LOCATION_GRAMPIANS.latitude;
+            mLongitude = LOCATION_GRAMPIANS.longitude;
+        }
+        addMarkerOnMap(mLatitude, mLongitude);
         // set map to satellite map
          m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         m_cGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -211,22 +241,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
                 //myMap.addMarker(new MarkerOptions().position(point).title(point.toString()));
 
                 //The code below demonstrate how to convert between LatLng and Location
-
+                Geocoder geocoder = new Geocoder(getContext(), Locale.ENGLISH);
                 //Convert LatLng to Location
                 Location location = new Location("Test");
                 location.setLatitude(point.latitude);
                 location.setLongitude(point.longitude);
                 location.setTime(new Date().getTime()); //Set time as current Date
                 //txtinfo.setText(location.toString());
+                try {
+                    List<Address> fromLocation = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    if(fromLocation.size() > 0){
+                        String adminArea = fromLocation.get(0).getAdminArea();
+                        Log.i("map", "location city "+adminArea);
+                        if(!adminArea.equals("Victoria")){
+                            return;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 //Convert Location to LatLng
-                LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(newLatLng)
-                        .title(newLatLng.toString());
-
-                m_cGoogleMap.addMarker(markerOptions);
+                addMarkerOnMap(location.getLatitude(), location.getLongitude());
 
             }
         });
