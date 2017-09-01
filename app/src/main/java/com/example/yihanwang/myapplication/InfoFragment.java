@@ -14,24 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
 
 public class InfoFragment extends Fragment {
     private TextView item;
@@ -44,13 +33,15 @@ public class InfoFragment extends Fragment {
         queue = Volley.newRequestQueue(this.getContext());
 
         Bundle args = getArguments();
-        int position = args.getInt("current_position");
-        ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
+        long position = args.getLong("id");
+        ImageInfo imageInfo = ImageStorage.getInstance().getImageInfoById(position);
 
         View view = inflater.inflate(R.layout.info_plant_fragment, container, false);
         final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
         final String url = imageInfo.getImages().get(0).getThumbUrl();
-        this.queryImageInfo(imageInfo);
+        item = (TextView) view.findViewById(R.id.PlantRecord);
+        item.setMovementMethod(new ScrollingMovementMethod());
+        item.setText(imageInfo.getDescription());
         Log.i("image", "show image url " + url);
         new AsyncTask<String, Void, Bitmap>() {
             @Override
@@ -75,51 +66,8 @@ public class InfoFragment extends Fragment {
             }
         }.execute();
 
-        item = (TextView) view.findViewById(R.id.PlantRecord);
-        item.setMovementMethod(new ScrollingMovementMethod());
 
         return view;
     }
 
-    private void queryImageInfo(ImageInfo imageInfo) {
-        String url = null;
-        try {
-            url = APIUrl.getPlantInfo(URLEncoder.encode(imageInfo.getName(), "utf8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        if (url == null) {
-            Log.e("http", "image info url is null");
-            return;
-        }
-        Log.i("http", "load image info " + url);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject query = response.getJSONObject("query");
-                            JSONObject pages = query.getJSONObject("pages");
-                            Iterator<String> keys = pages.keys();
-                            if (keys.hasNext()) {
-                                String key = keys.next();
-                                JSONObject keyObjs = pages.getJSONObject(key);
-                                String info = keyObjs.getString("extract");
-                                item.setText(info);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("http", error.getMessage());
-            }
-        });
-        request.setRetryPolicy(new DefaultRetryPolicy(20000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        queue.add(request);
-    }
 }

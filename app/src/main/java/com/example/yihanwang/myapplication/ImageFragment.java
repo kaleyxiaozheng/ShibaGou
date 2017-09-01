@@ -44,6 +44,7 @@ public class ImageFragment extends Fragment {
     private Button infoBtn;
     private RequestQueue queue;
     private int currentPosition;
+    private ImageLoader imageLoader = new ImageLoader();
 
     CustomSwip customSwip;
     View view;
@@ -65,7 +66,7 @@ public class ImageFragment extends Fragment {
                 customSwip.notifyDataSetChanged();
             }
         });
-        ImageLoader.getPlantImagesInfo(lat, lon, queue);
+        imageLoader.getPlantImagesInfo(lat, lon, queue);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         customSwip = new CustomSwip(getActivity());
@@ -105,12 +106,12 @@ public class ImageFragment extends Fragment {
 
                 Fragment fragment = new InfoFragment();
                 Bundle args = new Bundle();
-                args.putInt("current_position", currentPosition);
+                ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+                args.putLong("id", imageInfo.getId());
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
-
             }
         });
 
@@ -130,8 +131,8 @@ public class ImageFragment extends Fragment {
 
     private void SaveImage(Bitmap finalBitmap) {
 
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/saved_images");
+        String root = getContext().getExternalCacheDir().getAbsolutePath();
+        File myDir = new File(root, "saved_images");
         myDir.mkdirs();
         Random generator = new Random();
         int n = 10000;
@@ -144,7 +145,11 @@ public class ImageFragment extends Fragment {
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
-
+            ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+            ImageGaleryStorage.getInstance().addImageGalery(imageInfo.getId(), finalBitmap, file.getPath());
+            viewPager.setAdapter(null);
+            viewPager.setAdapter(customSwip);
+            viewPager.setCurrentItem(currentPosition);
         } catch (Exception e) {
             e.printStackTrace();
         }

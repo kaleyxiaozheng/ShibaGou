@@ -32,20 +32,20 @@
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:id="@+id/dragLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape"
-        android:elegantTextHeight="true"
-        android:text="Choose Location"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="60dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal" />
+    <!--<Button-->
+        <!--android:id="@+id/dragLocation"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/shape"-->
+        <!--android:elegantTextHeight="true"-->
+        <!--android:text="Choose Location"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginTop="60dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:layout_gravity="center_horizontal" />-->
 
 </LinearLayout>

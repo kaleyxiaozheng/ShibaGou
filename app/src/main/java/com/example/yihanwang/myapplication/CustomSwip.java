@@ -6,13 +6,16 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.yihanwang.myapplication.entities.ImageGalery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.io.IOException;
@@ -43,7 +46,14 @@ public class CustomSwip extends PagerAdapter {
         ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
         if (imageInfo != null && imageInfo.getImages().size() > 0) {
             final String url = imageInfo.getImages().get(0).getThumbUrl();
-            Log.i("image", "show image url " + url);
+            ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
+            if(imageGalery != null){
+                ImageView compare = (ImageView) itemView.findViewById(R.id.compare_image_view);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
+                layoutParams.weight = 1;
+                compare.setImageBitmap(imageGalery.getBitmap());
+            }
+            Log.i("image", "show image url " + url + " id = " + imageInfo.getId());
             new AsyncTask<String, Void, Bitmap>() {
                 @Override
                 protected Bitmap doInBackground(String... strings) {

@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ImageInfo {
 
+    private long id;
+
     private String name;
 
     private String commonName;
@@ -26,10 +28,13 @@ public class ImageInfo {
 
     private String rank;
 
+    private String description;
+
     private List<Image> images = new ArrayList<>();
 
     public ImageInfo(JSONObject jsonObject) {
         try {
+            this.id = System.nanoTime();
             this.commonName = jsonObject.getString("commonName");
             this.name = jsonObject.getString("name");
             this.family = jsonObject.getString("family");
@@ -74,8 +79,21 @@ public class ImageInfo {
         return rank;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public List<Image> getImages() {
         return new ArrayList<>(images);
+    }
+
+
+    public long getId() {
+        return id;
     }
 
     public static class Image {

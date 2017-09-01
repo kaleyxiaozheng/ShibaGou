@@ -3,18 +3,25 @@ package com.example.yihanwang.myapplication;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kaley on 31/8/17.
@@ -22,6 +29,7 @@ import java.net.URL;
 
 public class ListAdapter extends RecyclerView.Adapter {
 
+    private List<ImageInfo> items = new ArrayList<>();
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,13 +38,29 @@ public class ListAdapter extends RecyclerView.Adapter {
         return viewHolder;
     }
 
-
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
-        final ImageView thumbView = (ImageView) ((ViewHolder)holder).mView.findViewById(R.id.thumbnail);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        final ImageInfo imageInfo = this.getItem(position);
+        final ViewHolder viewHolder = (ViewHolder) holder;
+        final ImageView thumbView = (ImageView) viewHolder.mView.findViewById(R.id.thumbnail);
         final String thumbUrl = imageInfo.getImages().get(0).getThumbUrl();
+        TextView textView = (TextView) viewHolder.mView.findViewById(R.id.image_name);
+        textView.setText(imageInfo.getName());
+        TextView basicInfo = (TextView) viewHolder.mView.findViewById(R.id.basicinfo);
+        basicInfo.setText(imageInfo.getDescription().substring(0, imageInfo.getDescription().indexOf('.')));
 
+        viewHolder.mView.findViewById(R.id.list_fragment_id).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new InfoFragment();
+                Bundle args = new Bundle();
+                args.putLong("id", imageInfo.getId());
+                fragment.setArguments(args);
+                FragmentManager fragmentManager = ((FragmentActivity)viewHolder.mView.getContext()).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
+            }
+        });
         new AsyncTask<String, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(String... strings) {
@@ -64,7 +88,16 @@ public class ListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return ImageStorage.getInstance().getImageCount();
+        return items.size();
+    }
+
+    public void addItem(ImageInfo imageInfo){
+        this.items.add(imageInfo);
+        this.notifyItemInserted(this.items.size() - 1);
+    }
+
+    public ImageInfo getItem(int position){
+        return this.items.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

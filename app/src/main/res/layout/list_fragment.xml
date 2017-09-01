@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_fragment_id"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="120dp">
 
@@ -10,8 +11,23 @@
         android:layout_height="120dp"
         android:padding="5dp"/>
 
-    <TextView
-        android:id="@+id/basicinfo"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/image_name"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/basicinfo"
+            android:textSize="10dp"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </LinearLayout>

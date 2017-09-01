@@ -40,4 +40,13 @@ public class ImageStorage {
         return null;
     }
 
+    public ImageInfo getImageInfoById(long id) {
+        for (ImageInfo imageInfo : images) {
+            if (imageInfo.getId() == id) {
+                return imageInfo;
+            }
+        }
+        return null;
+    }
+
 }

@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
         locateYourself = (Button) view.findViewById(R.id.findPlant);
-        chooseLocation = (Button) view.findViewById(R.id.dragLocation);
+        //chooseLocation = (Button) view.findViewById(R.id.dragLocation);
 
         locateYourself.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         tf = Typeface.createFromAsset(getActivity().getAssets(), "Aclonica.ttf");
 
         locateYourself.setTypeface(tf);
-        chooseLocation.setTypeface(tf);
+        //hooseLocation.setTypeface(tf);
 
         return view;
     }
