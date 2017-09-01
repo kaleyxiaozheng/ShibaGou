@@ -38,7 +38,7 @@ public class InfoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.info_plant_fragment, container, false);
         final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
-        final String url = imageInfo.getImages().get(0).getThumbUrl();
+        final String url = imageInfo.getImages().get(0).getImageUrl();
         item = (TextView) view.findViewById(R.id.PlantRecord);
         item.setMovementMethod(new ScrollingMovementMethod());
         item.setText(imageInfo.getDescription());

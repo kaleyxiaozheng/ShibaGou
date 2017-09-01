@@ -21,7 +21,6 @@ public class LocationTracker extends Service implements LocationListener {
     private Context context;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
     Location location;
     LocationManager locationManager;
 
@@ -69,11 +68,6 @@ public class LocationTracker extends Service implements LocationListener {
         }
         return  location;
     }
-
-
-
-
-
 
     @Nullable
     @Override
