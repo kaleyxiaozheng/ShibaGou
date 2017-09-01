@@ -44,6 +44,7 @@ public class CustomSwip extends PagerAdapter {
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
         ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
+        textView.setText("Image :" + (position+1) + "/" + ImageStorage.getInstance().getImageCount());
         if (imageInfo != null && imageInfo.getImages().size() > 0) {
             final String url = imageInfo.getImages().get(0).getThumbUrl();
             ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
@@ -70,7 +71,6 @@ public class CustomSwip extends PagerAdapter {
                 @Override
                 protected void onPostExecute(Bitmap bitmap) {
                     if (bitmap != null) {
-                        textView.setText("Image Counter :" + (position+1) + "/" + ImageStorage.getInstance().getImageCount());
                         imageView.setImageBitmap(bitmap);
                     } else {
                         Log.e("image", "can't read image from " + url);
@@ -89,7 +89,8 @@ public class CustomSwip extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
+        Log.d("view", "destory item");
+        container.removeView((View)object);
     }
 
 
