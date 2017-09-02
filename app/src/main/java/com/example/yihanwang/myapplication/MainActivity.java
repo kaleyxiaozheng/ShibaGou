@@ -1,7 +1,11 @@
 package com.example.yihanwang.myapplication;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        checkPermission();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         Fragment fragment = new HomeFragment();
@@ -32,13 +36,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    1000);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 1000) {
+
+        }
+    }
+
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            if(id == 1){
+            if (id == 1) {
 
 //                String name = InstructionFragment.class.getName();
 //                Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
@@ -48,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //                            .replace(R.id.frame_container, fragment, name).addToBackStack(name).commit();
 //                }
 
-            } else if(id == 2) {
+            } else if (id == 2) {
 
 //                String name = GalleryFragment.class.getName();
 //                Fragment tag = getSupportFragmentManager().findFragmentByTag(name);
