@@ -24,9 +24,14 @@ public class ImageGaleryStorage {
 
     public void addImageGalery(long id, Bitmap bitmap, String path) {
         Log.i("galery", "save image galery " + id);
-        removeImageGalery(id);
-        ImageGalery imageGalery = new ImageGalery(id, bitmap, path);
-        this.items.add(imageGalery);
+        ImageGalery galery = getImageGalery(id);
+        if (galery != null) {
+            galery.addImage(bitmap);
+        } else {
+            ImageGalery imageGalery = new ImageGalery(id, path);
+            imageGalery.addImage(bitmap);
+            this.items.add(imageGalery);
+        }
     }
 
     public void removeImageGalery(long id) {

@@ -44,15 +44,28 @@ public class CustomSwip extends PagerAdapter {
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
         ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
-        textView.setText("Image :" + (position+1) + "/" + ImageStorage.getInstance().getImageCount());
+        //textView.setText("Image :" + (position + 1) + "/" + ImageStorage.getInstance().getImageCount());
+        textView.setText((position + 1) + "/" + ImageStorage.getInstance().getImageCount());
         if (imageInfo != null && imageInfo.getImages().size() > 0) {
             final String url = imageInfo.getImages().get(0).getImageUrl();
             ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
-            if(imageGalery != null){
-                ImageView compare = (ImageView) itemView.findViewById(R.id.compare_image_view);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
-                layoutParams.weight = 1;
-                compare.setImageBitmap(imageGalery.getBitmap());
+            if (imageGalery != null) {
+                int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
+                if(imageGalery.getImageCount() > 0){
+                    View galeryContainer = itemView.findViewById(R.id.image_galery_container);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
+                    layoutParams.weight = 1;
+                }
+                for (int i = 0; i < viewIds.length; i++) {
+                    Bitmap image = imageGalery.getImage(i);
+                    if (image == null) {
+                        break;
+                    }
+                    ImageView compare = (ImageView) itemView.findViewById(viewIds[i]);
+                    compare.setImageBitmap(image);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
+                    layoutParams.weight = 1;
+                }
             }
             Log.i("image", "show image url " + url + " id = " + imageInfo.getId());
             new AsyncTask<String, Void, Bitmap>() {
@@ -90,7 +103,7 @@ public class CustomSwip extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         Log.d("view", "destory item");
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
 
