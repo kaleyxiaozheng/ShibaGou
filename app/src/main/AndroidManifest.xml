@@ -34,7 +34,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
