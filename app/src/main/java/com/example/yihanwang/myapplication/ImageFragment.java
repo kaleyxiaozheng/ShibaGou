@@ -62,31 +62,11 @@ public class ImageFragment extends Fragment {
         viewPager.setAdapter(customSwip);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
-            private void updateArrows(int position) {
-                ImageView leftArrow = (ImageView) viewPager.findViewById(R.id.image_left_arrow);
-                ImageView rightArrow = (ImageView) viewPager.findViewById(R.id.image_right_arrow);
-                Log.i("image", "update position "+position+","+ImageStorage.getInstance().getImageCount());
-                if (position == 0) {
-                    leftArrow.setVisibility(View.GONE);
-                } else {
-                    leftArrow.setVisibility(View.VISIBLE);
-                }
-                if (position >= ImageStorage.getInstance().getImageCount() - 1) {
-                    rightArrow.setVisibility(View.GONE);
-                } else {
-                    rightArrow.setVisibility(View.VISIBLE);
-                }
-            }
-
             @Override
             public void onPageSelected(int position) {
                 currentPosition = position;
             }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                updateArrows(position);
-            }
+            
         });
 
         picture = (Button) view.findViewById(R.id.takePhoto);
