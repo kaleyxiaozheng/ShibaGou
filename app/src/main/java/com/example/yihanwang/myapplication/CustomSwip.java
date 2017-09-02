@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -82,9 +83,16 @@ public class CustomSwip extends PagerAdapter {
                 }
 
                 @Override
-                protected void onPostExecute(Bitmap bitmap) {
+                protected void onPostExecute(final Bitmap bitmap) {
                     if (bitmap != null) {
-                        imageView.setImageBitmap(bitmap);
+                        Handler mainHandler = new Handler(itemView.getContext().getMainLooper());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                imageView.setImageBitmap(bitmap);
+                            }
+                        });
+
                     } else {
                         Log.e("image", "can't read image from " + url);
                     }

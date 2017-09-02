@@ -146,6 +146,17 @@ public class ImageFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(queue != null){
+            queue.cancelAll(new RequestQueue.RequestFilter() {
+                @Override
+                public boolean apply(Request<?> request) {
+                    return true;
+                }
+            });
+        }
+    }
 }
 
