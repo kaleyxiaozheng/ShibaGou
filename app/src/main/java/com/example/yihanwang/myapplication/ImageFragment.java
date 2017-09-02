@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -58,10 +60,32 @@ public class ImageFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         customSwip = new CustomSwip(getActivity());
         viewPager.setAdapter(customSwip);
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
+            private void updateArrows(int position) {
+                ImageView leftArrow = (ImageView) viewPager.findViewById(R.id.image_left_arrow);
+                ImageView rightArrow = (ImageView) viewPager.findViewById(R.id.image_right_arrow);
+                Log.i("image", "update position "+position+","+ImageStorage.getInstance().getImageCount());
+                if (position == 0) {
+                    leftArrow.setVisibility(View.GONE);
+                } else {
+                    leftArrow.setVisibility(View.VISIBLE);
+                }
+                if (position >= ImageStorage.getInstance().getImageCount() - 1) {
+                    rightArrow.setVisibility(View.GONE);
+                } else {
+                    rightArrow.setVisibility(View.VISIBLE);
+                }
+            }
+
             @Override
             public void onPageSelected(int position) {
                 currentPosition = position;
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                updateArrows(position);
             }
         });
 

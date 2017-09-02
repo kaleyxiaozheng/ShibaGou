@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.location.LocationListener;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
 public class MapFragment extends Fragment implements OnMapReadyCallback, FragmentManager.OnBackStackChangedListener {
     private GoogleMap m_cGoogleMap;
     private Location location;
-    private Double mLatitude,mLongitude;
+    private Double mLatitude, mLongitude;
     private LocationTracker locationTracker;
     private Button toImage;
     private Button toList;
@@ -49,19 +51,51 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     private Marker marker;
     private LocationManager locationManager;
 
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            //your code here
+            if(MapFragment.this.location == null){
+                mLatitude = location.getLatitude();
+                mLongitude = location.getLongitude();
+                MapFragment.this.location = new Location("");
+                MapFragment.this.location.setLatitude(mLatitude);
+                MapFragment.this.location.setLongitude(mLongitude);
+                addMarkerOnMap(mLatitude, mLongitude);
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
 
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000,
+                    1000, mLocationListener);
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
 
 
         if (tempView != null) {
@@ -149,7 +183,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         }
       */
 
-        toImage = (Button)view.findViewById(R.id.findPlant);
+        toImage = (Button) view.findViewById(R.id.findPlant);
         toImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +199,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
             }
         });
 
-        toList = (Button)view.findViewById(R.id.plantList);
+        toList = (Button) view.findViewById(R.id.plantList);
         toList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +216,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         });
 
 
-
         return view;
     }
 
@@ -190,26 +223,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     private void addMarkerOnMap(double lat, double lon) {
         LatLng latLng = new LatLng(lat, lon);
         Address currentLocation = getCurrentLocation(lat, lon);
-        if(currentLocation == null || !"Victoria".equals(currentLocation.getAdminArea())){
+        if (currentLocation == null || !"Victoria".equals(currentLocation.getAdminArea())) {
             return;
         }
         MarkerOptions markerOptions = new MarkerOptions()
                 .position(latLng)
                 .title("");
-        if(marker != null){
+        if (marker != null) {
             marker.remove();
         }
         mLongitude = lon;
         mLatitude = lat;
         marker = m_cGoogleMap.addMarker(markerOptions);
-        m_cGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+        m_cGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
 
-    private Address getCurrentLocation(double lat, double lon){
+    private Address getCurrentLocation(double lat, double lon) {
         try {
             Geocoder geocoder = new Geocoder(getContext(), Locale.ENGLISH);
             List<Address> fromLocation = geocoder.getFromLocation(lat, lon, 1);
-            if(fromLocation.size() > 0){
+            if (fromLocation.size() > 0) {
                 return fromLocation.get(0);
             }
         } catch (IOException e) {
@@ -225,7 +258,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         m_cGoogleMap = googleMap;
         locationTracker = new LocationTracker(getActivity());
         location = locationTracker.getLocation();
-        if(location != null) {
+        if (location != null) {
             mLatitude = location.getLatitude();
             mLongitude = location.getLongitude();
         } else {
@@ -234,7 +267,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         }
         addMarkerOnMap(mLatitude, mLongitude);
         // set map to satellite map
-         m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         m_cGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -251,10 +284,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
                 //txtinfo.setText(location.toString());
                 try {
                     List<Address> fromLocation = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    if(fromLocation.size() > 0){
+                    if (fromLocation.size() > 0) {
                         String adminArea = fromLocation.get(0).getAdminArea();
-                        Log.i("map", "location city "+adminArea);
-                        if(!adminArea.equals("Victoria")){
+                        Log.i("map", "location city " + adminArea);
+                        if (!adminArea.equals("Victoria")) {
                             return;
                         }
                     }
@@ -280,7 +313,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 */
 
 
-
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -297,10 +329,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     }
 
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == PLACE_PICKER_REQUEST){
-            if(resultCode == RESULT_OK){
-                Place place = PlacePicker.getPlace(data,getActivity());
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, getActivity());
                 String address = String.format("Place:");
             }
         }
