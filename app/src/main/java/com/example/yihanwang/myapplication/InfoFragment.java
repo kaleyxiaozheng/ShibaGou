@@ -42,6 +42,10 @@ public class InfoFragment extends Fragment {
         item = (TextView) view.findViewById(R.id.PlantRecord);
         item.setMovementMethod(new ScrollingMovementMethod());
         item.setText(imageInfo.getDescription());
+
+        TextView title = (TextView) view.findViewById(R.id.PlantRecordTitle);
+        title.setText(imageInfo.getName());
+
         Log.i("image", "show image url " + url);
         new AsyncTask<String, Void, Bitmap>() {
             @Override
