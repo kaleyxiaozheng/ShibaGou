@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.yihanwang.myapplication.entities.LocationTracker;
+import com.example.yihanwang.myapplication.gps.LocationService;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,7 +39,6 @@ import java.util.Locale;
 import static android.app.Activity.RESULT_OK;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, FragmentManager.OnBackStackChangedListener {
-    private static final int LOCATION_PERMISSION = 1000;
     private GoogleMap m_cGoogleMap;
     private Location location;
     private Double mLatitude, mLongitude;
@@ -48,50 +48,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     private View tempView;
     private int PLACE_PICKER_REQUEST = 1;
 
-    private static final LatLng LOCATION_GRAMPIANS
-            = new LatLng(-37.6145, 142.3244);
     private Marker marker;
-    private LocationManager locationManager;
-
-    private final LocationListener mLocationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(final Location location) {
-            //your code here
-            if (MapFragment.this.location == null) {
-                mLatitude = location.getLatitude();
-                mLongitude = location.getLongitude();
-                MapFragment.this.location = new Location("");
-                MapFragment.this.location.setLatitude(mLatitude);
-                MapFragment.this.location.setLongitude(mLongitude);
-                addMarkerOnMap(mLatitude, mLongitude);
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000,
-                    1000, mLocationListener);
-        }
     }
 
     @Nullable
@@ -109,82 +70,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment);
         // Set up an asyncronous callback to let us know when the map has loaded
         mapFrag.getMapAsync(this);
-        /*
-        locationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return view;
-        }
-
-        if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-
-
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude,longitude);
-                    Geocoder geocoder = new Geocoder(getActivity());
-                    try {
-                       List<Address> addressList =  geocoder.getFromLocation(latitude,longitude,1);
-                        String str = addressList.get(0).getLocality();
-                        m_cGoogleMap.addMarker(new MarkerOptions().position(latLng).title("You Are Here"));
-                        m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String provider) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String provider) {
-
-                }
-            });
-
-        }
-
-        else if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-
-                }
-
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String provider) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String provider) {
-
-                }
-            });
-        }
-      */
-
+        mLatitude = LocationService.getInstance().getCurrentLat();
+        mLongitude = LocationService.getInstance().getCurrentLon();
         toImage = (Button) view.findViewById(R.id.findPlant);
         toImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,8 +95,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
 
                 Fragment fragment = new ListFragment();
                 Bundle args = new Bundle();
-                args.putDouble("location_lat", LOCATION_GRAMPIANS.latitude);
-                args.putDouble("location_lon", LOCATION_GRAMPIANS.longitude);
+                args.putDouble("location_lat", mLatitude);
+                args.putDouble("location_lon", mLongitude);
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
@@ -263,9 +150,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         if (location != null) {
             mLatitude = location.getLatitude();
             mLongitude = location.getLongitude();
-        } else {
-            mLatitude = LOCATION_GRAMPIANS.latitude;
-            mLongitude = LOCATION_GRAMPIANS.longitude;
         }
         addMarkerOnMap(mLatitude, mLongitude);
         // set map to satellite map

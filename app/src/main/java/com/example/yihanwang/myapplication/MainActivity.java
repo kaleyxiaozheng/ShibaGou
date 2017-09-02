@@ -2,7 +2,6 @@ package com.example.yihanwang.myapplication;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.example.yihanwang.myapplication.gps.LocationService;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     1000);
+        } else {
+            LocationService.getInstance(this).locateCurrentLocation();
         }
     }
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == 1000) {
-
+            LocationService.getInstance(this).locateCurrentLocation();
         }
     }
 

@@ -79,17 +79,6 @@ public class ImageFragment extends Fragment {
             }
         });
 
-        location = (Button) view.findViewById(R.id.locatePoint);
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new MapFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(MapFragment.class.getName()).commit();
-            }
-        });
-
         infoBtn = (Button) view.findViewById(R.id.plantInfo);
         infoBtn.setOnClickListener(new OnClickListener() {
             @Override

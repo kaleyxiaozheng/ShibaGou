@@ -41,17 +41,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_alignParentLeft="true" />
-            //android:layout_alignBottom="@+id/plantList"
-
-
-        <Button
-            android:id="@+id/locatePoint"
-            android:layout_width="30dp"
-            android:layout_height="fill_parent"
-            android:background="@drawable/ic_point_location_button"
-            android:layout_centerHorizontal="true" />
-
-
 
         <Button
             android:id="@+id/plantInfo"
