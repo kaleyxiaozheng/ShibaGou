@@ -87,11 +87,14 @@ public class ImageFragment extends Fragment {
                 Fragment fragment = new InfoFragment();
                 Bundle args = new Bundle();
                 ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
-                args.putLong("id", imageInfo.getId());
-                fragment.setArguments(args);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
+
+                if(imageInfo != null){
+                    args.putLong("id", imageInfo.getId());
+                    fragment.setArguments(args);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, fragment).addToBackStack(InfoFragment.class.getName()).commit();
+                }
             }
         });
 

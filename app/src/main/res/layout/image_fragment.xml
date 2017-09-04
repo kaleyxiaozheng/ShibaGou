@@ -35,7 +35,7 @@
 
         <Button
             android:id="@+id/takePhoto"
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/ic_camera_button"
@@ -46,7 +46,8 @@
         <Button
             android:id="@+id/plantInfo"
             android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/ic_info_button"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"/>
