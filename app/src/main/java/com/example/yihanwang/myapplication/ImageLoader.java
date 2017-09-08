@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import io.realm.Realm;
+
 /**
  * Created by Kaley on 31/8/17.
  */
@@ -37,15 +39,22 @@ public class ImageLoader {
         listeners.remove(l);
     }
 
-    public void getPlantImagesInfo(double lat, double lon, final RequestQueue queue) {
+    public void getPlantImagesInfo(final double lat, final double lon, final RequestQueue queue) {
+        final Realm realm = Realm.getDefaultInstance();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, APIUrl.getPlantsList(lat, lon, 50, 1), null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("http", response.toString());
                 try {
                     for (int i = 0; i < response.length(); i++) {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        ImageInfo imageInfo = new ImageInfo(jsonObject);
+                        final JSONObject jsonObject = response.getJSONObject(i);
+                        ImageInfo imageInfo;
+                        realm.beginTransaction();
+                        imageInfo = realm.createObject(ImageInfo.class);
+                        imageInfo.setJsonValue(jsonObject);
+                        imageInfo.setLatitude(lat);
+                        imageInfo.setLongtitude(lon);
+                        realm.commitTransaction();
                         getImageUrl(imageInfo, queue);
                     }
                 } catch (JSONException e) {
@@ -69,8 +78,9 @@ public class ImageLoader {
                     JSONArray results = response.getJSONObject("searchResults").getJSONArray("results");
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject jsonObject = results.getJSONObject(i);
-                        ImageInfo.Image image = new ImageInfo.Image(jsonObject);
+                        final ImageInfo.Image image = new ImageInfo.Image(jsonObject);
                         imageInfo.addImage(image);
+
                     }
                     if (imageInfo.getImages().size() > 0
                             && imageInfo.getImages().get(0).getThumbUrl() != null
@@ -102,6 +112,7 @@ public class ImageLoader {
             return;
         }
         Log.i("http", "load image info " + url);
+        final Realm realm = Realm.getDefaultInstance();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -114,14 +125,16 @@ public class ImageLoader {
                                 String key = keys.next();
                                 JSONObject keyObjs = pages.getJSONObject(key);
                                 String info = keyObjs.getString("extract");
+                                realm.beginTransaction();
                                 imageInfo.setDescription(info);
+                                realm.commitTransaction();
                             }
-                            if(imageInfo.getDescription() != null && !imageInfo.getDescription().isEmpty()){
+                            if (imageInfo.getDescription() != null && !imageInfo.getDescription().isEmpty()) {
                                 ImageStorage.getInstance().addImage(imageInfo);
                                 notifyListeners(imageInfo);
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.w("http", "no extract value for the query");
                         }
                     }
                 }, new Response.ErrorListener() {

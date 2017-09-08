@@ -43,9 +43,10 @@ public class CustomSwip extends PagerAdapter {
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View itemView = layoutInflater.inflate(R.layout.activity_custom_swip, container, false);
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
+
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
         ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(position);
-        //textView.setText("Image :" + (position + 1) + "/" + ImageStorage.getInstance().getImageCount());
+        textView.setText("Image :" + (position + 1) + "/" + ImageStorage.getInstance().getImageCount());
         textView.setText((position + 1) + "/" + ImageStorage.getInstance().getImageCount());
         if (imageInfo != null && imageInfo.getImages().size() > 0) {
             final String url = imageInfo.getImages().get(0).getImageUrl();

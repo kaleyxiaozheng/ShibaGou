@@ -5,6 +5,8 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 /**
  * Created by Kaley on 30/8/17.
  */

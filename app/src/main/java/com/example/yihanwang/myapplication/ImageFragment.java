@@ -66,7 +66,7 @@ public class ImageFragment extends Fragment {
             public void onPageSelected(int position) {
                 currentPosition = position;
             }
-            
+
         });
 
         picture = (Button) view.findViewById(R.id.takePhoto);

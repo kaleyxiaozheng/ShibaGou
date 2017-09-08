@@ -6,11 +6,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+
 /**
  * Created by Kaley on 30/8/17.
  */
 
-public class ImageInfo {
+public class ImageInfo extends RealmObject {
 
     private long id;
 
@@ -30,9 +33,18 @@ public class ImageInfo {
 
     private String description;
 
+    private double latitude;
+
+    private double longtitude;
+
+    @Ignore
     private List<Image> images = new ArrayList<>();
 
-    public ImageInfo(JSONObject jsonObject) {
+    public ImageInfo() {
+    }
+
+
+    public void setJsonValue(JSONObject jsonObject){
         try {
             this.id = System.nanoTime();
             this.commonName = jsonObject.getString("commonName");
@@ -94,6 +106,22 @@ public class ImageInfo {
 
     public long getId() {
         return id;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
     }
 
     public static class Image {
