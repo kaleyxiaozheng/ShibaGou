@@ -23,10 +23,6 @@ import java.util.List;
 
 import io.realm.Realm;
 
-/**
- * Created by Kaley on 31/8/17.
- */
-
 public class ImageLoader {
 
     private final List<ImageAvailableListener> listeners = new ArrayList<>();

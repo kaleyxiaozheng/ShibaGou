@@ -10,10 +10,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
-/**
- * Created by kaley on 6/9/17.
- */
-
 public class TouchImageView extends android.support.v7.widget.AppCompatImageView {
     Matrix matrix;
     // We can be in one of these 3 states
@@ -27,7 +23,7 @@ public class TouchImageView extends android.support.v7.widget.AppCompatImageView
     PointF last = new PointF();
     PointF start = new PointF();
     float minScale = 1f;
-    float maxScale = 3f;
+    float maxScale = 5f;
     float[] m;
     int viewWidth, viewHeight;
 

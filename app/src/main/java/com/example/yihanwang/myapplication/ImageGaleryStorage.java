@@ -8,10 +8,6 @@ import com.example.yihanwang.myapplication.entities.ImageGalery;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kaley on 1/9/17.
- */
-
 public class ImageGaleryStorage {
 
     private static final ImageGaleryStorage instance = new ImageGaleryStorage();

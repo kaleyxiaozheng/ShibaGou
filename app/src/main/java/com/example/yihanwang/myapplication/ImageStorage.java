@@ -7,10 +7,6 @@ import java.util.List;
 
 import io.realm.Realm;
 
-/**
- * Created by Kaley on 30/8/17.
- */
-
 public class ImageStorage {
 
     private static ImageStorage instance = new ImageStorage();

@@ -23,10 +23,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kaley on 31/8/17.
- */
-
 public class ListAdapter extends RecyclerView.Adapter {
 
     private List<ImageInfo> items = new ArrayList<>();

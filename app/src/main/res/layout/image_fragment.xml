@@ -46,7 +46,7 @@
         <Button
             android:id="@+id/plantInfo"
             android:layout_width="50dp"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="13dp"
             android:background="@drawable/ic_info_button"
             android:layout_alignParentRight="true"
