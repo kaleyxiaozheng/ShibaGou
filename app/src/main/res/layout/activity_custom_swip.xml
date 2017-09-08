@@ -27,8 +27,9 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="1">
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:alpha=".4"
                 android:gravity="center"
                 android:src="@drawable/ic_left_arrow_button"
                 />
@@ -44,8 +45,9 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop" />
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:alpha=".4"
                 android:gravity="center"
                 android:src="@drawable/ic_right_arrow_button"
                 />
