@@ -9,10 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
-/**
- * Created by Kaley on 2/9/17.
- */
-
 public class LocationService {
 
     private static LocationService instance;

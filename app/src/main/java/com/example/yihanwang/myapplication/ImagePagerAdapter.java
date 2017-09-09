@@ -3,11 +3,9 @@ package com.example.yihanwang.myapplication;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +22,12 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-public class CustomSwip extends PagerAdapter {
+public class ImagePagerAdapter extends PagerAdapter {
 
     private Context ctx;
     private LayoutInflater layoutInflater;
 
-    public CustomSwip(Context c) {
+    public ImagePagerAdapter(Context c) {
         ctx = c;
     }
 
@@ -41,7 +39,7 @@ public class CustomSwip extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View itemView = layoutInflater.inflate(R.layout.activity_custom_swip, container, false);
+        final View itemView = layoutInflater.inflate(R.layout.image_swipe, container, false);
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
 
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);

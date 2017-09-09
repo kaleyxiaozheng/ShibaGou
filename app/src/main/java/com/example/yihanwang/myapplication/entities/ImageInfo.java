@@ -9,10 +9,6 @@ import java.util.List;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 
-/**
- * Created by Kaley on 30/8/17.
- */
-
 public class ImageInfo extends RealmObject {
 
     private long id;

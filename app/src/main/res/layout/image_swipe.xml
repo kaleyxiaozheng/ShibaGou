@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/swip_image_container"
+            android:id="@+id/swipe_image_container"
             android:layout_width="match_parent"
             android:layout_height="175dp"
             android:orientation="horizontal"

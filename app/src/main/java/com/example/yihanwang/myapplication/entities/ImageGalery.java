@@ -5,10 +5,6 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kaley on 1/9/17.
- */
-
 public class ImageGalery {
 
     private long id;

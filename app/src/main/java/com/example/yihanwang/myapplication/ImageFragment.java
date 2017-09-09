@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,7 +33,7 @@ public class ImageFragment extends Fragment {
     private int currentPosition;
     private ImageLoader imageLoader = new ImageLoader();
 
-    CustomSwip customSwip;
+    ImagePagerAdapter customSwip;
     View view;
 
     @Nullable
@@ -58,7 +56,7 @@ public class ImageFragment extends Fragment {
         imageLoader.getPlantImagesInfo(lat, lon, queue);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        customSwip = new CustomSwip(getActivity());
+        customSwip = new ImagePagerAdapter(getActivity());
         viewPager.setAdapter(customSwip);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 

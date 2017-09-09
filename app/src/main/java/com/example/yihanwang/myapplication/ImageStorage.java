@@ -5,8 +5,6 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-
 public class ImageStorage {
 
     private static ImageStorage instance = new ImageStorage();
