@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 public class ListFragment extends Fragment {
     private RequestQueue queue;
     private RecyclerView recyclerView;
     private ListAdapter listAdapter;
-//    private ImageLoader imageLoader = new ImageLoader();
 
     @Nullable
     @Override

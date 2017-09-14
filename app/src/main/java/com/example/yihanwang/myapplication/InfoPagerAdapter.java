@@ -18,13 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ImagePagerAdapter extends PagerAdapter {
+public class InfoPagerAdapter extends PagerAdapter {
 
     private final List<ImageInfo> images = new ArrayList<>();
     private Context ctx;
     private LayoutInflater layoutInflater;
 
-    public ImagePagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
+    public InfoPagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
         ctx = c;
         this.images.addAll(imagesFromLocation);
     }

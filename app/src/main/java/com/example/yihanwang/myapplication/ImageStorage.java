@@ -1,10 +1,7 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
