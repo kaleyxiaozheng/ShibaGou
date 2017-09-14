@@ -31,7 +31,12 @@ public class InfoFragment extends Fragment {
         item = (TextView) view.findViewById(R.id.PlantRecord);
         item.setMovementMethod(new ScrollingMovementMethod());
         if(imageInfo != null  && imageInfo.getDescription() != null) {
-            item.setText(imageInfo.getDescription());
+            String descriptions[] = imageInfo.getDescription().split("\\r?\\n");
+            String description = "";
+            for(int i = 0; i < descriptions.length; i++){
+                description = description + " " + descriptions[i];
+            }
+            item.setText(description);
         }
         if(imageInfo != null) {
             TextView title = (TextView) view.findViewById(R.id.PlantRecordTitle);
