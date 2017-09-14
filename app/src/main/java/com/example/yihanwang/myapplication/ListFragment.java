@@ -13,11 +13,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
-public class ListFragment extends Fragment implements ImageLoader.ImageAvailableListener{
+public class ListFragment extends Fragment {
     private RequestQueue queue;
     private RecyclerView recyclerView;
     private ListAdapter listAdapter;
-    private ImageLoader imageLoader = new ImageLoader();
+//    private ImageLoader imageLoader = new ImageLoader();
 
     @Nullable
     @Override
@@ -34,10 +34,7 @@ public class ListFragment extends Fragment implements ImageLoader.ImageAvailable
         double lat = args.getDouble("location_lat");
         double lon = args.getDouble("location_lon");
 
-        listAdapter = new ListAdapter();
-
-        imageLoader.addListener(this);
-        imageLoader.getPlantImagesInfo(lat, lon, queue);
+        listAdapter = new ListAdapter(getActivity(), ImageStorage.getInstance().getImagesFromLocation(lat, lon));
 
         recyclerView.setAdapter(listAdapter);
 
@@ -48,12 +45,6 @@ public class ListFragment extends Fragment implements ImageLoader.ImageAvailable
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        imageLoader.removeListener(this);
-    }
-
-    @Override
-    public void imageAvailable(ImageInfo imageInfo) {
-        listAdapter.addItem(imageInfo);
     }
 }
 

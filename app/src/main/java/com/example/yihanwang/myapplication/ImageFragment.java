@@ -8,55 +8,41 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ImageFragment extends Fragment {
     private ViewPager viewPager;
     private Button picture;
-    private Button location;
     private Button infoBtn;
-    private RequestQueue queue;
     private int currentPosition;
-    private ImageLoader imageLoader = new ImageLoader();
-
     ImagePagerAdapter customSwip;
     View view;
+    private List<ImageInfo> images = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        queue = Volley.newRequestQueue(this.getContext());
         view = inflater.inflate(R.layout.image_fragment, container, false);
         Bundle args = getArguments();
         double lat = args.getDouble("location_lat");
         double lon = args.getDouble("location_lon");
-        ImageStorage.getInstance().clearImage();
-        queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-            @Override
-            public void onRequestFinished(Request<Object> request) {
-                Log.i("http", "request has finished");
-                customSwip.notifyDataSetChanged();
-            }
-        });
-        imageLoader.getPlantImagesInfo(lat, lon, queue);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        customSwip = new ImagePagerAdapter(getActivity());
+        this.images = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
+        customSwip = new ImagePagerAdapter(getActivity(), images);
         viewPager.setAdapter(customSwip);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
@@ -66,7 +52,6 @@ public class ImageFragment extends Fragment {
             }
 
         });
-
         picture = (Button) view.findViewById(R.id.takePhoto);
         picture.setOnClickListener(new OnClickListener() {
 
@@ -84,10 +69,10 @@ public class ImageFragment extends Fragment {
 
                 Fragment fragment = new InfoFragment();
                 Bundle args = new Bundle();
-                ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+                ImageInfo imageInfo = images.get(currentPosition);
 
-                if(imageInfo != null){
-                    args.putLong("id", imageInfo.getId());
+                if (imageInfo != null) {
+                    args.putDouble("id", imageInfo.getId());
                     fragment.setArguments(args);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
@@ -111,7 +96,6 @@ public class ImageFragment extends Fragment {
     }
 
     private void SaveImage(Bitmap finalBitmap) {
-
         String root = getContext().getExternalCacheDir().getAbsolutePath();
         File myDir = new File(root, "saved_images");
         myDir.mkdirs();
@@ -126,7 +110,7 @@ public class ImageFragment extends Fragment {
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
-            ImageInfo imageInfo = ImageStorage.getInstance().getImageInfo(currentPosition);
+            ImageInfo imageInfo = images.get(currentPosition);
             ImageGaleryStorage.getInstance().addImageGalery(imageInfo.getId(), finalBitmap, file.getPath());
             viewPager.setAdapter(null);
             viewPager.setAdapter(customSwip);
@@ -139,14 +123,6 @@ public class ImageFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if(queue != null){
-            queue.cancelAll(new RequestQueue.RequestFilter() {
-                @Override
-                public boolean apply(Request<?> request) {
-                    return true;
-                }
-            });
-        }
     }
 }
 

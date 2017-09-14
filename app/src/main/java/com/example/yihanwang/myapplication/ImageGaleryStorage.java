@@ -18,7 +18,7 @@ public class ImageGaleryStorage {
         return instance;
     }
 
-    public void addImageGalery(long id, Bitmap bitmap, String path) {
+    public void addImageGalery(double id, Bitmap bitmap, String path) {
         Log.i("galery", "save image galery " + id);
         ImageGalery galery = getImageGalery(id);
         if (galery != null) {
@@ -38,7 +38,7 @@ public class ImageGaleryStorage {
         }
     }
 
-    public ImageGalery getImageGalery(long id) {
+    public ImageGalery getImageGalery(double id) {
         for (ImageGalery imageGalery : items) {
             if (imageGalery.getId() == id) {
                 return imageGalery;

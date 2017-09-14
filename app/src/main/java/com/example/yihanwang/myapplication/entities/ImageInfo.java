@@ -11,7 +11,7 @@ import io.realm.annotations.Ignore;
 
 public class ImageInfo extends RealmObject {
 
-    private long id;
+    private double id;
 
     private String name;
 
@@ -33,14 +33,17 @@ public class ImageInfo extends RealmObject {
 
     private double longtitude;
 
-    @Ignore
-    private List<Image> images = new ArrayList<>();
+    private String imageUrl;
+
+    private String thumbnailUrl;
+
+    private String Locations;
 
     public ImageInfo() {
     }
 
 
-    public void setJsonValue(JSONObject jsonObject){
+    public void setJsonValue(JSONObject jsonObject) {
         try {
             this.id = System.nanoTime();
             this.commonName = jsonObject.getString("commonName");
@@ -53,10 +56,6 @@ public class ImageInfo extends RealmObject {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public void addImage(Image image) {
-        this.images.add(image);
     }
 
     public String getName() {
@@ -95,57 +94,20 @@ public class ImageInfo extends RealmObject {
         this.description = description;
     }
 
-    public List<Image> getImages() {
-        return new ArrayList<>(images);
-    }
-
-
-    public long getId() {
+    public double getId() {
         return id;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public double getLongtitude() {
-        return longtitude;
+    public String getLocations() {
+        return Locations;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public static class Image {
-        private String id;
-        private String imageUrl;
-        private String thumbUrl;
-
-        public Image(JSONObject jsonObject) {
-            try {
-                id = jsonObject.getString("image");
-                imageUrl = jsonObject.getString("imageUrl");
-                thumbUrl = jsonObject.getString("thumbnailUrl");
-            } catch (JSONException e) {
-                e.printStackTrace();
-                ;
-            }
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getImageUrl() {
-            return imageUrl;
-        }
-
-        public String getThumbUrl() {
-            return thumbUrl;
-        }
-    }
 }

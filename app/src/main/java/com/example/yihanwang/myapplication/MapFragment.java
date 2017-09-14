@@ -207,7 +207,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
         }
 
         m_cGoogleMap.setMyLocationEnabled(true);
-       // m_cGoogleMap.getUiSettings().setMapToolbarEnabled(false);
+        // m_cGoogleMap.getUiSettings().setMapToolbarEnabled(false);
 
     }
 

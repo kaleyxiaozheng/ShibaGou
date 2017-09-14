@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ImageGalery {
 
-    private long id;
+    private double id;
 
     private List<Bitmap> bitmap = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class ImageGalery {
         return filePath;
     }
 
-    public ImageGalery(long id, String filePath) {
+    public ImageGalery(double id, String filePath) {
         this.id = id;
         this.filePath = filePath;
 
@@ -47,7 +47,7 @@ public class ImageGalery {
         return this.bitmap.size();
     }
 
-    public long getId() {
+    public double getId() {
         return id;
     }
 

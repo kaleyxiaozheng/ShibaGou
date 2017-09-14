@@ -44,14 +44,14 @@ public class ImageLoader {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         final JSONObject jsonObject = response.getJSONObject(i);
-                        ImageInfo imageInfo;
+                        ImageInfo imageInfo = new ImageInfo();
                         realm.beginTransaction();
-                        imageInfo = realm.createObject(ImageInfo.class);
-                        imageInfo.setJsonValue(jsonObject);
-                        imageInfo.setLatitude(lat);
-                        imageInfo.setLongtitude(lon);
+//                        imageInfo = realm.createObject(ImageInfo.class);
+//                        imageInfo.setJsonValue(jsonObject);
+//                        imageInfo.setLatitude(lat);
+//                        imageInfo.setLongtitude(lon);
                         realm.commitTransaction();
-                        getImageUrl(imageInfo, queue);
+//                        getImageUrl(imageInfo, queue);
                     }
                 } catch (JSONException e) {
 
@@ -66,35 +66,35 @@ public class ImageLoader {
         queue.add(jsonObjectRequest);
     }
 
-    private void getImageUrl(final ImageInfo imageInfo, final RequestQueue queue) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, APIUrl.getImageSearch(imageInfo.getGuid()), null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray results = response.getJSONObject("searchResults").getJSONArray("results");
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject jsonObject = results.getJSONObject(i);
-                        final ImageInfo.Image image = new ImageInfo.Image(jsonObject);
-                        imageInfo.addImage(image);
-
-                    }
-                    if (imageInfo.getImages().size() > 0
-                            && imageInfo.getImages().get(0).getThumbUrl() != null
-                            && imageInfo.getImages().get(0).getImageUrl() != null) {
-                        queryImageInfo(imageInfo, queue);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("http", error.getMessage());
-            }
-        });
-        queue.add(jsonObjectRequest);
-    }
+//    private void getImageUrl(final ImageInfo imageInfo, final RequestQueue queue) {
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, APIUrl.getImageSearch(imageInfo.getGuid()), null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    JSONArray results = response.getJSONObject("searchResults").getJSONArray("results");
+//                    for (int i = 0; i < results.length(); i++) {
+//                        JSONObject jsonObject = results.getJSONObject(i);
+//                        final ImageInfo.Image image = new ImageInfo.Image(jsonObject);
+//                        imageInfo.addImage(image);
+//
+//                    }
+//                    if (imageInfo.getImages().size() > 0
+//                            && imageInfo.getImages().get(0).getThumbUrl() != null
+//                            && imageInfo.getImages().get(0).getImageUrl() != null) {
+//                        queryImageInfo(imageInfo, queue);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("http", error.getMessage());
+//            }
+//        });
+//        queue.add(jsonObjectRequest);
+//    }
 
     private void queryImageInfo(final ImageInfo imageInfo, RequestQueue queue) {
         String url = null;

@@ -5,7 +5,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
+
 import com.felipecsl.gifimageview.library.GifImageView;
+
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -24,11 +26,11 @@ public class LogoAnimation extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setContentView(R.layout.activity_logo_animation);
 
-        gifImageView = (GifImageView)findViewById(R.id.gifImageView);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        gifImageView = (GifImageView) findViewById(R.id.gifImageView);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(progressBar.VISIBLE);
 
-        try{
+        try {
             InputStream inputStream = getAssets().open("boot_animation.gif");
             byte[] bytes = IOUtils.toByteArray(inputStream);
             gifImageView.setBytes(bytes);
@@ -42,7 +44,7 @@ public class LogoAnimation extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                LogoAnimation.this.startActivity(new Intent(LogoAnimation.this,MainActivity.class));
+                LogoAnimation.this.startActivity(new Intent(LogoAnimation.this, MainActivity.class));
                 LogoAnimation.this.finish();
             }
         }, 3000);

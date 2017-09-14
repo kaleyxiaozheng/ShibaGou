@@ -216,7 +216,6 @@ public class TouchImageView extends android.support.v7.widget.AppCompatImageView
     }
 
 
-
     float getFixTrans(float trans, float viewSize, float contentSize) {
 
         float minTrans, maxTrans;

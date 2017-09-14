@@ -22,36 +22,35 @@ public class LocationTracker extends Service implements LocationListener {
     LocationManager locationManager;
 
 
-
-    public LocationTracker(Context context){
-        this.context=context;
+    public LocationTracker(Context context) {
+        this.context = context;
     }
 
     //Create a GetLocation Method //
-    public  Location getLocation(){
-        try{
+    public Location getLocation() {
+        try {
 
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
             isGPSEnabled = locationManager.isProviderEnabled(locationManager.GPS_PROVIDER);
-            isNetworkEnabled=locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
+            isNetworkEnabled = locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
 
-            if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-                if(isGPSEnabled){
-                    if(location==null){
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,10,this);
-                        if(locationManager!=null){
+                if (isGPSEnabled) {
+                    if (location == null) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
+                        if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         }
                     }
                 }
                 // if lcoation is not found from GPS than it will found from network //
-                if(location==null){
-                    if(isNetworkEnabled){
+                if (location == null) {
+                    if (isNetworkEnabled) {
 
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000,10,this);
-                        if(locationManager!=null){
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 10, this);
+                        if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         }
 
@@ -60,15 +59,11 @@ public class LocationTracker extends Service implements LocationListener {
 
             }
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
         }
-        return  location;
+        return location;
     }
-
-
-
-
 
 
     @Nullable
