@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.gps.LocationService;
 
 public class HomeFragment extends Fragment {
@@ -71,6 +72,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
         return view;
     }
 }

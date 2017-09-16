@@ -1,7 +1,6 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -9,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.yihanwang.myapplication.entities.ImageGalery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.util.ArrayList;
@@ -37,7 +34,6 @@ public class InfoPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-        Log.i("info", "inflate " + position);
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view = layoutInflater.inflate(R.layout.info_swipe, container, false);
         ImageInfo imageInfo = images.get(position);
@@ -52,6 +48,7 @@ public class InfoPagerAdapter extends PagerAdapter {
             title.setText(imageInfo.getName());
             imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
         }
+        container.addView(view);
         return view;
     }
 

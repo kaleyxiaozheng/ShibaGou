@@ -102,4 +102,13 @@ public class ImageStorage {
     public List<ImageInfo> getAllImages() {
         return images;
     }
+
+    public int getIndexByImageId(double id) {
+        for (int i = 0; i < images.size(); i++) {
+            if (images.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }

@@ -2,43 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_info_container"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/app_background"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.example.yihanwang.myapplication.TouchImageView
+        android:id="@+id/PlantPhoto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
-
-        <com.example.yihanwang.myapplication.TouchImageView
-            android:id="@+id/PlantPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:adjustViewBounds="true" />
-    </RelativeLayout>
+        android:layout_height="100dp"
+        android:layout_weight="0.6"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
 
     <TextView
         android:id="@+id/PlantRecordTitle"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:layout_weight="0.1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textStyle="bold"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/PlantRecord"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.3"
         android:maxLines="15"
         android:scrollbars="vertical" />
 </LinearLayout>

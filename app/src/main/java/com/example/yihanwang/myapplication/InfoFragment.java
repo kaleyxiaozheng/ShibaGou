@@ -4,47 +4,43 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
+import java.util.List;
+
 public class InfoFragment extends Fragment {
-
-    private TextView item;
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle args = getArguments();
-        double position = args.getDouble("id");
-        ImageInfo imageInfo = ImageStorage.getInstance().getImageInfoById(position);
-
         View view = inflater.inflate(R.layout.info_fragment, container, false);
+        Bundle args = getArguments();
+        double id = args.getDouble("id");
+        int idx = ImageStorage.getInstance().getIndexByImageId(id);
         InfoPagerAdapter adapter = new InfoPagerAdapter(getContext(), ImageStorage.getInstance().getAllImages());
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.infoViewPager);
         viewPager.setAdapter(adapter);
 
-//        View view = inflater.inflate(R.layout.info_swipe, container, false);
-//        final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
-//        item = (TextView) view.findViewById(R.id.PlantRecord);
-//        item.setMovementMethod(new ScrollingMovementMethod());
-//        if(imageInfo != null  && imageInfo.getDescription() != null) {
-//            item.setText(imageInfo.getDescription());
-//        }
-//        if(imageInfo != null) {
-//            TextView title = (TextView) view.findViewById(R.id.PlantRecordTitle);
-//            title.setText(imageInfo.getName());
-//            imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), imageInfo));
-//        }
+        viewPager.setCurrentItem(idx);
+//        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//        });
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }
