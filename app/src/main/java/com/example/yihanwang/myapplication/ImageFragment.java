@@ -40,7 +40,7 @@ public class ImageFragment extends Fragment {
         double lat = args.getDouble("location_lat");
         double lon = args.getDouble("location_lon");
 
-        viewPager = (ViewPager) view.findViewById(R.id.plantViewPager);
+        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         this.images = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
         customSwip = new ImagePagerAdapter(getActivity(), images);
         viewPager.setAdapter(customSwip);

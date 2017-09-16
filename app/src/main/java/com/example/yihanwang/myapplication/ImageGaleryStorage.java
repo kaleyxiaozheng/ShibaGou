@@ -2,7 +2,6 @@ package com.example.yihanwang.myapplication;
 
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.example.yihanwang.myapplication.entities.ImageGalery;
 
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageGaleryStorage {
+
     private static final ImageGaleryStorage instance = new ImageGaleryStorage();
 
     private List<ImageGalery> items = new ArrayList<>();

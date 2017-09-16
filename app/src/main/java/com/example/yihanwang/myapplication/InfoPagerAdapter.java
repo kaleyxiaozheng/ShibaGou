@@ -3,6 +3,7 @@ package com.example.yihanwang.myapplication;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +25,9 @@ public class InfoPagerAdapter extends PagerAdapter {
     private Context ctx;
     private LayoutInflater layoutInflater;
 
-    public InfoPagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
+    public InfoPagerAdapter(Context c, List<ImageInfo> images) {
         ctx = c;
-        this.images.addAll(imagesFromLocation);
+        this.images.addAll(images);
     }
 
     @Override
@@ -36,36 +37,22 @@ public class InfoPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
+        Log.i("info", "inflate " + position);
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View itemView = layoutInflater.inflate(R.layout.image_swipe, container, false);
-        final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
-
-        final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
+        final View view = layoutInflater.inflate(R.layout.info_swipe, container, false);
         ImageInfo imageInfo = images.get(position);
-        textView.setText("Image :" + (position + 1) + "/" + images.size());
-        textView.setText((position + 1) + "/" + images.size());
-        ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
-        if (imageGalery != null) {
-            int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
-            if (imageGalery.getImageCount() > 0) {
-                View galeryContainer = itemView.findViewById(R.id.image_galery_container);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
-                layoutParams.weight = 1;
-            }
-            for (int i = 0; i < viewIds.length; i++) {
-                Bitmap image = imageGalery.getImage(i);
-                if (image == null) {
-                    break;
-                }
-                ImageView compare = (ImageView) itemView.findViewById(viewIds[i]);
-                compare.setImageBitmap(image);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
-                layoutParams.weight = 1;
-            }
+        final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
+        TextView item = (TextView) view.findViewById(R.id.PlantRecord);
+        item.setMovementMethod(new ScrollingMovementMethod());
+        if(imageInfo != null  && imageInfo.getDescription() != null) {
+            item.setText(imageInfo.getDescription());
         }
-        imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
-        container.addView(itemView);
-        return itemView;
+        if(imageInfo != null) {
+            TextView title = (TextView) view.findViewById(R.id.PlantRecordTitle);
+            title.setText(imageInfo.getName());
+            imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
+        }
+        return view;
     }
 
     @Override

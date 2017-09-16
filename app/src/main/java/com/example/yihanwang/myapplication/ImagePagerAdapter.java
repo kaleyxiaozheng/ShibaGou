@@ -2,10 +2,12 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,15 +17,15 @@ import android.widget.TextView;
 import com.example.yihanwang.myapplication.entities.ImageGalery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ImagePagerAdapter extends PagerAdapter {
 
-    private long then;
-    private int longClickDuration = 5000;
-    private ImageView compare;
     private final List<ImageInfo> images = new ArrayList<>();
     private Context ctx;
     private LayoutInflater layoutInflater;
@@ -31,7 +33,6 @@ public class ImagePagerAdapter extends PagerAdapter {
     public ImagePagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
         ctx = c;
         this.images.addAll(imagesFromLocation);
-        this.managingImageView();
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ImagePagerAdapter extends PagerAdapter {
                 if (image == null) {
                     break;
                 }
-                compare = (ImageView) itemView.findViewById(viewIds[i]);
+                ImageView compare = (ImageView) itemView.findViewById(viewIds[i]);
                 compare.setImageBitmap(image);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
                 layoutParams.weight = 1;
@@ -85,30 +86,4 @@ public class ImagePagerAdapter extends PagerAdapter {
         return (view == object);
     }
 
-    public void managingImageView() {
-        if(compare != null){
-            compare.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        then = (long) System.currentTimeMillis();
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if ((System.currentTimeMillis() - then) > longClickDuration) {
-            /* Implement long click behavior here */
-                            System.out.println("Long Click has happened!");
-                            return false;
-                        } else {
-            /* Implement short click behavior here or do nothing */
-                            System.out.println("Short Click has happened...");
-                            return true;
-                        }
-                    }
-                    return true;
-                }
-            });
-        }
-
-    }
-
 }
-
