@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ImageStorage {
@@ -84,11 +85,13 @@ public class ImageStorage {
                     Location l2 = new Location("l2");
                     l2.setLatitude(lat1);
                     l2.setLongitude(lon1);
-                    if (Math.abs(l1.distanceTo(l2)) <= 100 * DISTANCE) {
+                    if (Math.abs(l1.distanceTo(l2)) <= 10 * DISTANCE) {
                         rangeImages.add(imageInfo);
+//                        if(rangeImages.size() >= 20){
+//                            return rangeImages;
+//                        }
                         break;
                     }
-//                    Log.i("distance", "from " + lat + "," + lon + " to " + lat1 + "," + lon1 + " = " + l1.distanceTo(l2) + "");
                 }
 
             } catch (JSONException e) {
@@ -110,5 +113,14 @@ public class ImageStorage {
             }
         }
         return 0;
+    }
+
+    public ImageInfo getImagebyId(double index){
+        for(int i = 0; i < images.size(); i++){
+            if(images.get(i).getId() == index){
+                return images.get(i);
+            }
+        }
+        return null;
     }
 }

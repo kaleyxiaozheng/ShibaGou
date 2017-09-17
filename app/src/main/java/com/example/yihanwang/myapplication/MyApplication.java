@@ -15,7 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
-public class MyApplication extends Application {
+public class  MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,19 +37,15 @@ public class MyApplication extends Application {
             }
         } catch (Exception e) {
             e.printStackTrace();
-//            Log.e("error", e.getMessage());
-//            Realm.init(this);
-//            RealmConfiguration config = new RealmConfiguration.Builder().name("default0.realm").schemaVersion(2).build();
-//            Realm.deleteRealm(config);
-//            Realm.setDefaultConfiguration(config);
-//            String path = Realm.getDefaultInstance().getPath();
-//            Log.i("database", "db path:" + path);
         }
     }
 
     private String copyBundledRealmFile(InputStream inputStream, String outFileName) {
         try {
             File file = new File(this.getFilesDir(), outFileName);
+            if (file.exists()){
+                return file.getAbsolutePath();
+            }
             FileOutputStream outputStream = new FileOutputStream(file);
             byte[] buf = new byte[1024];
             int bytesRead;

@@ -48,35 +48,11 @@ public class DBMigration implements RealmMigration {
             });
             imageInfo.removeField("desc");
 
-//            imageInfo.addField("lat_tmp", double.class).transform(new RealmObjectSchema.Function() {
-//                @Override
-//                public void apply(DynamicRealmObject obj) {
-//                    if(!obj.getString("latitude").isEmpty()){
-//                        try {
-//                            obj.setDouble("lat_tmp", Double.parseDouble(obj.getString("latitude")));
-//                        }catch(NumberFormatException e){
-//
-//                        }
-//                    }
-//                }
-//            });
-//            imageInfo.addField("latitude", double.class);
-//            imageInfo.renameField("lat_tmp", "latitude");
-//
-//            imageInfo.addField("lon_tmp", double.class).transform(new RealmObjectSchema.Function() {
-//                @Override
-//                public void apply(DynamicRealmObject obj) {
-//                    if(!obj.getString("longtitude").isEmpty()) {
-//                        try {
-//                            obj.setDouble("lon_tmp", Double.parseDouble(obj.getString("longtitude")));
-//                        }catch(NumberFormatException e){
-//
-//                        }
-//                    }
-//                }
-//            });
-//            imageInfo.addField("longtitude", double.class);
-//            imageInfo.renameField("lon_tmp", "longtitude");
+            RealmObjectSchema scoreRecord = schema.create("ScoreRecord");
+            scoreRecord.addField("id", int.class);
+            scoreRecord.addField("score", int.class);
+            scoreRecord.addField("imageId", double.class);
+
         }
     }
 }

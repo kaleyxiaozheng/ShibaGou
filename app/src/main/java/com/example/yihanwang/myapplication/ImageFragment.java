@@ -8,14 +8,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.daasuu.ahp.AnimateHorizontalProgressBar;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,7 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class ImageFragment extends Fragment {
+    public static int id = 1;
     private ViewPager viewPager;
     private Button picture;
     private Button infoBtn;
@@ -118,6 +125,35 @@ public class ImageFragment extends Fragment {
             viewPager.setAdapter(null);
             viewPager.setAdapter(customSwip);
             viewPager.setCurrentItem(currentPosition);
+
+            Realm realm = Realm.getDefaultInstance();
+
+            realm.beginTransaction();
+            int i = 0;
+            RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+
+            for(ScoreRecord imageID : allImages) {
+                if(imageID.getImageId() == imageInfo.getId()) {
+                    i = i + 1;
+                }
+            }
+            if (i < 3) {
+                ScoreRecord record = realm.createObject(ScoreRecord.class);
+                record.setId(id++);
+                record.setImageId(imageInfo.getId());
+                record.setScore(10);
+                //Log.i("score", "score " + record.getScore());
+            }
+
+            realm.commitTransaction();
+
+            int result = 0;
+            RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+            for (ScoreRecord score : total) {
+                //Log.i("score", "score " + score.getScore());
+                result += score.getScore();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
