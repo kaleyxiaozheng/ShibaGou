@@ -65,15 +65,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        ad = (ImageButton) view.findViewById(R.id.logoAd);
-//        ad.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), AppAdActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
+        ad = (ImageView) view.findViewById(R.id.logoAd);
+        ad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AppAdActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         plant = (ImageButton) view.findViewById(R.id.plantsbtn);
         plant.setOnClickListener(new View.OnClickListener() {

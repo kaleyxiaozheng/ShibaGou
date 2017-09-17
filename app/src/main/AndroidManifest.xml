@@ -39,6 +39,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ComparisonActivity"></activity>
         <activity android:name=".ScoreActivity"></activity>
+        <activity android:name=".AppAdActivity"></activity>
+
 
     </application>
 
