@@ -45,10 +45,21 @@ public class ImagePagerAdapter extends PagerAdapter {
         final View itemView = layoutInflater.inflate(R.layout.image_swipe, container, false);
         imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
 
-        final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
+        final TextView count = (TextView) itemView.findViewById(R.id.imageCount);
+        final TextView name = (TextView) itemView.findViewById(R.id.imageName);
         final ImageInfo imageInfo = images.get(position);
-        textView.setText("Image :" + (position + 1) + "/" + images.size());
-        textView.setText((position + 1) + "/" + images.size());
+        count.setText("Image :" + (position + 1) + "/" + images.size());
+        count.setText((position + 1) + "/" + images.size());
+
+        String commonName = imageInfo.getCommonName();
+        String sciencename = imageInfo.getName();
+
+        if(!commonName.isEmpty()){
+            name.setText(commonName + " (" + sciencename + ")");
+        } else {
+            name.setText(sciencename);
+        }
+
         final ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(imageInfo.getId());
         if (imageGalery != null) {
             int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
