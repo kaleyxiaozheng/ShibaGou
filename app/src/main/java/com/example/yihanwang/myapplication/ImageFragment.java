@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.daasuu.ahp.AnimateHorizontalProgressBar;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.io.File;
@@ -62,6 +63,7 @@ public class ImageFragment extends Fragment {
             }
         });
 
+
         infoBtn = (Button) view.findViewById(R.id.plantInfo);
         infoBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,6 +82,7 @@ public class ImageFragment extends Fragment {
                 }
             }
         });
+
 
         return view;
 
