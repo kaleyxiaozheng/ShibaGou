@@ -126,16 +126,28 @@ public class ImageFragment extends Fragment {
             Realm realm = Realm.getDefaultInstance();
 
             realm.beginTransaction();
-            ScoreRecord record = realm.createObject(ScoreRecord.class);
-            record.setId(id++);
-            record.setImageId(imageInfo.getId());
-            record.setScore(10);
+            int i = 0;
+            RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+
+            for(ScoreRecord imageID : allImages) {
+                if(imageID.getImageId() == imageInfo.getId()) {
+                    i = i + 1;
+                }
+            }
+            if (i < 3) {
+                ScoreRecord record = realm.createObject(ScoreRecord.class);
+                record.setId(id++);
+                record.setImageId(imageInfo.getId());
+                record.setScore(10);
+                //Log.i("score", "score " + record.getScore());
+            }
+
             realm.commitTransaction();
 
             int result = 0;
             RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
             for (ScoreRecord score : total) {
-                Log.i("id", "image id " + score.getImageId());
+                //Log.i("score", "score " + score.getScore());
                 result += score.getScore();
             }
 
