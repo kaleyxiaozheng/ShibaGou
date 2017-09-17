@@ -13,6 +13,7 @@ import com.example.yihanwang.myapplication.gps.LocationService;
 
 public class HomeFragment extends Fragment {
     private ImageButton locateYourself;
+    private ImageButton scoreBtn;
     private ImageButton plantBtn;
     private ImageButton listBtn;
 

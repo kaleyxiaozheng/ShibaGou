@@ -15,7 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
-public class MyApplication extends Application {
+public class  MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

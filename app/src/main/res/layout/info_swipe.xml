@@ -10,7 +10,7 @@
         android:id="@+id/PlantPhoto"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.5"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
@@ -24,8 +24,10 @@
         android:layout_weight="0.1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="vertical"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/PlantRecord"
@@ -33,7 +35,9 @@
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="0.3"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.4"
         android:maxLines="15"
+        android:textSize="15dp"
         android:scrollbars="vertical" />
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -21,6 +22,8 @@ public class InfoPagerAdapter extends PagerAdapter {
     private final List<ImageInfo> images = new ArrayList<>();
     private Context ctx;
     private LayoutInflater layoutInflater;
+    private TextView item;
+    private TextView title;
 
     public InfoPagerAdapter(Context c, List<ImageInfo> images) {
         ctx = c;
@@ -38,14 +41,24 @@ public class InfoPagerAdapter extends PagerAdapter {
         final View view = layoutInflater.inflate(R.layout.info_swipe, container, false);
         ImageInfo imageInfo = images.get(position);
         final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
-        TextView item = (TextView) view.findViewById(R.id.PlantRecord);
+        item = (TextView) view.findViewById(R.id.PlantRecord);
         item.setMovementMethod(new ScrollingMovementMethod());
         if(imageInfo != null  && imageInfo.getDescription() != null) {
-            item.setText(imageInfo.getDescription());
+            String[] words = imageInfo.getDescription().split("==");
+            StringBuilder sb = new StringBuilder();
+                sb.append(words[0]);
+            item.setText(sb);
         }
         if(imageInfo != null) {
-            TextView title = (TextView) view.findViewById(R.id.PlantRecordTitle);
-            title.setText(imageInfo.getName());
+            title = (TextView) view.findViewById(R.id.PlantRecordTitle);
+            String commonName = imageInfo.getCommonName();
+            String sciencename = imageInfo.getName();
+
+            if(!commonName.isEmpty()){
+                title.setText(commonName + " (" + sciencename + ")");
+            } else {
+                title.setText(sciencename);
+            }
             imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
         }
         container.addView(view);
