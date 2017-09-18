@@ -7,12 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
@@ -21,6 +25,10 @@ import com.example.yihanwang.myapplication.gps.LocationService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+/**
+ * Created by kaley on 18/9/17.
+ */
 
 public class ImageSelectFragment extends Fragment {
 
@@ -42,24 +50,33 @@ public class ImageSelectFragment extends Fragment {
         this.images.clear();
         this.imageViews.clear();
 
+        int score = ScoreUtils.getScore();
+        Log.i("score", "current score " + score);
+        int imageNumber = ScoreUtils.getNextLevelImageNumber(score);
+        Log.i("image", "next level image number " + imageNumber);
         TextView textView = (TextView) view.findViewById(R.id.select_text_view);
 
         final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
-        textView.setText("Image " + imageList.size());
-        final ImageView imageView1 = (ImageView) view.findViewById(R.id.select_image_view1);
-        ImageView imageView2 = (ImageView) view.findViewById(R.id.select_image_view2);
-        ImageView imageView3 = (ImageView) view.findViewById(R.id.select_image_view3);
-        imageViews.add(imageView1);
-        imageViews.add(imageView2);
-        imageViews.add(imageView3);
-        if (imageList.size() > 2) {
-            this.images.add(imageList.get(0));
-            this.images.add(imageList.get(1));
-            this.images.add(imageList.get(2));
-            for (int i = 0; i < this.images.size(); i++) {
-                imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
-                imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
-            }
+        textView.setText("Image " + imageList.size() + " Level: " + ScoreUtils.getCurrentLevel(score) +", Next Level needs " + (imageNumber));
+        imageNumber = Math.min(imageList.size(), imageNumber);
+        for (int i = 0; i < imageNumber; i++) {
+            imageViews.add(new ImageView(getContext()));
+            this.images.add(imageList.get(i));
+        }
+
+        LinearLayout scrollImageLayout = (LinearLayout) view.findViewById(R.id.scroll_image_layout);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        for (int i = 0; i < this.images.size(); i++) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width / 3, LinearLayout.LayoutParams.MATCH_PARENT);
+            layoutParams.setMargins(5, 0, 5, 0);
+            imageViews.get(i).setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageViews.get(i).setLayoutParams(layoutParams);
+            scrollImageLayout.addView(imageViews.get(i));
+            imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
+            imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
         }
         this.playBtn = (Button) view.findViewById(R.id.play_button);
         playBtn.setOnClickListener(new View.OnClickListener() {
@@ -92,18 +109,18 @@ public class ImageSelectFragment extends Fragment {
                 int i = -1;
                 do {
                     i = r.nextInt(imageList.size() - 1);
-                    Log.i("random", "get number "+ i);
+                    Log.i("random", "get number " + i);
                     for (ImageInfo image : images) {
                         if (image.getId() == imageList.get(i).getId()) {
                             found = true;
                         }
                     }
-                }while(found);
+                } while (found);
                 images.add(selectedImageIdx, imageList.get(i));
                 imageViews.get(selectedImageIdx).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(selectedImageIdx)));
 
                 selectedImageIdx = -1;
-                for(ImageView v : imageViews){
+                for (ImageView v : imageViews) {
                     v.setAlpha(1f);
                 }
             }

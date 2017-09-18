@@ -36,16 +36,7 @@ public class ScoreActivity extends Activity {
         curLevel = (TextView) findViewById(R.id.currentLevel);
         nexLevel = (TextView) findViewById(R.id.nextLevel);
 
-        int total = 0;
-        Realm realm = Realm.getDefaultInstance();
-
-        realm.beginTransaction();
-        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-
-        for (ScoreRecord score : results) {
-            total = total + score.getScore();
-        }
-        realm.commitTransaction();
+        int total = ScoreUtils.getScore();
 
         currentLevel = getLevelTitle(total);
         nextLevel = getNextLevel(total);

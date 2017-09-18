@@ -31,4 +31,10 @@
         <item name="android:background">@drawable/image_border</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
+
+    <style name="scrollImageStyle">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
 </resources>
