@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmModel;
 import io.realm.RealmResults;
 
 public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.OnGestureListener {
@@ -64,6 +63,7 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
         final TextView count = (TextView) itemView.findViewById(R.id.imageCount);
         final TextView name = (TextView) itemView.findViewById(R.id.imageName);
         final ImageInfo imageInfo = images.get(position);
+
         imageId = imageInfo.getId();
 
         count.setText("Image :" + (position + 1) + "/" + images.size());
@@ -96,18 +96,7 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
                 compare.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent event) {
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_BUTTON_PRESS:
-                                Log.i("image", "remove image gallery on " + imageGalleryIdx);
-                                //imageGalery.removeImage(imageGalleryIdx);
-                                //notifyDataSetChanged();
-//                                Intent intent = new Intent(view.getContext(), ComparisonActivity.class);
-//                                Bundle b = new Bundle();
-//                                b.putDouble("firstImage", imageInfo.getId());
-//                                b.putInt("secondImage", imageGalleryIdx);
-//                                intent.putExtras(b);
-//                                view.getContext().startActivity(intent);
-                        }
+
                         selectedImage = imageInfo;
                         currentSelectedGalaryIdx = imageGalleryIdx;
                         return gestureDetector.onTouchEvent(event);
@@ -228,6 +217,7 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
         intent.putExtras(b);
         this.ctx.startActivity(intent);
     }
+
 
 
 }

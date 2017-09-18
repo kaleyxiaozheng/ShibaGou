@@ -69,6 +69,7 @@ public class ImageStorage {
         return null;
     }
 
+
     public List<ImageInfo> getImagesFromLocation(double lat, double lon) {
         List<ImageInfo> rangeImages = new ArrayList<>();
         for (ImageInfo imageInfo : images) {
@@ -108,16 +109,16 @@ public class ImageStorage {
 
     public int getIndexByImageId(double id) {
         for (int i = 0; i < images.size(); i++) {
-            if (images.get(i).getId() == id) {
+            if (Math.abs(images.get(i).getId() - id) <= 0.00001) {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
-    public ImageInfo getImagebyId(double index){
-        for(int i = 0; i < images.size(); i++){
-            if(images.get(i).getId() == index){
+    public ImageInfo getImagebyId(double index) {
+        for (int i = 0; i < images.size(); i++) {
+            if (images.get(i).getId() == index) {
                 return images.get(i);
             }
         }

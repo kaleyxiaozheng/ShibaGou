@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
@@ -35,6 +36,8 @@ public class ImageFragment extends Fragment {
     private TextView score;
     private int currentPosition;
     ImagePagerAdapter customSwip;
+    private ProgressBar bar;
+    private int progress = 0;
     View view;
     private List<ImageInfo> images = new ArrayList<>();
 
@@ -51,8 +54,17 @@ public class ImageFragment extends Fragment {
         this.images = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
         customSwip = new ImagePagerAdapter(getActivity(), images);
         viewPager.setAdapter(customSwip);
+        double imageId = args.getDouble("selected_image_id");
+        if (imageId != 0.0) {
+            for(int i=0; i<this.images.size(); i++){
+                if(this.images.get(i).getId() == imageId){
+                    currentPosition = i;
+                    viewPager.setCurrentItem(currentPosition);
+                    break;
+                }
+            }
+        }
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
             @Override
             public void onPageSelected(int position) {
                 currentPosition = position;
@@ -70,6 +82,12 @@ public class ImageFragment extends Fragment {
             total = total + score.getScore();
         }
         realm.commitTransaction();
+
+        LevelAndScores las = new LevelAndScores();
+
+        bar = (ProgressBar) view.findViewById(R.id.progressBar);
+
+
 
         score = (TextView) view.findViewById(R.id.yourScore);
         score.setText(String.valueOf(total));
@@ -142,8 +160,8 @@ public class ImageFragment extends Fragment {
             int i = 0;
             RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
 
-            for(ScoreRecord imageID : allImages) {
-                if(imageID.getImageId() == imageInfo.getId()) {
+            for (ScoreRecord imageID : allImages) {
+                if (imageID.getImageId() == imageInfo.getId()) {
                     i = i + 1;
                 }
             }

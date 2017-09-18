@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="progress">#ff9d9e9d</color>
     <color name="startColor">#31c6f7</color>
+
+    <color name="image_border_start">#40990000</color>
+    <color name="image_border_end">#FF660000</color>
+    <color name="image_border_center">#FFFF3333</color>
+    <color name="default_back_color">#FFFFFFFF</color>
 </resources>

@@ -2,6 +2,8 @@
     <string name="app_name">My Application</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="skip">Skip</string>
+    <string name="play">Play</string>
     <string-array name="planets_array">
         <item></item>
         <item>Instruction</item>

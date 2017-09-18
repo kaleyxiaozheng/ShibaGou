@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         plant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new ImageFragment();
+                Fragment fragment = new ImageSelectFragment();
                 Bundle args = new Bundle();
                 args.putDouble("location_lat", LocationService.getInstance().getCurrentLat());
                 args.putDouble("location_lon", LocationService.getInstance().getCurrentLon());
