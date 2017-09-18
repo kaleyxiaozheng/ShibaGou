@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                Intent intent = new Intent(getActivity(), ScoreActivityNew.class);
                 startActivity(intent);
 
             }
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        plant = (ImageButton) view.findViewById(R.id.plantsbtn);
+        plant = (ImageButton) view.findViewById(R.id.gamebtn);
         plant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

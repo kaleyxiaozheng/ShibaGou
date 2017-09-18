@@ -14,8 +14,8 @@
             android:max="100"
             android:progress="50"
             android:progressDrawable="@drawable/progress_drawable"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
              />
 
 

@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
         android:orientation="vertical"
-        android:weightSum="2"
-        android:layout_marginBottom="0dp">
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,12 +19,12 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/iamhere"
+                android:id="@+id/gamebtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/iamhereicon" />
+                android:src="@drawable/plantsicontranc" />
 
             <ImageButton
                 android:id="@+id/scoreBtn"
@@ -39,17 +39,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="0dp">
-
-            <ImageButton
-                android:id="@+id/plantsbtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/plantsicontranc" />
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/listbtn"
@@ -59,6 +51,13 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/listicontranc" />
 
+            <ImageButton
+                android:id="@+id/iamhere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/iamhereicon" />
 
         </LinearLayout>
 
@@ -71,8 +70,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/logo_center"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:src="@drawable/logo_center" />
 </RelativeLayout>

@@ -8,15 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.daasuu.ahp.AnimateHorizontalProgressBar;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
@@ -89,10 +86,7 @@ public class ImageFragment extends Fragment {
                 }
             }
         });
-
-
         return view;
-
     }
 
     @Override
@@ -121,7 +115,7 @@ public class ImageFragment extends Fragment {
             out.flush();
             out.close();
             ImageInfo imageInfo = images.get(currentPosition);
-            ImageGaleryStorage.getInstance().addImageGalery(imageInfo.getId(), finalBitmap, file.getPath());
+            ImageGalleryStorage.getInstance().addImageGallery(imageInfo.getId(), finalBitmap, file.getPath());
             viewPager.setAdapter(null);
             viewPager.setAdapter(customSwip);
             viewPager.setCurrentItem(currentPosition);
@@ -153,7 +147,6 @@ public class ImageFragment extends Fragment {
                 //Log.i("score", "score " + score.getScore());
                 result += score.getScore();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

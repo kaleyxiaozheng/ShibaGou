@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.example.yihanwang.myapplication.entities.ImageGalery;
+import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 public class ComparisonActivity extends Activity {
@@ -28,7 +28,7 @@ public class ComparisonActivity extends Activity {
 
             ImageInfo first  = ImageStorage.getInstance().getImagebyId(index1);
             plantImage.setImageDrawable(ImageStorage.getInstance().getDrawable(this.getAssets(), first));
-            ImageGalery imageGalery = ImageGaleryStorage.getInstance().getImageGalery(first.getId());
+            ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(first.getId());
             Bitmap bitmap = imageGalery.getImage(index2);
             plantPhoto.setImageBitmap(bitmap);
 

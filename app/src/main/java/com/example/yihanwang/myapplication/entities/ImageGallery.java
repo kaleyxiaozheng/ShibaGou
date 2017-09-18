@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageGalery {
+public class ImageGallery {
 
     private double id;
 
@@ -17,7 +17,7 @@ public class ImageGalery {
         return filePath;
     }
 
-    public ImageGalery(double id, String filePath) {
+    public ImageGallery(double id, String filePath) {
         this.id = id;
         this.filePath = filePath;
 

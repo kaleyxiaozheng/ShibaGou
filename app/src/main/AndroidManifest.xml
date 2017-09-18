@@ -44,7 +44,7 @@
         <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".AppAdActivity"
             android:screenOrientation="landscape"></activity>
-
+        <activity android:name=".ScoreActivityNew"></activity>
 
     </application>
 
