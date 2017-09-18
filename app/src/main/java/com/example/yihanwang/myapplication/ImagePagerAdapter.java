@@ -1,11 +1,12 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,19 +18,32 @@ import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagePagerAdapter extends PagerAdapter {
+import io.realm.Realm;
+import io.realm.RealmModel;
+import io.realm.RealmResults;
+
+public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.OnGestureListener {
+
+    private static final int SWIPE_THRESHOLD = 100;
+    private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
     private final List<ImageInfo> images = new ArrayList<>();
+    private final GestureDetector gestureDetector;
     private Context ctx;
     private LayoutInflater layoutInflater;
+    private int currentSelectedGalaryIdx = -1;
+    private ImageInfo selectedImage = null;
+    private double imageId;
 
     public ImagePagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
         ctx = c;
         this.images.addAll(imagesFromLocation);
+        gestureDetector = new GestureDetector(ctx, this);
     }
 
     @Override
@@ -50,19 +64,21 @@ public class ImagePagerAdapter extends PagerAdapter {
         final TextView count = (TextView) itemView.findViewById(R.id.imageCount);
         final TextView name = (TextView) itemView.findViewById(R.id.imageName);
         final ImageInfo imageInfo = images.get(position);
+        imageId = imageInfo.getId();
+
         count.setText("Image :" + (position + 1) + "/" + images.size());
         count.setText((position + 1) + "/" + images.size());
 
         String commonName = imageInfo.getCommonName();
         String sciencename = imageInfo.getName();
 
-        if(!commonName.isEmpty()){
+        if (!commonName.isEmpty()) {
             name.setText(commonName + " (" + sciencename + ")");
         } else {
             name.setText(sciencename);
         }
 
-        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageId);
         if (imageGalery != null) {
             int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
             if (imageGalery.getImageCount() > 0) {
@@ -80,19 +96,21 @@ public class ImagePagerAdapter extends PagerAdapter {
                 compare.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent event) {
-                        switch (event.getAction()){
-                            case MotionEvent.ACTION_UP:
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_BUTTON_PRESS:
                                 Log.i("image", "remove image gallery on " + imageGalleryIdx);
                                 //imageGalery.removeImage(imageGalleryIdx);
                                 //notifyDataSetChanged();
-                                Intent intent = new Intent(view.getContext(), ComparisonActivity.class);
-                                Bundle b = new Bundle();
-                                b.putDouble("firstImage", imageInfo.getId());
-                                b.putInt("secondImage", imageGalleryIdx);
-                                intent.putExtras(b);
-                                view.getContext().startActivity(intent);
+//                                Intent intent = new Intent(view.getContext(), ComparisonActivity.class);
+//                                Bundle b = new Bundle();
+//                                b.putDouble("firstImage", imageInfo.getId());
+//                                b.putInt("secondImage", imageGalleryIdx);
+//                                intent.putExtras(b);
+//                                view.getContext().startActivity(intent);
                         }
-                        return true;
+                        selectedImage = imageInfo;
+                        currentSelectedGalaryIdx = imageGalleryIdx;
+                        return gestureDetector.onTouchEvent(event);
                     }
                 });
                 compare.setImageBitmap(image);
@@ -104,7 +122,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         container.addView(itemView);
 
         //AnimateHorizontalProgressBar progressBar = (AnimateHorizontalProgressBar)itemView.findViewById(R.id.progressBar);
-        ProgressBar progressBar = (ProgressBar)itemView.findViewById(R.id.progressBar);
+        ProgressBar progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
         //progressBar.setMax(1000);
         //progressBar.setProgress(400);
         return itemView;
@@ -124,4 +142,92 @@ public class ImagePagerAdapter extends PagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        Log.i("tap", "single tap" + motionEvent.getAction());
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_UP:
+                showComparisonActivity();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        boolean result = false;
+        try {
+            float diffY = e2.getY() - e1.getY();
+            float diffX = e2.getX() - e1.getX();
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+//                            onSwipeRight();
+                    } else {
+//                            onSwipeLeft();
+                    }
+                    result = true;
+                }
+            } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                if (diffY > 0) {
+//                        onSwipeBottom();
+                } else {
+//                        onSwipeTop();
+                    Log.i("guesture", "swipe top");
+                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(this.selectedImage.getId());
+                    imageGalery.removeImage(this.currentSelectedGalaryIdx);
+
+
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.beginTransaction();
+                    RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+
+                    for (final ScoreRecord record : results) {
+                        if (record.getImageId() == imageId) {
+                            record.deleteFromRealm();
+                            break;
+                        }
+                    }
+                    realm.commitTransaction();
+
+                    notifyDataSetChanged();
+                }
+                result = true;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return result;
+    }
+
+    private void showComparisonActivity() {
+        Intent intent = new Intent(this.ctx, ComparisonActivity.class);
+        Bundle b = new Bundle();
+        b.putDouble("firstImage", this.selectedImage.getId());
+        b.putInt("secondImage", this.currentSelectedGalaryIdx);
+        intent.putExtras(b);
+        this.ctx.startActivity(intent);
+    }
+
+
 }

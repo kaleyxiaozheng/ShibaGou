@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.yihanwang.myapplication">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -41,10 +40,10 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ComparisonActivity"></activity>
-        <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".AppAdActivity"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".ScoreActivityNew"></activity>
+        <activity android:name=".ScoreActivity"></activity>
+        <activity android:name=".GalleryActivity"></activity>
 
     </application>
 

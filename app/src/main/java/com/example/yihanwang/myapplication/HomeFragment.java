@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ScoreActivityNew.class);
+                Intent intent = new Intent(getActivity(), ScoreActivity.class);
                 startActivity(intent);
 
             }

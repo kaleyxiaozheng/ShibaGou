@@ -1,89 +1,121 @@
 package com.example.yihanwang.myapplication;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.Fragment;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class ScoreActivity extends Activity {
-    private TextView view1;
-    private TextView view2;
-    private TextView view3;
-    private TextView view4;
-    private TextView view5;
+/**
+ * Created by Kaley on 18/9/17.
+ */
 
-//    public void getScoreList() {
-//        List<TextView> scores = new ArrayList<>();
-//
-//        for (int i = 0; i < 5; i++) {
-//            String id = "R.id.level" + (i + 1);
-//            scores.add(i, (TextView) findViewById(Integer.valueOf(id)));
-//            scores.get(i).setText("Level " + (i + 1));
-//        }
-//    }
+public class ScoreActivity extends Activity {
+    private TextView curLevel;
+    private TextView nexLevel;
+    private Button gallery;
+    private String currentLevel;
+    private String nextLevel;
+    LevelAndScores las;
+
+    public ScoreActivity() {
+        las = new LevelAndScores();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_activity);
-            view1 = (TextView) findViewById(R.id.level1);
-            view2 = (TextView) findViewById(R.id.level2);
-            view3 = (TextView) findViewById(R.id.level3);
-            view4 = (TextView) findViewById(R.id.level4);
-            view5 = (TextView) findViewById(R.id.level5);
-            view1.setText("Level 1");
-            view2.setText("Level 2");
-            view3.setText(":");
-            view4.setText(":");
-            view5.setText(":");
 
-//        int total = 0;
-//        Realm realm = Realm.getDefaultInstance();
-//
-//        realm.beginTransaction();
-//        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-//
-//        for (ScoreRecord score : results) {
-//            total = total + score.getScore();
-//        }
-//        Log.i("score", "score " + total);
-//
-//        realm.commitTransaction();
+        curLevel = (TextView) findViewById(R.id.currentLevel);
+        nexLevel = (TextView) findViewById(R.id.nextLevel);
 
+        int total = 0;
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.beginTransaction();
+        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+
+        for (ScoreRecord score : results) {
+            total = total + score.getScore();
+        }
+        realm.commitTransaction();
+
+        currentLevel = getLevelTitle(total);
+        nextLevel = getNextLevel(total);
+
+        if (currentLevel.isEmpty()) {
+            currentLevel = "Something wrong with your level";
+        }
+
+        if (nextLevel.isEmpty()) {
+            nextLevel = "Something wrong with the application";
+        }
+
+        curLevel.setText(currentLevel);
+        nexLevel.setText(nextLevel);
+
+        gallery = (Button) findViewById(R.id.gallery);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent subscription = new Intent(getApplicationContext(), GalleryActivity.class);
+                startActivity(subscription);
+
+            }
+        });
     }
 
-//    private void blinkEffect(TextView text) {
-//        ObjectAnimator ani = ObjectAnimator.ofInt(text, "backgroundColor", Color.WHITE, Color.RED, Color.WHITE);
-//        ani.setDuration(1000);
-//        ani.setRepeatCount(Animation.INFINITE);
-//        ani.setEvaluator(new ArgbEvaluator());
-//        ani.setRepeatMode(Animation.INFINITE);
-//        ani.setRepeatMode(Animation.REVERSE);
-//        ani.start();
-//
-//    }
+    public String getLevelTitle(int total) {
+        String title = "";
 
+        for (int i = 0; i < 20; i++) {
+            if (total < las.LEVEL_SCORE[i]) {
+                if (i == 0) {
+                    title = "Your level is 0";
+                    if (!title.isEmpty()) {
+                        return title;
+                    }
+                } else {
+                    title = "Your level is " + las.LEVEL_TITLE[i - 1];
+                    if (!title.isEmpty()) {
+                        return title;
+                    }
+                }
+            }
+        }
+        return title;
+    }
+
+    public String getNextLevel(int total) {
+        String next = "";
+
+        for (int i = 0; i < 20; i++) {
+            if (total <= las.LEVEL_SCORE[i]) {
+                int imageNum = (las.LEVEL_SCORE[i] - total) / 10;
+                if (imageNum > 1) {
+                    next = "Find " + imageNum + " more plants to reach the next level";
+                    if (!next.isEmpty()) {
+                        return next;
+                    }
+                }
+                if (imageNum == 1) {
+                    next = "Find 1 more plant to reach the next level";
+                    if (!next.isEmpty()) {
+                        return next;
+                    }
+                }
+                if (imageNum == 0) {
+                    next = "Find " + (las.LEVEL_SCORE[i + 1] - total) / 10 + " more plants to reach the next level";
+                }
+            }
+        }
+        return next;
+    }
 }

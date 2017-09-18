@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
@@ -31,6 +32,7 @@ public class ImageFragment extends Fragment {
     private ViewPager viewPager;
     private Button picture;
     private Button infoBtn;
+    private TextView score;
     private int currentPosition;
     ImagePagerAdapter customSwip;
     View view;
@@ -57,6 +59,20 @@ public class ImageFragment extends Fragment {
             }
 
         });
+
+        Realm realm = Realm.getDefaultInstance();
+        int total = 0;
+
+        realm.beginTransaction();
+        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+
+        for (ScoreRecord score : results) {
+            total = total + score.getScore();
+        }
+        realm.commitTransaction();
+
+        score = (TextView) view.findViewById(R.id.yourScore);
+        score.setText(String.valueOf(total));
         picture = (Button) view.findViewById(R.id.takePhoto);
         picture.setOnClickListener(new OnClickListener() {
 
@@ -147,6 +163,8 @@ public class ImageFragment extends Fragment {
                 //Log.i("score", "score " + score.getScore());
                 result += score.getScore();
             }
+
+            score.setText(String.valueOf(result));
         } catch (Exception e) {
             e.printStackTrace();
         }
