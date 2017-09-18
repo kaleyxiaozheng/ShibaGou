@@ -61,11 +61,11 @@ public class ScoreActivityNew extends Activity {
         curLevel.setText(currentLevel);
         nexLevel.setText(nextLevel);
 
-        gallery= (Button) findViewById(R.id.gallery);
+        gallery = (Button) findViewById(R.id.gallery);
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent subscription = new Intent(getApplicationContext(),GalleryActivity.class);
+                Intent subscription = new Intent(getApplicationContext(), GalleryActivity.class);
                 startActivity(subscription);
 
             }
@@ -76,9 +76,15 @@ public class ScoreActivityNew extends Activity {
         String title = "";
 
         for (int i = 0; i < 20; i++) {
-            if (total <= las.LEVEL_SCORE[i]) {
+            if (total < las.LEVEL_SCORE[i]) {
                 title = "Your level is " + las.LEVEL_TITLE[i];
-                if(!title.isEmpty()) {
+                if (!title.isEmpty()) {
+                    return title;
+                }
+            }
+            if (total < las.LEVEL_SCORE[i]) {
+                title = "Your level is " + las.LEVEL_TITLE[i+1];
+                if (!title.isEmpty()) {
                     return title;
                 }
             }
@@ -95,16 +101,16 @@ public class ScoreActivityNew extends Activity {
 
             if (total <= las.LEVEL_SCORE[i]) {
 
-                if(imageNum > 2) {
+                if (imageNum > 2) {
                     next = "Find " + imageNum + " more plants to reach the next level";
-                    if(!next.isEmpty()) {
+                    if (!next.isEmpty()) {
                         return next;
                     }
                 }
 
-                if(imageNum < 2 && imageNum != 0){
+                if (imageNum < 2 && imageNum != 0) {
                     next = "Find " + imageNum + " more plant to reach the next level";
-                    if(!next.isEmpty()) {
+                    if (!next.isEmpty()) {
                         return next;
                     }
                 }
