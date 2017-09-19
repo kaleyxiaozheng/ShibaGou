@@ -60,6 +60,8 @@ class ImageAdapter extends BaseAdapter{
     private List<Double> imageIds = new ArrayList<>();
     private List<Integer> imageGalleryIds = new ArrayList<>();
 
+    private List<Integer> selectedImages = new ArrayList<>();
+
     public ImageAdapter(Context context, RealmResults<ScoreRecord> files, int deviceWidth){
         this.context = context;
         this.deviceWidth = deviceWidth;

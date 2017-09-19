@@ -50,7 +50,10 @@ public class ImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.image_fragment, container, false);
 
-        id = Realm.getDefaultInstance().where(ScoreRecord.class).max("id").intValue();
+        Number maxIdRecord = Realm.getDefaultInstance().where(ScoreRecord.class).max("id");
+        if(maxIdRecord != null) {
+            ImageFragment.id = maxIdRecord.intValue() + 1;
+        }
 
         Bundle args = getArguments();
         double lat = args.getDouble("location_lat");

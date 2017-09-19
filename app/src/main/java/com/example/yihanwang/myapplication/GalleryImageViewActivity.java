@@ -33,21 +33,24 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         double imageId = bundle.getDouble("image_id");
         int imageGalleryId = bundle.getInt("image_gallery_id");
-
+        Log.i("image", "image id " + imageId + ", image gallery id " + imageGalleryId);
         ScoreRecord record = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("id", imageGalleryId).findFirst();
-        if(record != null){
-            ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
+        if (record != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(record.getImagePath());
 
             ImageView imageView = (ImageView) findViewById(R.id.gallery_image_view);
             imageView.setImageBitmap(bitmap);
 
-            if(imageInfo != null){
-                TextView textView = (TextView) findViewById(R.id.gallery_image_text);
-                textView.setText(imageInfo.getName());
-            }
+
         } else {
             Log.e("image", "cant find image gallery from  DB " + imageGalleryId);
+        }
+        ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
+        if (imageInfo != null) {
+            TextView textView = (TextView) findViewById(R.id.gallery_image_text);
+            textView.setText(imageInfo.getName());
+        } else {
+            Log.e("image", "Image id cant find " + imageId);
         }
     }
 }
