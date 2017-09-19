@@ -52,6 +52,7 @@ public class DBMigration implements RealmMigration {
             scoreRecord.addField("id", int.class);
             scoreRecord.addField("score", int.class);
             scoreRecord.addField("imageId", double.class);
+            scoreRecord.addField("imagePath", String.class);
 
         }
     }

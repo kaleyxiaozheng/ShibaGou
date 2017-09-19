@@ -10,6 +10,8 @@ public class ScoreRecord extends RealmObject {
 
     private double imageId;
 
+    private String imagePath;
+
 
     public ScoreRecord() {
     }
@@ -36,5 +38,13 @@ public class ScoreRecord extends RealmObject {
 
     public void setImageId(double imageId) {
         this.imageId = imageId;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

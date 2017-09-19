@@ -44,6 +44,7 @@
             android:screenOrientation="landscape"></activity>
         <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".GalleryActivity"></activity>
+        <activity android:name=".GalleryImageViewActivity"></activity>
 
     </application>
 

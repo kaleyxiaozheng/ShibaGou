@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,6 +60,7 @@ public class ImageFragment extends Fragment {
             for(int i=0; i<this.images.size(); i++){
                 if(this.images.get(i).getId() == imageId){
                     currentPosition = i;
+                    Log.i("image", "show selected image " + imageId);
                     viewPager.setCurrentItem(currentPosition);
                     break;
                 }
@@ -166,10 +168,12 @@ public class ImageFragment extends Fragment {
                 }
             }
             if (i < 3) {
+                Log.i("database", "save image record " + imageInfo.getId());
                 ScoreRecord record = realm.createObject(ScoreRecord.class);
                 record.setId(id++);
                 record.setImageId(imageInfo.getId());
                 record.setScore(10);
+                record.setImagePath(file.getAbsolutePath());
                 //Log.i("score", "score " + record.getScore());
             }
 

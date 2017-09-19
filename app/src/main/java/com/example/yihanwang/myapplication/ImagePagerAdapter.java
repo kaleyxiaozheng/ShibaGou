@@ -24,25 +24,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
-public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.OnGestureListener {
+public class ImagePagerAdapter extends PagerAdapter {
 
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
     private final List<ImageInfo> images = new ArrayList<>();
-    private final GestureDetector gestureDetector;
     private Context ctx;
     private LayoutInflater layoutInflater;
     private int currentSelectedGalaryIdx = -1;
     private ImageInfo selectedImage = null;
-    private double imageId;
 
     public ImagePagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
         ctx = c;
         this.images.addAll(imagesFromLocation);
-        gestureDetector = new GestureDetector(ctx, this);
     }
 
     @Override
@@ -64,8 +62,6 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
         final TextView name = (TextView) itemView.findViewById(R.id.imageName);
         final ImageInfo imageInfo = images.get(position);
 
-        imageId = imageInfo.getId();
-
         count.setText("Image :" + (position + 1) + "/" + images.size());
         count.setText((position + 1) + "/" + images.size());
 
@@ -78,7 +74,7 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
             name.setText(sciencename);
         }
 
-        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageId);
+        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
         if (imageGalery != null) {
             int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
             if (imageGalery.getImageCount() > 0) {
@@ -92,13 +88,94 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
                     break;
                 }
                 final int imageGalleryIdx = i;
+//                final GestureDetector gestureDetector = new GestureDetector(ctx, this);
+                final GestureDetector gestureDetector = new GestureDetector(ctx, new GestureDetector.OnGestureListener() {
+
+                    @Override
+                    public boolean onDown(MotionEvent motionEvent) {
+                        return true;
+                    }
+
+                    @Override
+                    public void onShowPress(MotionEvent motionEvent) {
+
+                    }
+
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent motionEvent) {
+                        Log.i("tap", "single tap" + motionEvent.getAction());
+                        switch (motionEvent.getAction()) {
+                            case MotionEvent.ACTION_UP:
+                                showComparisonActivity();
+                        }
+                        return false;
+                    }
+
+
+                    @Override
+                    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onLongPress(MotionEvent motionEvent) {
+
+                    }
+
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                        boolean result = false;
+                        try {
+                            float diffY = e2.getY() - e1.getY();
+                            float diffX = e2.getX() - e1.getX();
+                            if (Math.abs(diffX) > Math.abs(diffY)) {
+                                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                                    if (diffX > 0) {
+//                            onSwipeRight();
+                                    } else {
+//                            onSwipeLeft();
+                                    }
+                                    result = true;
+                                }
+                            } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                                if (diffY > 0) {
+//                        onSwipeBottom();
+                                } else {
+//                        onSwipeTop();
+                                    Log.i("guesture", "swipe top");
+                                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+                                    imageGalery.removeImage(imageGalleryIdx);
+
+                                    Realm realm = Realm.getDefaultInstance();
+                                    realm.beginTransaction();
+                                    ScoreRecord ret = realm.where(ScoreRecord.class).equalTo("imageId", imageInfo.getId()).findFirst();
+                                    if (ret != null) {
+                                        Log.i("image", "delete image from db " + imageInfo.getId());
+                                        ret.deleteFromRealm();
+                                    } else {
+                                        Log.e("database", "Failed to find saved image " + imageInfo.getId());
+                                    }
+                                    realm.commitTransaction();
+
+                                    notifyDataSetChanged();
+                                }
+                                result = true;
+                            }
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                        return result;
+                    }
+                });
                 ImageView compare = (ImageView) itemView.findViewById(viewIds[i]);
                 compare.setOnTouchListener(new View.OnTouchListener() {
+
                     @Override
                     public boolean onTouch(View view, MotionEvent event) {
 
                         selectedImage = imageInfo;
                         currentSelectedGalaryIdx = imageGalleryIdx;
+
                         return gestureDetector.onTouchEvent(event);
                     }
                 });
@@ -132,83 +209,6 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
         return POSITION_NONE;
     }
 
-    @Override
-    public boolean onDown(MotionEvent motionEvent) {
-        return true;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent motionEvent) {
-
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        Log.i("tap", "single tap" + motionEvent.getAction());
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_UP:
-                showComparisonActivity();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent motionEvent) {
-
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        boolean result = false;
-        try {
-            float diffY = e2.getY() - e1.getY();
-            float diffX = e2.getX() - e1.getX();
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffX > 0) {
-//                            onSwipeRight();
-                    } else {
-//                            onSwipeLeft();
-                    }
-                    result = true;
-                }
-            } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                if (diffY > 0) {
-//                        onSwipeBottom();
-                } else {
-//                        onSwipeTop();
-                    Log.i("guesture", "swipe top");
-                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(this.selectedImage.getId());
-                    imageGalery.removeImage(this.currentSelectedGalaryIdx);
-
-
-                    Realm realm = Realm.getDefaultInstance();
-                    realm.beginTransaction();
-                    RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-
-                    for (final ScoreRecord record : results) {
-                        if (record.getImageId() == imageId) {
-                            record.deleteFromRealm();
-                            break;
-                        }
-                    }
-                    realm.commitTransaction();
-
-                    notifyDataSetChanged();
-                }
-                result = true;
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return result;
-    }
-
     private void showComparisonActivity() {
         Intent intent = new Intent(this.ctx, ComparisonActivity.class);
         Bundle b = new Bundle();
@@ -217,7 +217,6 @@ public class ImagePagerAdapter extends PagerAdapter implements GestureDetector.O
         intent.putExtras(b);
         this.ctx.startActivity(intent);
     }
-
 
 
 }

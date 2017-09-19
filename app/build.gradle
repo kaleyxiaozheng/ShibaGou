@@ -49,4 +49,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.daasuu:animateHorizontalProgressBar:0.2.4'
+    // Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    // Recyclerview
+    compile 'com.android.support:recyclerview-v7:25.1.1'
 }

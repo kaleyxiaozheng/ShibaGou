@@ -71,6 +71,8 @@ public class ImageStorage {
 
 
     public List<ImageInfo> getImagesFromLocation(double lat, double lon) {
+        Log.i("location", "Get image from location " + lat+" ," + lon);
+        Log.i("location", "total image count " + images.size());
         List<ImageInfo> rangeImages = new ArrayList<>();
         for (ImageInfo imageInfo : images) {
             String locations = imageInfo.getLocations();
@@ -100,6 +102,7 @@ public class ImageStorage {
             }
 
         }
+        Log.i("location", "get image " + rangeImages.size());
         return rangeImages;
     }
 
