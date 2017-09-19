@@ -4,6 +4,7 @@
     <string name="drawer_close">Close</string>
     <string name="skip">Skip</string>
     <string name="play">Play</string>
+    <string name="delete">Delete</string>
     <string-array name="planets_array">
         <item></item>
         <item>Instruction</item>

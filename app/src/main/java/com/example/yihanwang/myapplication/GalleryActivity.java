@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -19,10 +20,7 @@ import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -34,6 +32,8 @@ import io.realm.RealmResults;
 public class GalleryActivity extends Activity {
 
     private int deviceWidth = 1024;
+    private ImageAdapter adapter;
+    private Button deleteBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,80 +44,147 @@ public class GalleryActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         deviceWidth = displayMetrics.widthPixels;
 
-        GridView gridView = (GridView) findViewById(R.id.gallery_view);
+        final GridView gridView = (GridView) findViewById(R.id.gallery_view);
 
         RealmResults<ScoreRecord> allRecords = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-        gridView.setAdapter(new ImageAdapter(this, allRecords, deviceWidth));
+        adapter = new ImageAdapter(this, allRecords, deviceWidth);
+        gridView.setAdapter(adapter);
 
-    }
-}
-
-class ImageAdapter extends BaseAdapter{
-
-    private final int deviceWidth;
-    private Context context;
-    private List<Bitmap> images = new ArrayList<>();
-    private List<Double> imageIds = new ArrayList<>();
-    private List<Integer> imageGalleryIds = new ArrayList<>();
-
-    private List<Integer> selectedImages = new ArrayList<>();
-
-    public ImageAdapter(Context context, RealmResults<ScoreRecord> files, int deviceWidth){
-        this.context = context;
-        this.deviceWidth = deviceWidth;
-        for(ScoreRecord file : files){
-            try {
-                Bitmap bitmap = BitmapFactory.decodeFile(file.getImagePath());
-                images.add(bitmap);
-                imageIds.add(file.getImageId());
-                imageGalleryIds.add(file.getId());
-                Log.i("db", "image gallery id " + file.getId());
-            }catch(Exception e){
-                Log.e("image", e.getMessage());
-            }
-        }
-    }
-
-    @Override
-    public int getCount() {
-        return images.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(final int position, final View convertView, ViewGroup viewGroup) {
-        ImageView imageView;
-        if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams((deviceWidth - 50) / 3, (deviceWidth - 50) / 3));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
-        }
-        imageView.setImageBitmap(images.get(position));
-        imageView.setOnClickListener(new View.OnClickListener() {
+        this.deleteBtn = (Button) findViewById(R.id.delete_btn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, GalleryImageViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putDouble("image_id", imageIds.get(position));
-                bundle.putInt("image_gallery_id", imageGalleryIds.get(position));
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-
+                adapter.deleteSelectedImages();
+                RealmResults<ScoreRecord> records = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+                adapter.loadImageData(records);
+                gridView.setAdapter(null);
+                gridView.setAdapter(adapter);
             }
         });
-        return imageView;
     }
+
+
+    class ImageAdapter extends BaseAdapter {
+
+        private final int deviceWidth;
+        private Context context;
+        private List<Bitmap> images = new ArrayList<>();
+        private List<Double> imageIds = new ArrayList<>();
+        private List<Integer> imageGalleryIds = new ArrayList<>();
+
+        private List<Integer> selectedImages = new ArrayList<>();
+
+        public ImageAdapter(Context context, RealmResults<ScoreRecord> files, int deviceWidth) {
+            this.context = context;
+            this.deviceWidth = deviceWidth;
+            loadImageData(files);
+        }
+
+        private void loadImageData(RealmResults<ScoreRecord> files) {
+            images.clear();
+            imageIds.clear();
+            imageGalleryIds.clear();
+            selectedImages.clear();
+            for (ScoreRecord file : files) {
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getImagePath());
+                    images.add(bitmap);
+                    imageIds.add(file.getImageId());
+                    imageGalleryIds.add(file.getId());
+                    Log.i("db", "image gallery id " + file.getId());
+                } catch (Exception e) {
+                    Log.e("image", e.getMessage());
+                }
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return images.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        public void deleteSelectedImages() {
+            for (Integer pos : selectedImages) {
+                deleteImage(imageGalleryIds.get(pos));
+            }
+        }
+
+        public void deleteImage(int galleryId) {
+            Realm realm = Realm.getDefaultInstance();
+            ScoreRecord record = realm.where(ScoreRecord.class).equalTo("id", galleryId).findFirst();
+            if (record != null) {
+                String imagePath = record.getImagePath();
+                boolean delete = new File(imagePath).delete();
+                if (!delete) {
+                    Log.e("image", "failed to delete image on " + imagePath);
+                }
+                ImageGalleryStorage.getInstance().removeImageGallery(galleryId);
+                realm.beginTransaction();
+                record.deleteFromRealm();
+                realm.commitTransaction();
+            } else {
+                Log.e("db", "cant find gallery to delete " + galleryId);
+            }
+        }
+
+        @Override
+        public View getView(final int position, final View convertView, ViewGroup viewGroup) {
+            ImageView imageView;
+            if (convertView == null) {
+                // if it's not recycled, initialize some attributes
+                imageView = new ImageView(context);
+                imageView.setLayoutParams(new GridView.LayoutParams((deviceWidth - 50) / 3, (deviceWidth - 50) / 3));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(8, 8, 8, 8);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+            imageView.setImageBitmap(images.get(position));
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, GalleryImageViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("image_id", imageIds.get(position));
+                    bundle.putInt("image_gallery_id", imageGalleryIds.get(position));
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+
+                }
+            });
+
+            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (selectedImages.indexOf(position) >= 0) {
+                        view.setAlpha(1f);
+                        selectedImages.remove(new Integer(position));
+                    } else {
+                        selectedImages.add(position);
+                        view.setAlpha(0.5f);
+                    }
+                    if (selectedImages.size() > 0) {
+                        deleteBtn.setEnabled(true);
+                    } else {
+                        deleteBtn.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
+            return imageView;
+        }
+    }
+
 }
+
+
