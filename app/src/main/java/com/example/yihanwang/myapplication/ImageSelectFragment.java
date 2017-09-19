@@ -2,6 +2,7 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,8 @@ public class ImageSelectFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.select_text_view);
 
         final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
+        Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(),"BlessingsthroughRaindrops.ttf");
+        textView.setTypeface(font1);
         textView.setText("Image " + imageList.size() + " Level: " + ScoreUtils.getCurrentLevel(score) +", Next Level needs " + (imageNumber));
         imageNumber = Math.min(imageList.size(), imageNumber);
         for (int i = 0; i < imageNumber; i++) {

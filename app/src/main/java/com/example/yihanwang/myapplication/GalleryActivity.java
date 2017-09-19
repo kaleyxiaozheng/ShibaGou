@@ -58,6 +58,7 @@ class ImageAdapter extends BaseAdapter{
     private Context context;
     private List<Bitmap> images = new ArrayList<>();
     private List<Double> imageIds = new ArrayList<>();
+    private List<Integer> imageGalleryIds = new ArrayList<>();
 
     public ImageAdapter(Context context, RealmResults<ScoreRecord> files, int deviceWidth){
         this.context = context;
@@ -67,6 +68,8 @@ class ImageAdapter extends BaseAdapter{
                 Bitmap bitmap = BitmapFactory.decodeFile(file.getImagePath());
                 images.add(bitmap);
                 imageIds.add(file.getImageId());
+                imageGalleryIds.add(file.getId());
+                Log.i("db", "image gallery id " + file.getId());
             }catch(Exception e){
                 Log.e("image", e.getMessage());
             }
@@ -107,6 +110,7 @@ class ImageAdapter extends BaseAdapter{
                 Intent intent = new Intent(context, GalleryImageViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putDouble("image_id", imageIds.get(position));
+                bundle.putInt("image_gallery_id", imageGalleryIds.get(position));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 

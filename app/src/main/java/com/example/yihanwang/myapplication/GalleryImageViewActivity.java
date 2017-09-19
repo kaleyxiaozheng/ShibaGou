@@ -1,13 +1,20 @@
 package com.example.yihanwang.myapplication;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by kaley on 19/9/17.
@@ -25,13 +32,22 @@ public class GalleryImageViewActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         double imageId = bundle.getDouble("image_id");
-        ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
-        if(imageInfo != null){
-            TextView textView = (TextView) findViewById(R.id.gallery_image_text);
-            textView.setText(imageInfo.getName());
+        int imageGalleryId = bundle.getInt("image_gallery_id");
+
+        ScoreRecord record = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("id", imageGalleryId).findFirst();
+        if(record != null){
+            ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
+            Bitmap bitmap = BitmapFactory.decodeFile(record.getImagePath());
 
             ImageView imageView = (ImageView) findViewById(R.id.gallery_image_view);
-            imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(getAssets(), imageInfo));
+            imageView.setImageBitmap(bitmap);
+
+            if(imageInfo != null){
+                TextView textView = (TextView) findViewById(R.id.gallery_image_text);
+                textView.setText(imageInfo.getName());
+            }
+        } else {
+            Log.e("image", "cant find image gallery from  DB " + imageGalleryId);
         }
     }
 }

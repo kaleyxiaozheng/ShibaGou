@@ -2,6 +2,7 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -39,6 +40,7 @@ public class ImageFragment extends Fragment {
     ImagePagerAdapter customSwip;
     private ProgressBar bar;
     private int progress = 0;
+
     View view;
     private List<ImageInfo> images = new ArrayList<>();
 
@@ -47,6 +49,9 @@ public class ImageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.image_fragment, container, false);
+
+        id = Realm.getDefaultInstance().where(ScoreRecord.class).max("id").intValue();
+
         Bundle args = getArguments();
         double lat = args.getDouble("location_lat");
         double lon = args.getDouble("location_lon");
@@ -92,6 +97,7 @@ public class ImageFragment extends Fragment {
 
 
         score = (TextView) view.findViewById(R.id.yourScore);
+
         score.setText(String.valueOf(total));
         picture = (Button) view.findViewById(R.id.takePhoto);
         picture.setOnClickListener(new OnClickListener() {

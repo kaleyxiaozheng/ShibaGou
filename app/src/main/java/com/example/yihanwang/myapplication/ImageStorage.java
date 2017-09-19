@@ -90,9 +90,9 @@ public class ImageStorage {
                     l2.setLongitude(lon1);
                     if (Math.abs(l1.distanceTo(l2)) <= 10 * DISTANCE) {
                         rangeImages.add(imageInfo);
-//                        if(rangeImages.size() >= 20){
-//                            return rangeImages;
-//                        }
+                        if(rangeImages.size() >= 30){
+                            return rangeImages;
+                        }
                         break;
                     }
                 }
