@@ -59,7 +59,6 @@ public class ScoreActivity extends Activity {
             public void onClick(View v) {
                 Intent subscription = new Intent(getApplicationContext(), GalleryActivity.class);
                 startActivity(subscription);
-
             }
         });
 
