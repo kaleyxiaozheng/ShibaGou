@@ -14,4 +14,12 @@ public class LevelAndScores {
             LEVEL_TITLE[i] = "Level " + (i+1);
         }
     }
+
+    public int[] getLEVEL_SCORE() {
+        return LEVEL_SCORE;
+    }
+
+    public String[] getLEVEL_TITLE() {
+        return LEVEL_TITLE;
+    }
 }
