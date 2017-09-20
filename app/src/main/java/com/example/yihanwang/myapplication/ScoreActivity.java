@@ -2,12 +2,15 @@ package com.example.yihanwang.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -22,6 +25,8 @@ public class ScoreActivity extends Activity {
     private Button gallery;
     private String currentLevel;
     private String nextLevel;
+    private TextView userScore;
+    private TextView levelTxt;
     LevelAndScores las;
 
     public ScoreActivity() {
@@ -61,6 +66,20 @@ public class ScoreActivity extends Activity {
 
             }
         });
+
+        String setScore = String.valueOf(total);
+        userScore = (TextView) findViewById(R.id.displayScore);
+        userScore.setText(setScore);
+        userScore.setTextColor(Color.RED);
+        levelTxt = (TextView) findViewById(R.id.level);
+        levelTxt.setText("Level1");
+        CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
+        circularProgressBar.setColor(ContextCompat.getColor(this, R.color.progressBarColor));
+        circularProgressBar.setBackgroundColor(ContextCompat.getColor(this, R.color.backgroundProgressBarColor));
+        circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));
+        circularProgressBar.setBackgroundProgressBarWidth(getResources().getDimension(R.dimen.backgroundProgressBarWidth));
+        int animationDuration = 2500; // 2500ms = 2,5s
+        circularProgressBar.setProgressWithAnimation(total, animationDuration); // Default duration = 1500ms
     }
 
     public String getLevelTitle(int total) {

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/app_background"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -12,6 +13,45 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="50dp"
+            app:cpb_background_progressbar_color="#FFCDD2"
+            app:cpb_background_progressbar_width="5dp"
+            app:cpb_progressbar_color="#F44336"
+            app:cpb_progressbar_width="10dp" />
+
+        <TextView
+            android:id="@+id/displayScore"
+            android:textSize="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hello there"
+            tools:layout_editor_absoluteX="159dp"
+            tools:layout_editor_absoluteY="194dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:layout_alignLeft="@id/progressBar"
+            android:layout_alignTop="@id/progressBar"
+            android:layout_alignRight="@id/progressBar"
+            android:layout_alignBottom="@id/progressBar"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/level"
+            android:textSize="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressBar"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:includeFontPadding="false"
+            android:text="level" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

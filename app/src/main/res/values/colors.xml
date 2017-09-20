@@ -10,4 +10,7 @@
     <color name="image_border_end">#FF660000</color>
     <color name="image_border_center">#FFFF3333</color>
     <color name="default_back_color">#FFFFFFFF</color>
+
+    <color name="backgroundProgressBarColor">#ff40f2</color>
+    <color name="progressBarColor">#000288</color>
 </resources>
