@@ -39,7 +39,7 @@ public class ScoreActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_activity);
-        Typeface font = Typeface.createFromAsset(getAssets(), "BlessingsthroughRaindrops.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(),"BlessingsthroughRaindrops.ttf");
 
         nexLevel = (TextView) findViewById(R.id.nextLevel);
 
@@ -68,42 +68,21 @@ public class ScoreActivity extends Activity {
         circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));
         circularProgressBar.setBackgroundProgressBarWidth(getResources().getDimension(R.dimen.backgroundProgressBarWidth));
         int animationDuration = 2500; // 2500ms = 2,5s
-
-        circularProgressBar.setProgressWithAnimation(getLevel(total), animationDuration);
+        circularProgressBar.setProgressWithAnimation(total, animationDuration); // Default duration = 1500ms
     }
-
-
-    public int getLevel(int total) {
-        int levelScore = 0;
-        for (int i = 0; i < 20; i++) {
-            if (total < las.LEVEL_SCORE[i]) {
-                if(total == 0) {
-                    levelScore = 20;
-                    return levelScore;
-                } else {
-                    levelScore = las.LEVEL_SCORE[i];
-                    return levelScore;
-                }
-            } else {
-                levelScore = las.LEVEL_SCORE[i+1];
-            }
-        }
-        return levelScore;
-    }
-
 
     public String getLevelTitle(int total) {
         String title = "";
 
         for (int i = 0; i < 20; i++) {
             if (total < las.LEVEL_SCORE[i]) {
-                if (total == 0) {
+                if (i == 0) {
                     title = "You are in level 0";
                     if (!title.isEmpty()) {
                         return title;
                     }
                 } else {
-                    title = "You are in " + las.LEVEL_TITLE[i - 1];
+                    title = "You are in " + las.LEVEL_TITLE[i-1];
                     if (!title.isEmpty()) {
                         return title;
                     }

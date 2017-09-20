@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cbfcce">
+    android:background="#d3efd5">
 
     <TextView
         android:id="@+id/plantname"
