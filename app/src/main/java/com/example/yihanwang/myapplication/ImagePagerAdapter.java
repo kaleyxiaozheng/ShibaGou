@@ -143,19 +143,9 @@ public class ImagePagerAdapter extends PagerAdapter {
                                 } else {
 //                        onSwipeTop();
                                     Log.i("guesture", "swipe top");
-                                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
-                                    imageGalery.removeImage(imageGalleryIdx);
-
-                                    Realm realm = Realm.getDefaultInstance();
-                                    realm.beginTransaction();
-                                    ScoreRecord ret = realm.where(ScoreRecord.class).equalTo("imageId", imageInfo.getId()).findFirst();
-                                    if (ret != null) {
-                                        Log.i("image", "delete image from db " + imageInfo.getId());
-                                        ret.deleteFromRealm();
-                                    } else {
-                                        Log.e("database", "Failed to find saved image " + imageInfo.getId());
-                                    }
-                                    realm.commitTransaction();
+//                                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+//                                    imageGalery.removeImage(imageGalleryIdx);
+                                    ImageGalleryStorage.getInstance().removeGalleryImage(imageInfo.getId(), imageGalleryIdx);
 
                                     notifyDataSetChanged();
                                 }

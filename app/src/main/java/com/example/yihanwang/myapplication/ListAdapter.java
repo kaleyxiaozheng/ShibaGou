@@ -41,7 +41,7 @@ public class ListAdapter extends RecyclerView.Adapter {
         TextView textView = (TextView) viewHolder.mView.findViewById(R.id.image_name);
         textView.setText(imageInfo.getName());
         TextView basicInfo = (TextView) viewHolder.mView.findViewById(R.id.basicinfo);
-        if (imageInfo.getDescription() != null) {
+        if (imageInfo.getDescription() != null && !imageInfo.getDescription().isEmpty() && imageInfo.getDescription().indexOf('.') >= 0) {
             basicInfo.setText(imageInfo.getDescription().substring(0, imageInfo.getDescription().indexOf('.')));
         }
 

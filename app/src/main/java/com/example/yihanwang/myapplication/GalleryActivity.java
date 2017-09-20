@@ -130,9 +130,6 @@ public class GalleryActivity extends Activity {
                     Log.e("image", "failed to delete image on " + imagePath);
                 }
                 ImageGalleryStorage.getInstance().removeImageGallery(galleryId);
-                realm.beginTransaction();
-                record.deleteFromRealm();
-                realm.commitTransaction();
             } else {
                 Log.e("db", "cant find gallery to delete " + galleryId);
             }

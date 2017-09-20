@@ -76,7 +76,7 @@ public class ScoreActivity extends Activity {
 
         for (int i = 0; i < 20; i++) {
             if (total < las.LEVEL_SCORE[i]) {
-                if (i == 0) {
+                if (total == 0) {
                     title = "You are in level 0";
                     if (!title.isEmpty()) {
                         return title;

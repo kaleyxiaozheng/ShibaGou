@@ -160,33 +160,10 @@ public class ImageFragment extends Fragment {
             out.flush();
             out.close();
             ImageInfo imageInfo = images.get(currentPosition);
-            ImageGalleryStorage.getInstance().addImageGallery(imageInfo.getId(), finalBitmap, file.getPath());
+            ImageGalleryStorage.getInstance().addImageGallery(imageInfo.getId(), file.getPath());
             viewPager.setAdapter(null);
             viewPager.setAdapter(customSwip);
             viewPager.setCurrentItem(currentPosition);
-
-            Realm realm = Realm.getDefaultInstance();
-
-            realm.beginTransaction();
-            int i = 0;
-            RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-
-            for (ScoreRecord imageID : allImages) {
-                if (imageID.getImageId() == imageInfo.getId()) {
-                    i = i + 1;
-                }
-            }
-            if (i < 3) {
-                Log.i("database", "save image record " + imageInfo.getId());
-                ScoreRecord record = realm.createObject(ScoreRecord.class);
-                record.setId(id++);
-                record.setImageId(imageInfo.getId());
-                record.setScore(10);
-                record.setImagePath(file.getAbsolutePath());
-                //Log.i("score", "score " + record.getScore());
-            }
-
-            realm.commitTransaction();
 
             int result = 0;
             RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();

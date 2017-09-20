@@ -24,16 +24,7 @@ public class ImageGallery {
     }
 
     public void addImage(Bitmap bitmap) {
-        if (this.bitmap.size() >= 3) {
-            this.removeImage(0);
-        }
         this.bitmap.add(bitmap);
-    }
-
-    public void removeImage(int idx) {
-        if (this.bitmap.size() > idx) {
-            this.bitmap.remove(idx);
-        }
     }
 
     public Bitmap getImage(int i) {

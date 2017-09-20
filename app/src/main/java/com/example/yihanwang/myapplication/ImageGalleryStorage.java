@@ -1,49 +1,81 @@
 package com.example.yihanwang.myapplication;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.yihanwang.myapplication.entities.ImageGallery;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class ImageGalleryStorage {
 
     private static final ImageGalleryStorage instance = new ImageGalleryStorage();
 
-    private List<ImageGallery> items = new ArrayList<>();
-
     public static ImageGalleryStorage getInstance() {
         return instance;
     }
 
-    public void addImageGallery(double id, Bitmap bitmap, String path) {
-        Log.i("gallery", "save image gallery " + id);
-        ImageGallery gallery = getImageGallery(id);
-        if (gallery != null) {
-            gallery.addImage(bitmap);
-        } else {
-            ImageGallery imageGallery = new ImageGallery(id, path);
-            imageGallery.addImage(bitmap);
-            this.items.add(imageGallery);
+    public void addImageGallery(double imageId, String path) {
+        Log.i("gallery", "save image gallery " + imageId);
+
+        RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
+        if (allImages == null || allImages.size() >= 3) {
+            return;
         }
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        ScoreRecord record = realm.createObject(ScoreRecord.class);
+        Number maxId = realm.where(ScoreRecord.class).max("id");
+        if (maxId != null) {
+            record.setId(maxId.intValue() + 1);
+        } else {
+            record.setId(1);
+        }
+        record.setImageId(imageId);
+        record.setScore(10);
+        record.setImagePath(path);
+        realm.commitTransaction();
     }
 
-    public void removeImageGallery(long id) {
-        ImageGallery gallery = getImageGallery(id);
-
-        if (gallery != null) {
-            this.items.remove(gallery);
+    public void removeImageGallery(int id) {
+        Realm realm = Realm.getDefaultInstance();
+        ScoreRecord score = realm.where(ScoreRecord.class).equalTo("id", id).findFirst();
+        if(score != null){
+            realm.beginTransaction();
+            score.deleteFromRealm();
+            realm.commitTransaction();
         }
     }
 
     public ImageGallery getImageGallery(double id) {
-        for (ImageGallery imageGallery : items) {
-            if (imageGallery.getId() == id) {
-                return imageGallery;
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", id).findAll();
+        ImageGallery gallery = null;
+        if (recordList.size() > 0) {
+            gallery = new ImageGallery(recordList.get(0).getImageId(), "");
+            for (ScoreRecord record : recordList) {
+                Bitmap bitmap = BitmapFactory.decodeFile(record.getImagePath());
+                gallery.addImage(bitmap);
             }
         }
-        return null;
+        return gallery;
+    }
+
+    public void removeGalleryImage(double imageId, int galleryIdx) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
+        if(recordList.size() > galleryIdx ){
+            realm.beginTransaction();
+            ScoreRecord scoreRecord = recordList.get(galleryIdx);
+            scoreRecord.deleteFromRealm();
+            realm.commitTransaction();
+        }
     }
 }
