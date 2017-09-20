@@ -14,7 +14,11 @@
         <TextView
             android:id="@+id/select_text_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="#3CB371"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <ScrollView

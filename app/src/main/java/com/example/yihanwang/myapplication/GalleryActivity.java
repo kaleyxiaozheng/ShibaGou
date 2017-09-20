@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
@@ -33,7 +34,7 @@ public class GalleryActivity extends Activity {
 
     private int deviceWidth = 1024;
     private ImageAdapter adapter;
-    private Button deleteBtn;
+    private ImageButton deleteBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class GalleryActivity extends Activity {
         adapter = new ImageAdapter(this, allRecords, deviceWidth);
         gridView.setAdapter(adapter);
 
-        this.deleteBtn = (Button) findViewById(R.id.delete_btn);
+        this.deleteBtn = (ImageButton) findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
