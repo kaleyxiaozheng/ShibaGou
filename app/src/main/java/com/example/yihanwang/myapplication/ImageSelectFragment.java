@@ -108,17 +108,7 @@ public class ImageSelectFragment extends Fragment {
                 images.remove(selectedImageIdx);
                 skipBtn.setEnabled(false);
                 playBtn.setEnabled(false);
-                boolean found = false;
-                int i = -1;
-                do {
-                    i = r.nextInt(imageList.size() - 1);
-                    Log.i("random", "get number " + i);
-                    for (ImageInfo image : images) {
-                        if (image.getId() == imageList.get(i).getId()) {
-                            found = true;
-                        }
-                    }
-                } while (found);
+                int i = r.nextInt(imageList.size() - 1);
                 images.add(selectedImageIdx, imageList.get(i));
                 imageViews.get(selectedImageIdx).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(selectedImageIdx)));
 

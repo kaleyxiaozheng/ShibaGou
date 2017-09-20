@@ -2,6 +2,7 @@ package com.example.yihanwang.myapplication;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +49,9 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
         if (imageInfo != null) {
             TextView textView = (TextView) findViewById(R.id.gallery_image_text);
+            Typeface font = Typeface.createFromAsset(getAssets(),"BlessingsthroughRaindrops.ttf");
             textView.setText(imageInfo.getName());
+            textView.setTypeface(font);
         } else {
             Log.e("image", "Image id cant find " + imageId);
         }
