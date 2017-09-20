@@ -26,7 +26,7 @@ public class ComparisonActivity extends Activity {
         plant = (TextView) findViewById(R.id.plantname);
         photo = (TextView) findViewById(R.id.yourphoto);
 
-        photo.setText("Your photo");
+        photo.setText("Your photo:");
 
         Bundle b = getIntent().getExtras();
         double index1 = -1;
@@ -39,9 +39,9 @@ public class ComparisonActivity extends Activity {
             String com = first.getCommonName();
 
             if (com.isEmpty()) {
-                plant.setText(first.getName());
+                plant.setText(first.getName() + ":");
             } else {
-                plant.setText(com + " (" + first.getName() +")");
+                plant.setText(com + " (" + first.getName() +"):");
             }
 
             plantImage.setImageDrawable(ImageStorage.getInstance().getDrawable(this.getAssets(), first));

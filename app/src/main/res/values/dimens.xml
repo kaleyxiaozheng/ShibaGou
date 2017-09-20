@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="progressBarWidth">20dp</dimen>
+    <dimen name="progressBarWidth">10dp</dimen>
     <dimen name="backgroundProgressBarWidth">10dp</dimen>
 </resources>
