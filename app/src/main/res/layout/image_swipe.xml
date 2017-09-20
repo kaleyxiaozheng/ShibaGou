@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#cdff82">
+    android:background="#cbfcce">
 
         <!--<ProgressBar-->
             <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
