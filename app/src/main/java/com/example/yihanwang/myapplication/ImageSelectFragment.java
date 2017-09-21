@@ -1,14 +1,11 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,11 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
-import com.example.yihanwang.myapplication.gps.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +50,18 @@ public class ImageSelectFragment extends Fragment {
         Log.i("score", "current score " + score);
         int imageNumber = ScoreUtils.getNextLevelImageNumber(score);
         Log.i("image", "next level image number " + imageNumber);
-        TextView textView = (TextView) view.findViewById(R.id.select_text_view);
+        TextView image_number = (TextView) view.findViewById(R.id.image_number);
+        TextView current_level = (TextView) view.findViewById(R.id.current_level);
+        TextView next_level = (TextView) view.findViewById(R.id.next_level);
 
         final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
-        Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(),"BlessingsthroughRaindrops.ttf");
-        textView.setTypeface(font1);
-        textView.setText("Image " + imageList.size() + " Level: " + ScoreUtils.getCurrentLevel(score) +", Next Level needs " + (imageNumber));
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"BlessingsthroughRaindrops.ttf");
+        image_number.setTypeface(font);
+        current_level.setTypeface(font);
+        next_level.setTypeface(font);
+        image_number.setText("There are " + imageList.size() + " plants nearby.");
+        current_level.setText("you are level: " + ScoreUtils.getCurrentLevel(score));
+        next_level.setText("go next Level needs " + (imageNumber));
         imageNumber = Math.min(imageList.size(), imageNumber);
         for (int i = 0; i < imageNumber; i++) {
             imageViews.add(new ImageView(getContext()));
