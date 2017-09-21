@@ -24,6 +24,19 @@
             <!--android:layout_marginLeft="15dp"-->
             <!--android:layout_marginTop="15dp"-->
             <!--/>-->
+        <com.example.yihanwang.myapplication.entities.TextProgressBar
+            android:id="@+id/pb"
+            android:layout_width="fill_parent"
+            android:layout_height="24dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:max="100"
+            android:progress="60"
+            android:progressDrawable="@drawable/progress_drawable"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+
+            />
 
         <TextView
             android:id="@+id/yourScore"

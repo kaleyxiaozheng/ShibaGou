@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
+import com.example.yihanwang.myapplication.entities.TextProgressBar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,6 +41,9 @@ public class ImageFragment extends Fragment {
     ImagePagerAdapter customSwip;
     private ProgressBar bar;
     private int progress = 0;
+    int myProgress = 0;
+    TextProgressBar pb;
+    LevelAndScores las = new LevelAndScores();
 
     View view;
     private List<ImageInfo> images = new ArrayList<>();
@@ -93,15 +97,20 @@ public class ImageFragment extends Fragment {
         }
         realm.commitTransaction();
 
-        LevelAndScores las = new LevelAndScores();
-
-        bar = (ProgressBar) view.findViewById(R.id.progressBar);
-
-
-
         score = (TextView) view.findViewById(R.id.yourScore);
 
         score.setText(String.valueOf(total));
+
+        pb = (TextProgressBar) view.findViewById(R.id.pb);
+        pb = new TextProgressBar(getActivity());
+        pb = (TextProgressBar)view.findViewById(R.id.pb);
+        LevelAndScores levelAndScores = new LevelAndScores();
+        int level = Integer.parseInt(getLevel(total));
+        int levelScore = levelAndScores.getLEVEL_SCORE()[level];
+        int displayProgress = total/las.getLEVEL_SCORE()[0]*100;
+        pb.setText(total + "/" + levelScore);
+        pb.setProgress(total);
+        pb.setMax(levelScore);
         picture = (Button) view.findViewById(R.id.takePhoto);
         picture.setOnClickListener(new OnClickListener() {
 
@@ -182,5 +191,27 @@ public class ImageFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+    public String getLevel(int total) {
+        String title = "";
+
+        for (int i = 0; i < 20; i++) {
+            if (total < las.LEVEL_SCORE[i]) {
+                if (i == 0) {
+                    title = "0";
+                    if (!title.isEmpty()) {
+                        return title;
+                    }
+                } else {
+                    title = las.LEVEL_TITLE[i - 1];
+                    if (!title.isEmpty()) {
+                        return title;
+                    }
+                }
+            }
+        }
+        return title;
+    }
+
 }
 
