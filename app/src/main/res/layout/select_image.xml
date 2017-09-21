@@ -5,41 +5,59 @@
     android:background="#d3efd5"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/userInfo"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/select_text_view"
+            android:id="@+id/image_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textColor="#3CB371"
+            android:textColor="#0B6437"
             android:textSize="18dp"
             android:textStyle="bold"/>
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/current_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0B6437"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/next_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0B6437"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:scrollbars="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="center_vertical"
-        android:paddingTop="100dp">
+        android:layout_below="@+id/userInfo"
+        android:layout_marginTop="10dp">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp">
 
             <LinearLayout
                 android:id="@+id/scroll_image_layout"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -48,8 +66,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="1dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="20dp"
                     android:scaleType="centerCrop" />
 
             </LinearLayout>

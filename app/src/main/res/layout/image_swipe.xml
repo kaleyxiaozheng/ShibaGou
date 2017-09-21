@@ -49,13 +49,13 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="15dp"
             android:layout_weight="1">
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:alpha=".4"
-                android:gravity="center"
-                android:src="@drawable/ic_left_arrow_button"
-                />
+            <!--<ImageView-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:alpha=".4"-->
+                <!--android:gravity="center"-->
+                <!--android:src="@drawable/ic_left_arrow_button"-->
+                <!--/>-->
             <com.example.yihanwang.myapplication.TouchImageView
                 android:id="@+id/swip_image_view"
                 android:layout_width="fill_parent"
@@ -69,13 +69,13 @@
                 android:scaleType="fitCenter" />
                // android:scaleType="centerCrop" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:alpha=".4"
-                android:gravity="center"
-                android:src="@drawable/ic_right_arrow_button"
-                />
+            <!--<ImageView-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:alpha=".4"-->
+                <!--android:gravity="center"-->
+                <!--android:src="@drawable/ic_right_arrow_button"-->
+                <!--/>-->
         </LinearLayout>
 
 
