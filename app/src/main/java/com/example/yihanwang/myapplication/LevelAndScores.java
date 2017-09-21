@@ -18,8 +18,4 @@ public class LevelAndScores {
     public int[] getLEVEL_SCORE() {
         return LEVEL_SCORE;
     }
-
-    public String[] getLEVEL_TITLE() {
-        return LEVEL_TITLE;
-    }
 }
