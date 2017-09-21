@@ -17,7 +17,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.gps.LocationService;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,15 +29,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        checkPermission();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.maindialog, null);
-        Typeface font1 = Typeface.createFromAsset(getAssets(),"AYearWithoutRain.ttf");
-        Typeface font2 = Typeface.createFromAsset(getAssets(),"BlessingsthroughRaindrops.ttf");
+        Typeface font1 = Typeface.createFromAsset(getAssets(),"astron.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(),"retganon.ttf");
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView message = (TextView) view.findViewById(R.id.message);
         title.setTypeface(font1);
         message.setTypeface(font2);
         title.setText("CampingMate");
+
+        List<ImageInfo> images = ImageStorage.getInstance().getImagesFromLocation(LocationService.getInstance().getCurrentLat(), LocationService.getInstance().getCurrentLon());
         message.setText("There are 20 plants in your area, press play to begin");
 
         builder.setPositiveButton("Play", new DialogInterface.OnClickListener(){
@@ -51,13 +61,15 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
             }
         });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
         builder.setView(view);
         builder.show();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        checkPermission();
 
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
