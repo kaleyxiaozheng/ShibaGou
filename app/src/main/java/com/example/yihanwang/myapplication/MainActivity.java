@@ -2,7 +2,6 @@ package com.example.yihanwang.myapplication;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
@@ -34,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         checkPermission();
 
+    }
+
+    private void alertMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.maindialog, null);
-        Typeface font1 = Typeface.createFromAsset(getAssets(),"astron.ttf");
-        Typeface font2 = Typeface.createFromAsset(getAssets(),"retganon.ttf");
+        Typeface font1 = Typeface.createFromAsset(getAssets(), "astron.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "retganon.ttf");
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView message = (TextView) view.findViewById(R.id.message);
         title.setTypeface(font1);
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         title.setText("CampingMate");
 
         List<ImageInfo> images = ImageStorage.getInstance().getImagesFromLocation(LocationService.getInstance().getCurrentLat(), LocationService.getInstance().getCurrentLon());
-        message.setText("There are 20 plants in your area, press play to begin");
+        message.setText("There are " + images.size() + " plants in your area, press play to begin");
 
-        builder.setPositiveButton("Play", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("Play", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.frame_container, fragment).commit();
-
     }
 
     private void checkPermission() {
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     1000);
         } else {
             LocationService.getInstance(this).locateCurrentLocation();
+            alertMessage();
         }
     }
 
@@ -94,13 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         if (requestCode == 1000) {
             LocationService.getInstance(this).locateCurrentLocation();
+            alertMessage();
         }
     }
-
-    public void showAlert(View view) {
-        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Hello").create();
-        myAlert.show();
-    }
-
 }

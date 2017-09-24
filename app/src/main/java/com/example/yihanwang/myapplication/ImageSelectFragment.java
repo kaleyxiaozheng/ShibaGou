@@ -46,8 +46,8 @@ public class ImageSelectFragment extends Fragment {
         this.images.clear();
         this.imageViews.clear();
 
-        int score = ScoreUtils.getScore();
-        Log.i("score", "current score " + score);
+        int score = ScoreUtils.getCurrentScores();
+        //Log.i("score", "current score " + score);
         int imageNumber = ScoreUtils.getNextLevelImageNumber(score);
         Log.i("image", "next level image number " + imageNumber);
         TextView image_number = (TextView) view.findViewById(R.id.image_number);
@@ -55,12 +55,14 @@ public class ImageSelectFragment extends Fragment {
         TextView next_level = (TextView) view.findViewById(R.id.next_level);
 
         final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"retganon.ttf");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "retganon.ttf");
         image_number.setTypeface(font);
         current_level.setTypeface(font);
         next_level.setTypeface(font);
         image_number.setText("There are " + imageList.size() + " plants nearby.");
-        current_level.setText("you are level: " + ScoreUtils.getCurrentLevel(score));
+        int lev = ScoreUtils.getCurrentLevel(score);
+        current_level.setText("you are level: " + lev);
+
         next_level.setText("go to next Level, you need to take " + (imageNumber) + " more plants");
         imageNumber = Math.min(imageList.size(), imageNumber);
         for (int i = 0; i < imageNumber; i++) {

@@ -11,7 +11,21 @@ import io.realm.RealmResults;
 
 public class ScoreUtils {
 
-    public static int getScore() {
+    public static int[] level_score = new int[20];
+    public static String[] level_title = new String[20];
+
+    public static void setScoresLevels() {
+        level_score[0] = 20;
+        level_title[0] = "Level 1";
+
+        for (int i = 1; i < level_score.length; i++) {
+            level_score[i] = i * 10 + level_score[0] + level_score[i - 1];
+            level_title[i] = "Level " + (i + 1);
+        }
+    }
+
+
+    public static int getCurrentScores() {
         int total = 0;
         RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
 
@@ -22,10 +36,10 @@ public class ScoreUtils {
     }
 
     public static int getNextLevelImageNumber(int currentScore) {
-        LevelAndScores las = new LevelAndScores();
+        setScoresLevels();
         for (int i = 0; i < 20; i++) {
-            if (currentScore < las.LEVEL_SCORE[i]) {
-                return (las.LEVEL_SCORE[i]) / 10;
+            if (currentScore < level_score[i]) {
+                return (level_score[i]) / 10;
             }
         }
         return -1;
@@ -33,13 +47,26 @@ public class ScoreUtils {
 
 
     public static int getCurrentLevel(int currentScore) {
-        LevelAndScores las = new LevelAndScores();
+        setScoresLevels();
         for (int i = 0; i < 20; i++) {
-            if (currentScore <= las.LEVEL_SCORE[i]) {
+            if (currentScore < level_score[i]) {
+                if (i == 0) {
+                    return i;
+                }
                 return i;
+            }
+            if (currentScore == level_score[i]) {
+                return i + 1;
             }
         }
         return -1;
     }
 
+//    public static int[] getLevel_score() {
+//        return level_score;
+//    }
+//
+//    public static String[] getLevel_title() {
+//        return level_title;
+//    }
 }

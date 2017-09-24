@@ -2,7 +2,6 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -43,7 +42,6 @@ public class ImageFragment extends Fragment {
     private int progress = 0;
     int myProgress = 0;
     TextProgressBar pb;
-    LevelAndScores las = new LevelAndScores();
 
     View view;
     private List<ImageInfo> images = new ArrayList<>();
@@ -104,10 +102,9 @@ public class ImageFragment extends Fragment {
         pb = (TextProgressBar) view.findViewById(R.id.pb);
         pb = new TextProgressBar(getActivity());
         pb = (TextProgressBar)view.findViewById(R.id.pb);
-        LevelAndScores levelAndScores = new LevelAndScores();
-        int level = Integer.parseInt(getLevel(total));
-        int levelScore = levelAndScores.getLEVEL_SCORE()[level];
-        int displayProgress = total/las.getLEVEL_SCORE()[0]*100;
+        int level = ScoreUtils.getCurrentLevel(total);
+        int levelScore = ScoreUtils.getNextLevelImageNumber(total) * 10;
+        //int displayProgress = total/las.getLEVEL_SCORE()[0]*100;
         pb.setText(total + "/" + levelScore);
         pb.setProgress(total);
         pb.setMax(levelScore);
@@ -177,7 +174,7 @@ public class ImageFragment extends Fragment {
             int result = 0;
             RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
             for (ScoreRecord score : total) {
-                //Log.i("score", "score " + score.getScore());
+                //Log.i("score", "score " + score.getCurrentScores());
                 result += score.getScore();
             }
 
@@ -192,26 +189,26 @@ public class ImageFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public String getLevel(int total) {
-        String title = "";
-
-        for (int i = 0; i < 20; i++) {
-            if (total < las.LEVEL_SCORE[i]) {
-                if (i == 0) {
-                    title = "0";
-                    if (!title.isEmpty()) {
-                        return title;
-                    }
-                } else {
-                    title = las.LEVEL_TITLE[i - 1];
-                    if (!title.isEmpty()) {
-                        return title;
-                    }
-                }
-            }
-        }
-        return title;
-    }
+//    public String getLevel(int total) {
+//        String title = "";
+//
+//        for (int i = 0; i < 20; i++) {
+//            if (total < las.LEVEL_SCORE[i]) {
+//                if (i == 0) {
+//                    title = "0";
+//                    if (!title.isEmpty()) {
+//                        return title;
+//                    }
+//                } else {
+//                    title = las.LEVEL_TITLE[i - 1];
+//                    if (!title.isEmpty()) {
+//                        return title;
+//                    }
+//                }
+//            }
+//        }
+//        return title;
+//    }
 
 }
 
