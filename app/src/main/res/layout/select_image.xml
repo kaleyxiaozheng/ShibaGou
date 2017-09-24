@@ -5,54 +5,68 @@
     android:background="#d3efd5"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/userInfo"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical"
         android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/imageNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/select_imagenumbers" />
 
         <TextView
             android:id="@+id/image_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#0B6437"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/current_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#0B6437"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/next_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#0B6437"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            android:layout_alignBottom="@id/imageNum"
+            android:layout_alignLeft="@id/imageNum"
+            android:layout_alignRight="@id/imageNum"
+            android:layout_alignTop="@id/imageNum"
+            android:layout_marginTop="68dp"
+            android:gravity="center_horizontal"
+            android:textColor="#fffcfb"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+        <!--<TextView-->
+        <!--android:id="@+id/current_level"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#d3efd5"-->
+        <!--android:textSize="18dp"-->
+        <!--android:textStyle="bold"/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/next_level"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#d3efd5"-->
+        <!--android:textSize="18dp"-->
+        <!--android:textStyle="bold"/>-->
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:scrollbars="horizontal"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_below="@+id/userInfo"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/userInfo"
-        android:layout_marginTop="10dp">
+        android:scrollbars="horizontal">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="20dp">
 
             <LinearLayout
                 android:id="@+id/scroll_image_layout"
@@ -76,23 +90,41 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="150dp"
         android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/play_button"
+        <ImageView
+            android:id="@+id/grass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:enabled="false"
-            android:text="@string/play" />
-
-        <Button
-            android:id="@+id/skip_button"
+            android:src="@drawable/select_grass"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitXY"
+            android:gravity="bottom|center_horizontal"/>
+        <ImageView
+            android:id="@+id/instruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:enabled="false"
-            android:text="@string/skip" />
+            android:layout_alignBottom="@id/grass"
+            android:layout_alignLeft="@id/grass"
+            android:layout_alignRight="@id/grass"
+            android:src="@drawable/select_instruction"/>
+
+
+        <!--<Button-->
+            <!--android:id="@+id/play_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:enabled="false"-->
+            <!--android:text="@string/play" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/skip_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:enabled="false"-->
+            <!--android:text="@string/skip" />-->
     </RelativeLayout>
 </RelativeLayout>

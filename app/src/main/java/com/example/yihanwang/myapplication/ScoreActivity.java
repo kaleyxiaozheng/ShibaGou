@@ -18,7 +18,6 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class ScoreActivity extends Activity {
     private TextView nexLevel;
     private ImageView gallery;
-    private String nextLevel;
     private TextView userScore;
     private TextView levelTxt;
 
@@ -57,50 +56,4 @@ public class ScoreActivity extends Activity {
         circularProgressBar.setProgressWithAnimation(total, animationDuration); // Default duration = 1500ms
     }
 
-//    public String getLevelTitle(int total) {
-//        String title = "";
-//
-//        for (int i = 0; i < 20; i++) {
-//            if (total < las.LEVEL_SCORE[i]) {
-//                if (i == 0) {
-//                    title = "You are level 0";
-//                    if (!title.isEmpty()) {
-//                        return title;
-//                    }
-//                } else {
-//                    title = "You are " + las.LEVEL_TITLE[i-1];
-//                    if (!title.isEmpty()) {
-//                        return title;
-//                    }
-//                }
-//            }
-//        }
-//        return title;
-//    }
-//
-//    public String getNextLevel(int total) {
-//        String next = "";
-//
-//        for (int i = 0; i < 20; i++) {
-//            if (total <= las.LEVEL_SCORE[i]) {
-//                int imageNum = (las.LEVEL_SCORE[i] - total) / 10;
-//                if (imageNum > 1) {
-//                    next = "Find " + imageNum + " more plants to reach the next level";
-//                    if (!next.isEmpty()) {
-//                        return next;
-//                    }
-//                }
-//                if (imageNum == 1) {
-//                    next = "Find 1 more plant to reach the next level";
-//                    if (!next.isEmpty()) {
-//                        return next;
-//                    }
-//                }
-//                if (imageNum == 0) {
-//                    next = "Find " + (las.LEVEL_SCORE[i + 1] - total) / 10 + " more plants to reach the next level";
-//                }
-//            }
-//        }
-//        return next;
-//    }
 }
