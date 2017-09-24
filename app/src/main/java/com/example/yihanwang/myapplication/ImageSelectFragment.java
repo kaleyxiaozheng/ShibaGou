@@ -22,6 +22,7 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by kaley on 18/9/17.
@@ -90,6 +91,7 @@ public class ImageSelectFragment extends Fragment {
             imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
             //imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
             final ImageInfo imageinfo = images.get(i);
+            final int lo = i;
 
             final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.OnGestureListener() {
 
@@ -134,11 +136,15 @@ public class ImageSelectFragment extends Fragment {
 
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    boolean result = false;
 
+                    Random r = new Random();
+                    Log.i("SwipeLocation", "Swipe location " + lo);
+                    images.remove(lo);
+                    int i = r.nextInt(imageList.size() - 1);
+                    images.add(lo, imageList.get(i));
+                    imageViews.get(lo).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(lo)));
 
-
-                    return result;
+                    return true;
                 }
             });
 
