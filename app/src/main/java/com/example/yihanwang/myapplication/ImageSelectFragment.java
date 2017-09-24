@@ -131,18 +131,24 @@ public class ImageSelectFragment extends Fragment {
 
                 @Override
                 public void onLongPress(MotionEvent motionEvent) {
-
-                }
-
-                @Override
-                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
                     Random r = new Random();
                     Log.i("SwipeLocation", "Swipe location " + lo);
                     images.remove(lo);
                     int i = r.nextInt(imageList.size() - 1);
                     images.add(lo, imageList.get(i));
                     imageViews.get(lo).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(lo)));
+
+                }
+
+                @Override
+                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+//                    Random r = new Random();
+//                    Log.i("SwipeLocation", "Swipe location " + lo);
+//                    images.remove(lo);
+//                    int i = r.nextInt(imageList.size() - 1);
+//                    images.add(lo, imageList.get(i));
+//                    imageViews.get(lo).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(lo)));
 
                     return true;
                 }
