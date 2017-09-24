@@ -2,6 +2,7 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -42,6 +43,7 @@ public class ImageFragment extends Fragment {
     private int progress = 0;
     int myProgress = 0;
     TextProgressBar pb;
+    private List<ImageInfo> oneImage = new ArrayList<>();
 
     View view;
     private List<ImageInfo> images = new ArrayList<>();
@@ -63,19 +65,26 @@ public class ImageFragment extends Fragment {
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         this.images = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
-        customSwip = new ImagePagerAdapter(getActivity(), images);
-        viewPager.setAdapter(customSwip);
+
         double imageId = args.getDouble("selected_image_id");
         if (imageId != 0.0) {
             for(int i=0; i<this.images.size(); i++){
                 if(this.images.get(i).getId() == imageId){
                     currentPosition = i;
+                    oneImage.add(images.get(i));
                     Log.i("image", "show selected image " + imageId);
                     viewPager.setCurrentItem(currentPosition);
+                    customSwip = new ImagePagerAdapter(getActivity(), oneImage);
                     break;
                 }
             }
+//            if(oneImage.isEmpty()){
+//                viewPager.setCurrentItem(0);
+//                customSwip = new ImagePagerAdapter(getActivity(), images);
+//            }
         }
+
+        viewPager.setAdapter(customSwip);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -95,16 +104,16 @@ public class ImageFragment extends Fragment {
         }
         realm.commitTransaction();
 
-        score = (TextView) view.findViewById(R.id.yourScore);
+        //score = (TextView) view.findViewById(R.id.yourScore);
 
-        score.setText(String.valueOf(total));
+        //score.setText(String.valueOf(total));
 
-        pb = (TextProgressBar) view.findViewById(R.id.pb);
+       // pb = (TextProgressBar) view.findViewById(R.id.pb);
         pb = new TextProgressBar(getActivity());
-        pb = (TextProgressBar)view.findViewById(R.id.pb);
+        //pb = (TextProgressBar)view.findViewById(R.id.pb);
         int level = ScoreUtils.getCurrentLevel(total);
-        int levelScore = ScoreUtils.getNextLevelImageNumber(total) * 10;
-        //int displayProgress = total/las.getLEVEL_SCORE()[0]*100;
+        int levelScore = ScoreUtils.getCurrentLevel(total);
+        int displayProgress = total/ScoreUtils.getNextLevelImageNumber(total)*100;
         pb.setText(total + "/" + levelScore);
         pb.setProgress(total);
         pb.setMax(levelScore);
