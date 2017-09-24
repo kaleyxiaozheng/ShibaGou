@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,7 +29,6 @@ import java.util.List;
 
 public class ImageSelectFragment extends Fragment {
 
-    private int selectedImageIdx = -1;
     private TextView image_number;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
@@ -87,27 +88,69 @@ public class ImageSelectFragment extends Fragment {
             imageViews.get(i).setLayoutParams(layoutParams);
             scrollImageLayout.addView(imageViews.get(i));
             imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
-            imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
+            //imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
+            final ImageInfo imageinfo = images.get(i);
+
+            final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.OnGestureListener() {
+
+                @Override
+                public boolean onDown(MotionEvent motionEvent) {
+                    return true;
+                }
+
+                @Override
+                public void onShowPress(MotionEvent motionEvent) {
+
+                }
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent motionEvent) {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_UP:
+                        {
+                            Fragment fragment = new ImageFragment();
+                            Bundle args = new Bundle();
+                            args.putDouble("location_lat", lat);
+                            args.putDouble("location_lon", lon);
+                            args.putDouble("selected_image_id", imageinfo.getId());
+                            fragment.setArguments(args);
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+                    return false;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent motionEvent) {
+
+                }
+
+                @Override
+                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                    boolean result = false;
+
+
+
+                    return result;
+                }
+            });
+
+            imageViews.get(i).setOnTouchListener(new View.OnTouchListener() {
+
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    return gestureDetector.onTouchEvent(event);
+                }
+            });
         }
-        //this.playBtn = (Button) view.findViewById(R.id.play_button);
-//        playBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Fragment fragment = new ImageFragment();
-//                Bundle args = new Bundle();
-//                args.putDouble("location_lat", lat);
-//                args.putDouble("location_lon", lon);
-//                ImageInfo imageInfo = images.get(selectedImageIdx);
-//                selectedImageIdx = -1;
-//                args.putDouble("selected_image_id", imageInfo.getId());
-//                fragment.setArguments(args);
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
-//
-//            }
-//        });
+
         //this.skipBtn = (Button) view.findViewById(R.id.skip_button);
 //        this.skipBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -127,42 +170,5 @@ public class ImageSelectFragment extends Fragment {
 //            }
 //        });
         return view;
-    }
-
-    class ImageClickListener implements View.OnClickListener {
-        private int index = -1;
-        private ImageView imageView;
-        private Context context;
-
-        public ImageClickListener(ImageView imageView, Context context, int index) {
-            this.imageView = imageView;
-            this.context = context;
-            this.index = index;
-        }
-
-        @Override
-        public void onClick(View view) {
-            for (ImageView image : imageViews) {
-                image.setAlpha(1f);
-            }
-            if (selectedImageIdx != index) {
-                this.imageView.setAlpha(0.5f);
-                selectedImageIdx = index;
-            }
-
-            Fragment fragment = new ImageFragment();
-            Bundle args = new Bundle();
-            args.putDouble("location_lat", lat);
-            args.putDouble("location_lon", lon);
-            ImageInfo imageInfo = images.get(selectedImageIdx);
-            //selectedImageIdx = -1;
-            args.putDouble("selected_image_id", imageInfo.getId());
-            fragment.setArguments(args);
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
-
-
-        }
     }
 }
