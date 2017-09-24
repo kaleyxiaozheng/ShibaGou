@@ -49,7 +49,7 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
         if (imageInfo != null) {
             TextView textView = (TextView) findViewById(R.id.gallery_image_text);
-            Typeface font = Typeface.createFromAsset(getAssets(),"BlessingsthroughRaindrops.ttf");
+            Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
             textView.setText(imageInfo.getName());
             textView.setTypeface(font);
         } else {

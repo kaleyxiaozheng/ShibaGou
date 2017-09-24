@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.yihanwang.myapplication.entities.ImageGallery;
+import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ImageGalleryStorage {
         Log.i("gallery", "save image gallery " + imageId);
 
         RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
-        if (allImages == null || allImages.size() > 1) {
+        if (allImages == null || allImages.size() > 3) {
             return;
         }
         Realm realm = Realm.getDefaultInstance();
@@ -38,6 +39,7 @@ public class ImageGalleryStorage {
         } else {
             record.setId(1);
         }
+
         record.setImageId(imageId);
         record.setScore(10);
         record.setImagePath(path);

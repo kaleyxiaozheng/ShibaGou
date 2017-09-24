@@ -177,10 +177,6 @@ public class ImagePagerAdapter extends PagerAdapter {
         imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
         container.addView(itemView);
 
-        //AnimateHorizontalProgressBar progressBar = (AnimateHorizontalProgressBar)itemView.findViewById(R.id.progressBar);
-        ProgressBar progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
-        //progressBar.setMax(1000);
-        //progressBar.setProgress(400);
         return itemView;
     }
 

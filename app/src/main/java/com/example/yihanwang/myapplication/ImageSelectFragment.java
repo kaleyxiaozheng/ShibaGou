@@ -55,13 +55,13 @@ public class ImageSelectFragment extends Fragment {
         TextView next_level = (TextView) view.findViewById(R.id.next_level);
 
         final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"BlessingsthroughRaindrops.ttf");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"retganon.ttf");
         image_number.setTypeface(font);
         current_level.setTypeface(font);
         next_level.setTypeface(font);
         image_number.setText("There are " + imageList.size() + " plants nearby.");
         current_level.setText("you are level: " + ScoreUtils.getCurrentLevel(score));
-        next_level.setText("go next Level needs " + (imageNumber));
+        next_level.setText("go to next Level, you need to take " + (imageNumber) + " more plants");
         imageNumber = Math.min(imageList.size(), imageNumber);
         for (int i = 0; i < imageNumber; i++) {
             imageViews.add(new ImageView(getContext()));

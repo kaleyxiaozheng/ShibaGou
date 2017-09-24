@@ -39,7 +39,7 @@ public class ScoreActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_activity);
-        Typeface font = Typeface.createFromAsset(getAssets(),"BlessingsthroughRaindrops.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
 
         nexLevel = (TextView) findViewById(R.id.nextLevel);
 
@@ -76,7 +76,7 @@ public class ScoreActivity extends Activity {
 
         for (int i = 0; i < 20; i++) {
             if (total < las.LEVEL_SCORE[i]) {
-                if (total == 0) {
+                if (i == 0) {
                     title = "You are level 0";
                     if (!title.isEmpty()) {
                         return title;
