@@ -3,6 +3,7 @@ package com.example.yihanwang.myapplication;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.VideoView;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * Created by Kaley on 18/9/17.
  */
 
-public class AppAdActivity extends Activity {
+public class AppAdActivity extends AppCompatActivity {
 
     private VideoView video;
     @Override

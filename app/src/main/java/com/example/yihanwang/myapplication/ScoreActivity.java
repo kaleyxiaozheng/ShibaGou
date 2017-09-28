@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
  * Created by Kaley on 18/9/17.
  */
 
-public class ScoreActivity extends Activity {
+public class ScoreActivity extends AppCompatActivity {
     private TextView nexLevel;
     private ImageView gallery;
     private TextView userScore;
@@ -25,6 +26,9 @@ public class ScoreActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
 
 

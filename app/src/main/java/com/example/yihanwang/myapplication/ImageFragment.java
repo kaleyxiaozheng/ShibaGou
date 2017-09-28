@@ -43,7 +43,6 @@ public class ImageFragment extends Fragment {
     private int progress = 0;
     int myProgress = 0;
     TextProgressBar pb;
-    private List<ImageInfo> oneImage = new ArrayList<>();
 
     View view;
     private List<ImageInfo> images = new ArrayList<>();
@@ -71,10 +70,9 @@ public class ImageFragment extends Fragment {
             for(int i=0; i<this.images.size(); i++){
                 if(this.images.get(i).getId() == imageId){
                     currentPosition = i;
-                    oneImage.add(images.get(i));
                     Log.i("image", "show selected image " + imageId);
                     viewPager.setCurrentItem(currentPosition);
-                    customSwip = new ImagePagerAdapter(getActivity(), oneImage);
+                    customSwip = new ImagePagerAdapter(getActivity(), images);
                     break;
                 }
             }
@@ -197,27 +195,5 @@ public class ImageFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
-//    public String getLevel(int total) {
-//        String title = "";
-//
-//        for (int i = 0; i < 20; i++) {
-//            if (total < las.LEVEL_SCORE[i]) {
-//                if (i == 0) {
-//                    title = "0";
-//                    if (!title.isEmpty()) {
-//                        return title;
-//                    }
-//                } else {
-//                    title = las.LEVEL_TITLE[i - 1];
-//                    if (!title.isEmpty()) {
-//                        return title;
-//                    }
-//                }
-//            }
-//        }
-//        return title;
-//    }
-
 }
 

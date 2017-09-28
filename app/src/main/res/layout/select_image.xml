@@ -6,15 +6,15 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/userInfo"
+        android:id="@+id/imageNumInfo"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <ImageView
-            android:id="@+id/imageNum"
+            android:id="@+id/imageNumBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -26,10 +26,10 @@
             android:id="@+id/image_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imageNum"
-            android:layout_alignLeft="@id/imageNum"
-            android:layout_alignRight="@id/imageNum"
-            android:layout_alignTop="@id/imageNum"
+            android:layout_alignBottom="@id/imageNumBackground"
+            android:layout_alignLeft="@id/imageNumBackground"
+            android:layout_alignRight="@id/imageNumBackground"
+            android:layout_alignTop="@id/imageNumBackground"
             android:layout_marginTop="68dp"
             android:gravity="center_horizontal"
             android:textColor="#fffcfb"
@@ -41,7 +41,7 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/userInfo"
+        android:layout_below="@+id/imageNumInfo"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

@@ -3,13 +3,14 @@ package com.example.yihanwang.myapplication;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 
-public class ComparisonActivity extends Activity {
+public class ComparisonActivity extends AppCompatActivity {
     private ImageView plantImage;
     private ImageView plantPhoto;
 
@@ -20,6 +21,9 @@ public class ComparisonActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comparison_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         plantImage = (ImageView) findViewById(R.id.plantImage);
         plantPhoto = (ImageView) findViewById(R.id.plantPhoto);
 

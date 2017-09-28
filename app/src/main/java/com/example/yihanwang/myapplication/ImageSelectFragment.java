@@ -1,6 +1,7 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -110,15 +111,13 @@ public class ImageSelectFragment extends Fragment {
                     switch (motionEvent.getAction()) {
                         case MotionEvent.ACTION_UP:
                         {
-                            Fragment fragment = new ImageFragment();
+                            Intent intent = new Intent(getActivity(), PhotoImageActivity.class);
                             Bundle args = new Bundle();
                             args.putDouble("location_lat", lat);
                             args.putDouble("location_lon", lon);
                             args.putDouble("selected_image_id", imageinfo.getId());
-                            fragment.setArguments(args);
-                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
+                            intent.putExtras(args);
+                            startActivity(intent);
                         }
                     }
                     return false;
