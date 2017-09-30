@@ -46,6 +46,8 @@
         <activity android:name=".GalleryActivity"></activity>
         <activity android:name=".GalleryImageViewActivity"></activity>
         <activity android:name="PhotoImageActivity"></activity>
+        <activity android:name="EnvelopeActivity"></activity>
+        <activity android:name=".OneListActivity"></activity>
     </application>
 
 </manifest>

@@ -27,7 +27,7 @@ public class ImageGalleryStorage {
         Log.i("gallery", "save image gallery " + imageId);
 
         RealmResults<ScoreRecord> allImages = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
-        if (allImages == null || allImages.size() > 3) {
+        if (allImages == null || allImages.size() > 2) {
             return;
         }
         Realm realm = Realm.getDefaultInstance();

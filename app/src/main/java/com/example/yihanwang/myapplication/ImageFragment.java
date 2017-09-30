@@ -178,13 +178,7 @@ public class ImageFragment extends Fragment {
             viewPager.setAdapter(customSwip);
             viewPager.setCurrentItem(currentPosition);
 
-            int result = 0;
-            RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-            for (ScoreRecord score : total) {
-                //Log.i("score", "score " + score.getCurrentScores());
-                result += score.getScore();
-            }
-
+            int result = ScoreUtils.getCurrentScores();
             score.setText(String.valueOf(result));
         } catch (Exception e) {
             e.printStackTrace();

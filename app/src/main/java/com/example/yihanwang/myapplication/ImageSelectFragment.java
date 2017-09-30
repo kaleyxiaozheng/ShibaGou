@@ -1,12 +1,14 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -20,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
+import com.example.yihanwang.myapplication.gps.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +36,13 @@ import java.util.Random;
 public class ImageSelectFragment extends Fragment {
 
     private TextView image_number;
+    private ImageView envelope;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
     private double lon;
+    private TextView title;
+    private TextView message;
 
     public ImageSelectFragment() {
     }
@@ -50,6 +57,40 @@ public class ImageSelectFragment extends Fragment {
 
         this.images.clear();
         this.imageViews.clear();
+
+        envelope = (ImageView) view.findViewById(R.id.envelope);
+        envelope.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
+                Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(), "astron.ttf");
+                Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "AYearWithoutRain.ttf");
+                title = (TextView) view.findViewById(R.id.title);
+                message = (TextView) view.findViewById(R.id.message);
+                title.setTypeface(font1);
+                message.setTypeface(font2);
+                title.setText("CampingMate");
+
+                int cur = ScoreUtils.getCurrentScores();
+                int nex = ScoreUtils.getNextLevelImageNumber(cur);
+                int dif = nex - cur/10;
+                if(dif > 1){
+                    message.setText("After finding " + dif + " plants in your area, you will go to next level");
+                } else {
+                    message.setText("After finding " + dif + " plant in your area, you will go to next level");
+                }
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.setView(view);
+                builder.show();
+            }
+        });
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "retganon.ttf");
 
