@@ -87,7 +87,7 @@ public class PhotoImageActivity extends AppCompatActivity {
         imageInfo = ImageStorage.getInstance().getImageInfoById(imageId);
         if (imageInfo != null) {
             plant = (ImageView) findViewById(R.id.swip_image_view);
-            Drawable d = ImageStorage.getInstance().getDrawable(this.getAssets(), imageInfo) ;
+            Drawable d = ImageStorage.getInstance().getDrawable(this.getAssets(), imageInfo);
             plant.setImageDrawable(d);
         }
         photo = (ImageView) findViewById(R.id.takePhoto);
@@ -111,6 +111,8 @@ public class PhotoImageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        showPhotos(plant);
     }
 
     @Override
@@ -133,18 +135,31 @@ public class PhotoImageActivity extends AppCompatActivity {
         String fname = "Image-" + n + ".jpg";
         File file = new File(myDir, fname);
         if (file.exists()) file.delete();
+
+        ImageGallery imageGallery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+        if (imageGallery != null) {
+            if (imageGallery.getImageCount() > 2) {
+                ImageGalleryStorage.getInstance().removeImageGallery(imageGallery.getId());
+            }
+        }
+
         ImageGalleryStorage.getInstance().addImageGallery(imageInfo.getId(), file.getPath());
-        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
-
-        image_1 = (ImageView)findViewById(R.id.compare_image_view1);
-
-
         try {
             FileOutputStream out = new FileOutputStream(file);
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
-            } catch (Exception e) {
+            showPhotos(plant);
+            int result = 0;
+            RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+            for (ScoreRecord score : total) {
+                //Log.i("score", "score " + score.getScore());
+                result += score.getScore();
+            }
+
+            scoreTitle.setText("Score: " + result + "               Level: " + ScoreUtils.getCurrentLevel(result));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -156,6 +171,32 @@ public class PhotoImageActivity extends AppCompatActivity {
         b.putInt("secondImage", this.currentSelectedGalaryIdx);
         intent.putExtras(b);
         this.getApplicationContext().startActivity(intent);
+    }
+
+    public void showPhotos(ImageView imageView) {
+        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+
+        if (imageGalery != null) {
+            int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
+            if (imageGalery.getImageCount() > 0) {
+                View galeryContainer = findViewById(R.id.image_galery_container);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
+                layoutParams.weight = 1;
+            }
+
+            for (int i = 0; i < viewIds.length; i++) {
+                Bitmap image = imageGalery.getImage(i);
+                if (image == null) {
+                    break;
+                }
+                final int imageGalleryIdx = i;
+                ImageView compare = (ImageView) findViewById(viewIds[i]);
+                compare.setImageBitmap(image);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
+                layoutParams.weight = 1;
+            }
+            imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(getAssets(), imageInfo));
+        }
     }
 
 }

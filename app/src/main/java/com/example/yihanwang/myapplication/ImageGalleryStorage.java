@@ -30,6 +30,7 @@ public class ImageGalleryStorage {
         if (allImages == null || allImages.size() > 2) {
             return;
         }
+
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         ScoreRecord record = realm.createObject(ScoreRecord.class);
@@ -49,12 +50,23 @@ public class ImageGalleryStorage {
     public void removeImageGallery(int id) {
         Realm realm = Realm.getDefaultInstance();
         ScoreRecord score = realm.where(ScoreRecord.class).equalTo("id", id).findFirst();
-        if(score != null){
+        if (score != null) {
             realm.beginTransaction();
             score.deleteFromRealm();
             realm.commitTransaction();
         }
     }
+
+    public void removeImageGallery(double imageId) {
+        Realm realm = Realm.getDefaultInstance();
+        ScoreRecord score = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findFirst();
+        if (score != null) {
+            realm.beginTransaction();
+            score.deleteFromRealm();
+            realm.commitTransaction();
+        }
+    }
+
 
     public ImageGallery getImageGallery(double id) {
         Realm realm = Realm.getDefaultInstance();
@@ -73,7 +85,7 @@ public class ImageGalleryStorage {
     public void removeGalleryImage(double imageId, int galleryIdx) {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
-        if(recordList.size() > galleryIdx ){
+        if (recordList.size() > galleryIdx) {
             realm.beginTransaction();
             ScoreRecord scoreRecord = recordList.get(galleryIdx);
             scoreRecord.deleteFromRealm();
