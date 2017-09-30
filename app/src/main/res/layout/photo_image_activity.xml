@@ -125,7 +125,7 @@
 
                 <ImageView
                     android:id="@+id/takePhoto"
-                    android:layout_width="50dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_marginLeft="37dp"
                     android:layout_marginStart="37dp"

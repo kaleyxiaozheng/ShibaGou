@@ -191,6 +191,8 @@ public class PhotoImageActivity extends AppCompatActivity {
                 }
                 final int imageGalleryIdx = i;
 
+                final int recordId = ImageGalleryStorage.getInstance().getImageRecordId(imageInfo.getId(), imageGalleryIdx);
+
                 final ImageView compare = (ImageView) findViewById(viewIds[i]);
                 final GestureDetector gestureDetector = new GestureDetector(getBaseContext(), new GestureDetector.OnGestureListener() {
 
@@ -241,10 +243,10 @@ public class PhotoImageActivity extends AppCompatActivity {
                                 if (diffY > 0) {
                                 } else {
                                     Log.i("guesture", "swipe top");
-                                    ImageGalleryStorage.getInstance().removeGalleryImage(imageInfo.getId(), imageGalleryIdx);
+
+                                    ImageGalleryStorage.getInstance().removeGalleryImageById(recordId);
                                     compare.setImageDrawable(null);
                                 }
-
                                 result = true;
                             }
                         } catch (Exception exception) {
@@ -253,7 +255,6 @@ public class PhotoImageActivity extends AppCompatActivity {
                         return result;
                     }
                 });
-
 
 
                 compare.setOnTouchListener(new View.OnTouchListener() {

@@ -10,15 +10,37 @@
     tools:context="com.example.yihanwang.myapplication.MapFragment"
     android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/bluehome"
-        android:layout_width="match_parent"
-        android:layout_height="21dp"
-        android:layout_marginBottom="50dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="onClick"
-        android:src="@drawable/homeicon" />
+    <RelativeLayout
+        android:id="@+id/imageNumInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imageNumBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/select_imagenumbers" />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageNumBackground"
+            android:layout_alignLeft="@id/imageNumBackground"
+            android:layout_alignRight="@id/imageNumBackground"
+            android:layout_alignTop="@id/imageNumBackground"
+            android:layout_marginTop="68dp"
+            android:gravity="center_horizontal"
+            android:textColor="#fffcfb"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -50,17 +72,6 @@
             tools:layout_editor_absoluteX="159dp"
             tools:layout_editor_absoluteY="194dp"
             android:layout_marginTop="30dp"/>
-
-        <TextView
-            android:id="@+id/level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/displayScore"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
-            android:includeFontPadding="false"
-            android:textSize="28dp" />
 
         <TextView
             android:id="@+id/nextLevel"

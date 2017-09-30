@@ -61,8 +61,8 @@ public class ImageGalleryStorage {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
         int tempId = recordList.get(0).getId();
-        for(int i = 1; i < recordList.size(); i++){
-            if(recordList.get(i).getId() < tempId){
+        for (int i = 1; i < recordList.size(); i++) {
+            if (recordList.get(i).getId() < tempId) {
                 tempId = recordList.get(i).getId();
             }
         }
@@ -95,6 +95,26 @@ public class ImageGalleryStorage {
             realm.beginTransaction();
             ScoreRecord scoreRecord = recordList.get(galleryIdx);
             scoreRecord.deleteFromRealm();
+            realm.commitTransaction();
+        }
+    }
+
+    public int getImageRecordId(double imageId, int galleryIdx) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
+        ImageGallery gallery = null;
+        if (recordList.size() > galleryIdx) {
+            return recordList.get(galleryIdx).getId();
+        }
+        return -1;
+    }
+
+    public void removeGalleryImageById(int recordId) {
+        Realm realm = Realm.getDefaultInstance();
+        ScoreRecord record = realm.where(ScoreRecord.class).equalTo("id", recordId).findFirst();
+        if (record != null) {
+            realm.beginTransaction();
+            record.deleteFromRealm();
             realm.commitTransaction();
         }
     }

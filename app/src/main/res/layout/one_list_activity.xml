@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_weight="0.5"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
@@ -58,7 +58,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="0.4"
-        android:maxLines="15"
+        android:maxLines="10"
         android:textSize="15dp"
         android:scrollbars="vertical" />
 </LinearLayout>
