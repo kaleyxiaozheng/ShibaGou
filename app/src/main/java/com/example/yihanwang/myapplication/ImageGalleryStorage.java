@@ -59,14 +59,20 @@ public class ImageGalleryStorage {
 
     public void removeImageGallery(double imageId) {
         Realm realm = Realm.getDefaultInstance();
-        ScoreRecord score = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findFirst();
+        RealmResults<ScoreRecord> recordList = realm.where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
+        int tempId = recordList.get(0).getId();
+        for(int i = 1; i < recordList.size(); i++){
+            if(recordList.get(i).getId() < tempId){
+                tempId = recordList.get(i).getId();
+            }
+        }
+        ScoreRecord score = realm.where(ScoreRecord.class).equalTo("id", tempId).findFirst();
         if (score != null) {
             realm.beginTransaction();
             score.deleteFromRealm();
             realm.commitTransaction();
         }
     }
-
 
     public ImageGallery getImageGallery(double id) {
         Realm realm = Realm.getDefaultInstance();

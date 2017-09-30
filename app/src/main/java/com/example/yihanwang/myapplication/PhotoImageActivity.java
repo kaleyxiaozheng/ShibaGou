@@ -190,7 +190,84 @@ public class PhotoImageActivity extends AppCompatActivity {
                     break;
                 }
                 final int imageGalleryIdx = i;
-                ImageView compare = (ImageView) findViewById(viewIds[i]);
+
+                final ImageView compare = (ImageView) findViewById(viewIds[i]);
+                final GestureDetector gestureDetector = new GestureDetector(getBaseContext(), new GestureDetector.OnGestureListener() {
+
+                    @Override
+                    public boolean onDown(MotionEvent motionEvent) {
+                        return true;
+                    }
+
+                    @Override
+                    public void onShowPress(MotionEvent motionEvent) {
+
+                    }
+
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent motionEvent) {
+                        Log.i("tap", "single tap" + motionEvent.getAction());
+                        switch (motionEvent.getAction()) {
+                            case MotionEvent.ACTION_UP:
+                                showComparisonActivity();
+                        }
+                        return false;
+                    }
+
+
+                    @Override
+                    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onLongPress(MotionEvent motionEvent) {
+                    }
+
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                        boolean result = false;
+                        try {
+                            float diffY = e2.getY() - e1.getY();
+                            float diffX = e2.getX() - e1.getX();
+                            if (Math.abs(diffX) > Math.abs(diffY)) {
+                                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                                    if (diffX > 0) {
+                                    } else {
+                                    }
+                                    result = true;
+                                }
+                            } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                                if (diffY > 0) {
+                                } else {
+                                    Log.i("guesture", "swipe top");
+                                    ImageGalleryStorage.getInstance().removeGalleryImage(imageInfo.getId(), imageGalleryIdx);
+                                    compare.setImageDrawable(null);
+                                }
+
+                                result = true;
+                            }
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                        return result;
+                    }
+                });
+
+
+
+                compare.setOnTouchListener(new View.OnTouchListener() {
+
+                    @Override
+                    public boolean onTouch(View view, MotionEvent event) {
+
+                        selectedImage = imageInfo;
+                        currentSelectedGalaryIdx = imageGalleryIdx;
+
+                        return gestureDetector.onTouchEvent(event);
+                    }
+                });
+
                 compare.setImageBitmap(image);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
                 layoutParams.weight = 1;

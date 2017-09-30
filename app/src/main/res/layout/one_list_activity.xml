@@ -4,7 +4,39 @@
     android:id="@+id/swipe_info_container"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#d3efd5">
+
+    <RelativeLayout
+        android:id="@+id/userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/userBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/select_imagenumbers" />
+
+        <TextView
+            android:id="@+id/PlantRecordTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/userBackground"
+            android:layout_alignLeft="@id/userBackground"
+            android:layout_alignRight="@id/userBackground"
+            android:layout_alignTop="@id/userBackground"
+            android:layout_marginTop="68dp"
+            android:gravity="center_horizontal"
+            android:textColor="#fffcfb"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <com.example.yihanwang.myapplication.TouchImageView
         android:id="@+id/PlantPhoto"
@@ -17,19 +49,6 @@
         android:scaleType="centerCrop"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
-
-
-    <TextView
-        android:id="@+id/PlantRecordTitle"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="0.1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:scrollbars="vertical"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/PlantRecord"
