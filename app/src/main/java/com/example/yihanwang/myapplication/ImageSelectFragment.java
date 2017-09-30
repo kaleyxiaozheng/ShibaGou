@@ -133,58 +133,59 @@ public class ImageSelectFragment extends Fragment {
             imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
             //imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
             final ImageInfo imageinfo = images.get(i);
-            final int lo = i;
 
-            final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.OnGestureListener() {
-
-                @Override
-                public boolean onDown(MotionEvent motionEvent) {
-                    return true;
-                }
-
-                @Override
-                public void onShowPress(MotionEvent motionEvent) {
-
-                }
-
-                @Override
-                public boolean onSingleTapUp(MotionEvent motionEvent) {
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_UP:
-                        {
-                            Intent intent = new Intent(getActivity(), PhotoImageActivity.class);
-                            Bundle args = new Bundle();
-                            args.putDouble("location_lat", lat);
-                            args.putDouble("location_lon", lon);
-                            args.putDouble("selected_image_id", imageinfo.getId());
-                            intent.putExtras(args);
-                            startActivity(intent);
-                        }
-                    }
-                    return false;
-                }
-
-                @Override
-                public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                    return false;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent motionEvent) {
-                    Random r = new Random();
-                    Log.i("SwipeLocation", "Swipe location " + lo);
-                    images.remove(lo);
-                    int i = r.nextInt(imageList.size() - 1);
-                    images.add(lo, imageList.get(i));
-                    imageViews.get(lo).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(lo)));
-
-                }
-
-                @Override
-                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    return false;
-                }
-            });
+            ManageImage manageImage = new ManageImage(imageinfo, getActivity(), lat, lon, i, images, imageList, imageViews);
+            final GestureDetector gestureDetector = new GestureDetector(getActivity(), manageImage);
+//            final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.OnGestureListener() {
+//
+//                @Override
+//                public boolean onDown(MotionEvent motionEvent) {
+//                    return true;
+//                }
+//
+//                @Override
+//                public void onShowPress(MotionEvent motionEvent) {
+//
+//                }
+//
+//                @Override
+//                public boolean onSingleTapUp(MotionEvent motionEvent) {
+//                    switch (motionEvent.getAction()) {
+//                        case MotionEvent.ACTION_UP:
+//                        {
+//                            Intent intent = new Intent(getActivity(), PhotoImageActivity.class);
+//                            Bundle args = new Bundle();
+//                            args.putDouble("location_lat", lat);
+//                            args.putDouble("location_lon", lon);
+//                            args.putDouble("selected_image_id", imageinfo.getId());
+//                            intent.putExtras(args);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+//                    return false;
+//                }
+//
+//                @Override
+//                public void onLongPress(MotionEvent motionEvent) {
+//                    Random r = new Random();
+//                    Log.i("SwipeLocation", "Swipe location " + lo);
+//                    images.remove(lo);
+//                    int i = r.nextInt(imageList.size() - 1);
+//                    images.add(lo, imageList.get(i));
+//                    imageViews.get(lo).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(lo)));
+//
+//                }
+//
+//                @Override
+//                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+//                    return false;
+//                }
+//            });
 
             imageViews.get(i).setOnTouchListener(new View.OnTouchListener() {
 
