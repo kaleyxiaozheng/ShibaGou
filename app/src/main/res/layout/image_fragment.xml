@@ -2,41 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#d3efd5"
+    android:background="#fbe7e7"
     android:orientation="vertical">
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/processingBar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="0.1">-->
-
-        <!--<com.example.yihanwang.myapplication.entities.TextProgressBar-->
-            <!--android:id="@+id/pb"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="24dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:max="100"-->
-            <!--android:progress="60"-->
-            <!--android:progressDrawable="@drawable/progress_drawable"-->
-            <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
-
-            <!--/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/yourScore"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center" />-->
-    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/imageSwipe"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.8">
+        android:layout_weight="1"  >
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
@@ -44,40 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="fitXY" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.1"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/takePhoto"
-                android:layout_width="50dp"
-                android:layout_height="42dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/ic_camera_button" />
-
-            <Button
-                android:id="@+id/plantInfo"
-                android:layout_width="47dp"
-                android:layout_height="48dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/ic_info_button" />
-
-        </RelativeLayout>
-
-
     </LinearLayout>
 
 </LinearLayout>

@@ -1,42 +1,24 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
-import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-
 public class ImagePagerAdapter extends PagerAdapter {
-
-    private static final int SWIPE_THRESHOLD = 100;
-    private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
     private final List<ImageInfo> images = new ArrayList<>();
     private Context ctx;
     private LayoutInflater layoutInflater;
-    private int currentSelectedGalaryIdx = -1;
-    private ImageInfo selectedImage = null;
 
     public ImagePagerAdapter(Context c, List<ImageInfo> imagesFromLocation) {
         ctx = c;
@@ -53,7 +35,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View itemView = layoutInflater.inflate(R.layout.image_swipe, container, false);
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
-
+        Typeface font = Typeface.createFromAsset(ctx.getAssets(), "retganon.ttf");
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
         textView.setText("Image :" + (position + 1) + "/" + images.size());
         textView.setText((position + 1) + "/" + images.size());
@@ -74,106 +56,7 @@ public class ImagePagerAdapter extends PagerAdapter {
             name.setText(sciencename);
         }
 
-        final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
-        if (imageGalery != null) {
-            int viewIds[] = {R.id.compare_image_view1, R.id.compare_image_view2, R.id.compare_image_view3};
-            if (imageGalery.getImageCount() > 0) {
-                View galeryContainer = itemView.findViewById(R.id.image_galery_container);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
-                layoutParams.weight = 1;
-            }
-            for (int i = 0; i < viewIds.length; i++) {
-                Bitmap image = imageGalery.getImage(i);
-                if (image == null) {
-                    break;
-                }
-                final int imageGalleryIdx = i;
-//                final GestureDetector gestureDetector = new GestureDetector(ctx, this);
-                final GestureDetector gestureDetector = new GestureDetector(ctx, new GestureDetector.OnGestureListener() {
-
-                    @Override
-                    public boolean onDown(MotionEvent motionEvent) {
-                        return true;
-                    }
-
-                    @Override
-                    public void onShowPress(MotionEvent motionEvent) {
-
-                    }
-
-                    @Override
-                    public boolean onSingleTapUp(MotionEvent motionEvent) {
-                        Log.i("tap", "single tap" + motionEvent.getAction());
-                        switch (motionEvent.getAction()) {
-                            case MotionEvent.ACTION_UP:
-                                showComparisonActivity();
-                        }
-                        return false;
-                    }
-
-
-                    @Override
-                    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onLongPress(MotionEvent motionEvent) {
-
-                    }
-
-                    @Override
-                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                        boolean result = false;
-                        try {
-                            float diffY = e2.getY() - e1.getY();
-                            float diffX = e2.getX() - e1.getX();
-                            if (Math.abs(diffX) > Math.abs(diffY)) {
-                                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                                    if (diffX > 0) {
-//                            onSwipeRight();
-                                    } else {
-//                            onSwipeLeft();
-                                    }
-                                    result = true;
-                                }
-                            } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                                if (diffY > 0) {
-//                        onSwipeBottom();
-                                } else {
-//                        onSwipeTop();
-                                    Log.i("guesture", "swipe top");
-//                                    final ImageGallery imageGalery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
-//                                    imageGalery.removeImage(imageGalleryIdx);
-                                    ImageGalleryStorage.getInstance().removeGalleryImage(imageInfo.getId(), imageGalleryIdx);
-
-                                    notifyDataSetChanged();
-                                }
-                                result = true;
-                            }
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
-                        return result;
-                    }
-                });
-                ImageView compare = (ImageView) itemView.findViewById(viewIds[i]);
-                compare.setOnTouchListener(new View.OnTouchListener() {
-
-                    @Override
-                    public boolean onTouch(View view, MotionEvent event) {
-
-                        selectedImage = imageInfo;
-                        currentSelectedGalaryIdx = imageGalleryIdx;
-
-                        return gestureDetector.onTouchEvent(event);
-                    }
-                });
-                compare.setImageBitmap(image);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) compare.getLayoutParams();
-                layoutParams.weight = 1;
-            }
-        }
+        name.setTypeface(font);
         imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
         container.addView(itemView);
 
@@ -194,15 +77,5 @@ public class ImagePagerAdapter extends PagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
-
-    private void showComparisonActivity() {
-        Intent intent = new Intent(this.ctx, ComparisonActivity.class);
-        Bundle b = new Bundle();
-        b.putDouble("firstImage", this.selectedImage.getId());
-        b.putInt("secondImage", this.currentSelectedGalaryIdx);
-        intent.putExtras(b);
-        this.ctx.startActivity(intent);
-    }
-
 
 }

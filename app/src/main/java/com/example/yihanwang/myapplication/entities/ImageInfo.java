@@ -49,7 +49,7 @@ public class ImageInfo extends RealmObject {
             this.commonName = jsonObject.getString("commonName");
             this.name = jsonObject.getString("name");
             this.family = jsonObject.getString("family");
-            this.count = jsonObject.getInt("count");
+            this.count = jsonObject.getInt("count1");
             this.rank = jsonObject.getString("rank");
             this.kingdom = jsonObject.getString("kingdom");
             this.guid = jsonObject.getString("guid");

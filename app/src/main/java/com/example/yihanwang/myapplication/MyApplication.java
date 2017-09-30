@@ -31,7 +31,7 @@ public class  MyApplication extends Application {
             String path = Realm.getDefaultInstance().getPath();
             Log.i("database", "db path:" + path);
             RealmResults<ImageInfo> allImages = Realm.getDefaultInstance().where(ImageInfo.class).findAll();
-            Log.i("database", "all image count " + allImages.size());
+            Log.i("database", "all image count1 " + allImages.size());
             for (ImageInfo imageInfo : allImages) {
                 ImageStorage.getInstance().addImage(imageInfo);
             }
