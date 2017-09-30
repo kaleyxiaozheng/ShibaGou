@@ -105,7 +105,9 @@ public class PhotoImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), OneListActivity.class);
-
+                Bundle args = new Bundle();
+                args.putDouble("image_info_id", imageInfo.getId());
+                intent.putExtras(args);
                 startActivity(intent);
             }
         });
