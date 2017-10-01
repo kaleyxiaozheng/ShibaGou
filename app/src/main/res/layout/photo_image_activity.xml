@@ -46,8 +46,8 @@
             android:id="@+id/swipe_image_container"
             android:layout_width="match_parent"
             android:layout_height="165dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -127,23 +127,19 @@
                     android:id="@+id/takePhoto"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="37dp"
-                    android:layout_marginStart="37dp"
-                    android:src="@drawable/ic_camera_button"
+                    android:src="@drawable/taking_photo_3"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_marginLeft="23dp"  />
 
                 <ImageView
                     android:id="@+id/imageInfo"
                     android:layout_width="47dp"
                     android:layout_height="80dp"
                     android:src="@drawable/info_one"
-                    android:layout_marginRight="37dp"
-                    android:layout_marginEnd="37dp"
-                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="40dp"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentTop="true" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

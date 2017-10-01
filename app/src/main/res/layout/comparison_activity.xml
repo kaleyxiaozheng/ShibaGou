@@ -5,37 +5,37 @@
     android:background="#d3efd5"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/imageNumInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/imageNumInfo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="10dp">-->
 
-        <ImageView
-            android:id="@+id/imageNumBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/select_imagenumbers" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageNumBackground"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/select_imagenumbers" />-->
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imageNumBackground"
-            android:layout_alignLeft="@id/imageNumBackground"
-            android:layout_alignRight="@id/imageNumBackground"
-            android:layout_alignTop="@id/imageNumBackground"
-            android:layout_marginTop="68dp"
-            android:gravity="center_horizontal"
-            android:textColor="#fffcfb"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/imageNumBackground"-->
+            <!--android:layout_alignLeft="@id/imageNumBackground"-->
+            <!--android:layout_alignRight="@id/imageNumBackground"-->
+            <!--android:layout_alignTop="@id/imageNumBackground"-->
+            <!--android:layout_marginTop="68dp"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:textColor="#fffcfb"-->
+            <!--android:textSize="24dp"-->
+            <!--android:textStyle="bold" />-->
+    <!--</RelativeLayout>-->
 
     <TextView
         android:id="@+id/plantname"
@@ -48,15 +48,35 @@
         android:textStyle="bold"
         android:textColor="#49adb7"/>
 
-    <com.example.yihanwang.myapplication.TouchImageView
-        android:id="@+id/plantImage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.5" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+        android:id="@+id/photo_frame_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/photo_frame_1" />
+
+        <com.example.yihanwang.myapplication.TouchImageView
+            android:id="@+id/plantImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:layout_alignBottom="@id/photo_frame_1"
+            android:layout_alignLeft="@id/photo_frame_1"
+            android:layout_alignRight="@id/photo_frame_1"
+            android:layout_alignTop="@id/photo_frame_1"/>
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/yourphoto"
@@ -68,13 +88,43 @@
         android:textStyle="bold"
         android:textColor="#49adb7"/>
 
-    <com.example.yihanwang.myapplication.TouchImageView
-        android:id="@+id/plantPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.5" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/photo_frame_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/photo_frame_1"
+             />
+
+        <com.example.yihanwang.myapplication.TouchImageView
+            android:id="@+id/plantPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:layout_alignLeft="@id/photo_frame_2"
+            android:layout_alignRight="@id/photo_frame_2"
+            android:layout_alignTop="@id/photo_frame_2"
+            android:layout_alignBottom="@+id/photo_frame_2"/>
+
+    </RelativeLayout>
+    <!--<com.example.yihanwang.myapplication.TouchImageView-->
+        <!--android:id="@+id/plantPhoto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_weight="0.5" />-->
 </LinearLayout>
