@@ -12,5 +12,6 @@
     <color name="default_back_color">#FFFFFFFF</color>
 
     <color name="backgroundProgressBarColor">#fefefe</color>
-    <color name="progressBarColor">#5e81c4</color>
+    <color name="progressBarColor">#f7b432</color>
+    <color name="transparent">#00000000</color>
 </resources>

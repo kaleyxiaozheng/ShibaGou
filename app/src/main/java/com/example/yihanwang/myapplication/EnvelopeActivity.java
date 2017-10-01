@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 public class EnvelopeActivity extends AppCompatActivity {
     private ImageView map;
-    private TextView info;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,5 +22,6 @@ public class EnvelopeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         map = (ImageView) findViewById(R.id.map);
+        map.setBackgroundColor(0);
     }
 }

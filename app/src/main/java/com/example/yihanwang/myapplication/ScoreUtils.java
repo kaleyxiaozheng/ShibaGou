@@ -62,9 +62,9 @@ public class ScoreUtils {
         return -1;
     }
 
-//    public static int[] getLevel_score() {
-//        return level_score;
-//    }
+    public static int[] getLevel_score() {
+        return level_score;
+    }
 //
 //    public static String[] getLevel_title() {
 //        return level_title;

@@ -41,7 +41,6 @@ public class ImageSelectFragment extends Fragment {
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
     private double lon;
-    private TextView title;
     private TextView message;
 
     public ImageSelectFragment() {
@@ -66,11 +65,8 @@ public class ImageSelectFragment extends Fragment {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
                 Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(), "astron.ttf");
                 Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "AYearWithoutRain.ttf");
-                title = (TextView) view.findViewById(R.id.title);
                 message = (TextView) view.findViewById(R.id.message);
-                title.setTypeface(font1);
                 message.setTypeface(font2);
-                title.setText("CampingMate");
 
                 int cur = ScoreUtils.getCurrentScores();
                 int nex = ScoreUtils.getNextLevelImageNumber(cur);
@@ -81,12 +77,12 @@ public class ImageSelectFragment extends Fragment {
                     message.setText("After finding " + dif + " plant in your area, you will go to next level");
                 }
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
                 builder.setView(view);
                 builder.show();
             }

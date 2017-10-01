@@ -21,6 +21,7 @@ public class ScoreActivity extends AppCompatActivity {
     private ImageView gallery;
     private TextView userScore;
     private TextView levelTxt;
+    boolean check = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,10 @@ public class ScoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
 
-
         int total = ScoreUtils.getCurrentScores();
+        float imageNumber = ScoreUtils.getNextLevelImageNumber(total)*10;
+        float percent = total/imageNumber;
+        float progress = percent*100;
         userScore = (TextView) findViewById(R.id.displayScore);
         userScore.setText(String.valueOf(total));
         levelTxt = (TextView) findViewById(R.id.level);
@@ -57,7 +60,19 @@ public class ScoreActivity extends AppCompatActivity {
         circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));
         circularProgressBar.setBackgroundProgressBarWidth(getResources().getDimension(R.dimen.backgroundProgressBarWidth));
         int animationDuration = 2500; // 2500ms = 2,5s
-        circularProgressBar.setProgressWithAnimation(total, animationDuration); // Default duration = 1500ms
+        for(int i =0; i < 20; i++){
+            if(total == ScoreUtils.getLevel_score()[i]){
+                check = true;
+            }
+        }
+
+        if(check == true){
+            circularProgressBar.setProgressWithAnimation(100, animationDuration);
+        }
+        else {
+            circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+        }
     }
+
 
 }
