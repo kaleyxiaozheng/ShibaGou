@@ -17,7 +17,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
  */
 
 public class ScoreActivity extends AppCompatActivity {
-    private TextView nexLevel;
+    //private TextView nexLevel;
     private ImageView gallery;
     private TextView userScore;
     private TextView levelTxt;
@@ -41,9 +41,9 @@ public class ScoreActivity extends AppCompatActivity {
         levelTxt = (TextView) findViewById(R.id.level);
         levelTxt.setText("You are level " + ScoreUtils.getCurrentLevel(total));
         levelTxt.setTypeface(font);
-        nexLevel = (TextView) findViewById(R.id.nextLevel);
-        nexLevel.setText("next level " + (ScoreUtils.getCurrentLevel(total) + 1));
-        nexLevel.setTypeface(font);
+//        nexLevel = (TextView) findViewById(R.id.nextLevel);
+//        nexLevel.setText("next level " + (ScoreUtils.getCurrentLevel(total) + 1));
+//        nexLevel.setTypeface(font);
 
         gallery = (ImageView) findViewById(R.id.gallery);
         gallery.setOnClickListener(new View.OnClickListener() {

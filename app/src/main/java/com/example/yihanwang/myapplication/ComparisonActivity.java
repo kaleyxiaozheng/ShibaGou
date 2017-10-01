@@ -30,7 +30,7 @@ public class ComparisonActivity extends AppCompatActivity {
         plantPhoto = (ImageView) findViewById(R.id.plantPhoto);
 
         Typeface font1 = Typeface.createFromAsset(getAssets(), "retganon.ttf");
-        Typeface font2 = Typeface.createFromAsset(getAssets(), "Anjelika_Hollow.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "borther.ttf");
 
         plant = (TextView) findViewById(R.id.plantname);
         photo = (TextView) findViewById(R.id.yourphoto);
