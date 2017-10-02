@@ -31,6 +31,7 @@ public class ImageGalleryStorage {
             return;
         }
 
+
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         ScoreRecord record = realm.createObject(ScoreRecord.class);
@@ -41,8 +42,11 @@ public class ImageGalleryStorage {
             record.setId(1);
         }
 
+        RealmResults<ScoreRecord> imagesId = Realm.getDefaultInstance().where(ScoreRecord.class).equalTo("imageId", imageId).findAll();
+        if (allImages.size() < 1) {
+            record.setScore(10);
+        }
         record.setImageId(imageId);
-        record.setScore(10);
         record.setImagePath(path);
         realm.commitTransaction();
     }
