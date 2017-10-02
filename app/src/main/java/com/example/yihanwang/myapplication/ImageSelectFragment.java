@@ -1,13 +1,10 @@
 package com.example.yihanwang.myapplication;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,18 +13,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
-import com.example.yihanwang.myapplication.entities.ScoreRecord;
-import com.example.yihanwang.myapplication.gps.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by kaley on 18/9/17.
@@ -36,7 +29,7 @@ import java.util.Random;
 public class ImageSelectFragment extends Fragment {
 
     private TextView image_number;
-    private ImageView envelope;
+    private ImageView bird;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
@@ -57,8 +50,8 @@ public class ImageSelectFragment extends Fragment {
         this.images.clear();
         this.imageViews.clear();
 
-        envelope = (ImageView) view.findViewById(R.id.envelope);
-        envelope.setOnClickListener(new View.OnClickListener() {
+        bird = (ImageView) view.findViewById(R.id.bird);
+        bird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -77,12 +70,12 @@ public class ImageSelectFragment extends Fragment {
                     message.setText("After finding " + dif + " plant in your area, you will go to next level");
                 }
 
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
                 builder.setView(view);
                 builder.show();
             }

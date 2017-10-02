@@ -170,7 +170,7 @@ public class PhotoImageActivity extends AppCompatActivity {
         b.putDouble("firstImage", this.selectedImage.getId());
         b.putInt("secondImage", this.currentSelectedGalaryIdx);
         intent.putExtras(b);
-        this.getApplicationContext().startActivity(intent);
+        startActivity(intent);
     }
 
     public void showPhotos(ImageView imageView) {
