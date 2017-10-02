@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
     private void alertMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.maindialog, null);
-        Typeface font1 = Typeface.createFromAsset(getAssets(), "astron.ttf");
-        Typeface font2 = Typeface.createFromAsset(getAssets(), "retganon.ttf");
+        Typeface font1 = Typeface.createFromAsset(getAssets(), "teen_bd_it.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "teen.ttf");
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView message = (TextView) view.findViewById(R.id.message);
         title.setTypeface(font1);
         message.setTypeface(font2);
-        title.setText("CampingMate");
+        title.setText("Flora Friend");
 
         List<ImageInfo> images = ImageStorage.getInstance().getImagesFromLocation(LocationService.getInstance().getCurrentLat(), LocationService.getInstance().getCurrentLon());
         message.setText("There are " + images.size() + " plants in your area, press play to begin");

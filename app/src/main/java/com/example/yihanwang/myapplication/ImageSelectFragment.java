@@ -1,10 +1,12 @@
 package com.example.yihanwang.myapplication;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,11 +32,13 @@ public class ImageSelectFragment extends Fragment {
 
     private TextView image_number;
     private ImageView bird;
+    private ImageView bench;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
     private double lon;
     private TextView message;
+
 
     public ImageSelectFragment() {
     }
@@ -50,16 +54,21 @@ public class ImageSelectFragment extends Fragment {
         this.images.clear();
         this.imageViews.clear();
 
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
+
+
         bird = (ImageView) view.findViewById(R.id.bird);
         bird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
-                Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(), "astron.ttf");
-                Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "AYearWithoutRain.ttf");
                 message = (TextView) view.findViewById(R.id.message);
-                message.setTypeface(font2);
+                message.setTypeface(font);
 
                 int cur = ScoreUtils.getCurrentScores();
                 int nex = ScoreUtils.getNextLevelImageNumber(cur);
@@ -81,7 +90,15 @@ public class ImageSelectFragment extends Fragment {
             }
         });
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "retganon.ttf");
+        bench = (ImageView) view.findViewById(R.id.bench);
+        bench.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         int score = ScoreUtils.getCurrentScores();
         //Log.i("score", "current score " + score);
