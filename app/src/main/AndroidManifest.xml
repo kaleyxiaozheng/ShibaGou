@@ -18,7 +18,7 @@
         android:allowBackup="true"
         android:name=".MyApplication"
         android:icon="@mipmap/app_logo"
-        android:label="CampingMate"
+        android:label="Flora Friend"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar.Transparent">
@@ -48,6 +48,7 @@
         <activity android:name="PhotoImageActivity"></activity>
         <activity android:name="EnvelopeActivity" android:theme="@style/Theme.Transparent"></activity>
         <activity android:name=".OneListActivity"></activity>
+        <activity android:name=".TipActivity"></activity>
     </application>
 
 </manifest>

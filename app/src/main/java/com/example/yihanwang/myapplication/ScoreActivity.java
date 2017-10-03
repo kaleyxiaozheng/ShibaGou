@@ -30,7 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(),"teen.ttf");
 
         int total = ScoreUtils.getCurrentScores();
         float imageNumber = ScoreUtils.getNextLevelImageNumber(total)*10;

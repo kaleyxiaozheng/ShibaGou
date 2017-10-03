@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,7 +31,7 @@ public class ImageSelectFragment extends Fragment {
 
     private TextView image_number;
     private ImageView bird;
-    private ImageView bench;
+    private ImageView house;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
@@ -90,8 +89,8 @@ public class ImageSelectFragment extends Fragment {
             }
         });
 
-        bench = (ImageView) view.findViewById(R.id.bench);
-        bench.setOnClickListener(new View.OnClickListener() {
+        house = (ImageView) view.findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);

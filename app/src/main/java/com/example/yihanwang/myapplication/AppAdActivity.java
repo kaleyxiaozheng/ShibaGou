@@ -19,6 +19,9 @@ public class AppAdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_ad_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         video = (VideoView)findViewById(R.id.appAd);
         String path = "android.resource://com.example.yihanwang.myapplication/" + R.raw.app_ad;
         Uri uri = Uri.parse(path);

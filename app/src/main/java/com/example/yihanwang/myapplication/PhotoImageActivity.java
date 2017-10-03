@@ -1,36 +1,26 @@
 package com.example.yihanwang.myapplication;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
-import com.example.yihanwang.myapplication.entities.TextProgressBar;
-import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,6 +35,7 @@ public class PhotoImageActivity extends AppCompatActivity {
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
     private TextView scoreTitle;
+    private TextView tip;
     private ImageView background;
     private ImageView photo;
     private ImageView info;
@@ -53,12 +44,14 @@ public class PhotoImageActivity extends AppCompatActivity {
     private ImageInfo imageInfo;
     private int currentSelectedGalaryIdx = -1;
     private ImageInfo selectedImage = null;
-    private ImageView image_1;
+    private ImageView house;
+    private ImageView leaf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_image_activity);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -75,11 +68,11 @@ public class PhotoImageActivity extends AppCompatActivity {
         }
         realm.commitTransaction();
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "retganon.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
 
         background = (ImageView) findViewById(R.id.userBackground);
         scoreTitle = (TextView) findViewById(R.id.scoreTitle);
-        scoreTitle.setText("Score: " + total + "               Level: " + ScoreUtils.getCurrentLevel(total));
+        scoreTitle.setText("Score: " + total + "          Level: " + ScoreUtils.getCurrentLevel(total));
         scoreTitle.setTypeface(font);
 
         Bundle b = getIntent().getExtras();
@@ -90,7 +83,7 @@ public class PhotoImageActivity extends AppCompatActivity {
             Drawable d = ImageStorage.getInstance().getDrawable(this.getAssets(), imageInfo);
             plant.setImageDrawable(d);
         }
-        photo = (ImageView) findViewById(R.id.takePhoto);
+        photo = (ImageView) findViewById(R.id.camera);
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +92,7 @@ public class PhotoImageActivity extends AppCompatActivity {
             }
         });
 
-        info = (ImageView) findViewById(R.id.imageInfo);
+        info = (ImageView) findViewById(R.id.book);
         info.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -109,6 +102,40 @@ public class PhotoImageActivity extends AppCompatActivity {
                 args.putDouble("image_info_id", imageInfo.getId());
                 intent.putExtras(args);
                 startActivity(intent);
+            }
+        });
+
+        house = (ImageView) findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        leaf = (ImageView) findViewById(R.id.yellow_leaf);
+        leaf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "teen.ttf");
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PhotoImageActivity.this);
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tip_activity, null);
+                tip = (TextView) view.findViewById(R.id.tip);
+                tip.setTypeface(font);
+
+                    tip.setText("1. Clicking on a photo you just took to go to the comparison page \n 2. Swiping up the photo you just took to remove it");
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.setView(view);
+                builder.show();
             }
         });
 

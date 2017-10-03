@@ -35,7 +35,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View itemView = layoutInflater.inflate(R.layout.image_swipe, container, false);
         final ImageView imageView = (ImageView) itemView.findViewById(R.id.swip_image_view);
-        Typeface font = Typeface.createFromAsset(ctx.getAssets(), "retganon.ttf");
+        Typeface font = Typeface.createFromAsset(ctx.getAssets(), "teen.ttf");
         final TextView textView = (TextView) itemView.findViewById(R.id.imageCount);
         textView.setText("Image :" + (position + 1) + "/" + images.size());
         textView.setText((position + 1) + "/" + images.size());

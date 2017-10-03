@@ -31,7 +31,7 @@ public class OneListActivity extends AppCompatActivity {
         Bundle args = getIntent().getExtras();
         double id = args.getDouble("image_info_id");
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "retganon.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
         ImageInfo i = ImageStorage.getInstance().getImageInfoById(id);
         plant = (ImageView) findViewById(R.id.PlantPhoto);
         plant.setImageDrawable(ImageStorage.getInstance().getDrawable(getAssets(), i));
