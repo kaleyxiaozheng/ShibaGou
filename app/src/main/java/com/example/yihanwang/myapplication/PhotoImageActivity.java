@@ -120,23 +120,6 @@ public class PhotoImageActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(getApplicationContext(), TipActivity.class));
-//                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "teen.ttf");
-//
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(PhotoImageActivity.this);
-//                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tip_activity, null);
-//                tip = (TextView) view.findViewById(R.id.tip);
-//                tip.setTypeface(font);
-//
-//                    tip.setText("1. Clicking on a photo you just took to go to the comparison page \n 2. Swiping up the photo you just took to remove it");
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                builder.setView(view);
-//                builder.show();
             }
         });
 
@@ -185,7 +168,15 @@ public class PhotoImageActivity extends AppCompatActivity {
                 result += score.getScore();
             }
 
-            scoreTitle.setText("Score: " + result + "               Level: " + ScoreUtils.getCurrentLevel(result));
+            scoreTitle.setText("Score: " + result + "          Level: " + ScoreUtils.getCurrentLevel(result));
+
+            int[] score = ScoreUtils.getLevel_score();
+
+            for(int i = 0; i < 20; i++){
+                if(result == score[i]){
+                    startActivity(new Intent(getApplicationContext(), PassLevel.class));
+                }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

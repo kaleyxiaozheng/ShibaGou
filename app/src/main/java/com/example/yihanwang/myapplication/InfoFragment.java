@@ -1,5 +1,6 @@
 package com.example.yihanwang.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
@@ -14,6 +16,8 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 import java.util.List;
 
 public class InfoFragment extends Fragment {
+
+    private ImageView house;
 
     @Nullable
     @Override
@@ -29,11 +33,13 @@ public class InfoFragment extends Fragment {
         viewPager.setAdapter(adapter);
 
         viewPager.setCurrentItem(idx);
-//        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//
+
+//        house = (ImageView)  view.findViewById(R.id.house);
+//        house.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onPageSelected(int position) {
-//
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
 //            }
 //        });
         return view;

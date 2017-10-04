@@ -27,14 +27,14 @@
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/level"
+            android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/imageNumBackground"
             android:layout_alignLeft="@id/imageNumBackground"
             android:layout_alignRight="@id/imageNumBackground"
             android:layout_alignTop="@id/imageNumBackground"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="65dp"
             android:gravity="center_horizontal"
             android:textColor="#fffcfb"
             android:textSize="24dp"
@@ -61,10 +61,10 @@
             android:layout_width="165dp"
             android:layout_height="165dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="45dp" />
+            android:layout_marginTop="44dp" />
 
         <TextView
-            android:id="@+id/displayScore"
+            android:id="@+id/level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/circleBar"

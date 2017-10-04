@@ -38,11 +38,11 @@ public class ScoreActivity extends AppCompatActivity {
         float imageNumber = ScoreUtils.getNextLevelImageNumber(total)*10;
         float percent = total/imageNumber;
         float progress = percent*100;
-        userScore = (TextView) findViewById(R.id.displayScore);
-        userScore.setText(String.valueOf(total));
+        userScore = (TextView) findViewById(R.id.score);
+        userScore.setText("Your score: " + total);
         levelTxt = (TextView) findViewById(R.id.level);
         //levelTxt.setText("You are level " + ScoreUtils.getCurrentLevel(total));
-        levelTxt.setText("Your score " + total);
+        levelTxt.setText("Level\n" + ScoreUtils.getCurrentLevel(total));
         levelTxt.setTypeface(font);
 
 //        nexLevel = (TextView) findViewById(R.id.nextLevel);

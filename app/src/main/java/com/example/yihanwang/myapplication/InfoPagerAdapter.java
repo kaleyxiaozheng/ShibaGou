@@ -38,6 +38,9 @@ public class InfoPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        Typeface font = Typeface.createFromAsset(ctx.getAssets(), "teen.ttf");
+
         final View view = layoutInflater.inflate(R.layout.info_swipe, container, false);
         ImageInfo imageInfo = images.get(position);
         final ImageView imageView = (ImageView) view.findViewById(R.id.PlantPhoto);
@@ -59,6 +62,8 @@ public class InfoPagerAdapter extends PagerAdapter {
             } else {
                 title.setText(sciencename);
             }
+
+            title.setTypeface(font);
             imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), imageInfo));
         }
         container.addView(view);
