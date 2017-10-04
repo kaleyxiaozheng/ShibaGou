@@ -265,6 +265,12 @@ public class PhotoImageActivity extends AppCompatActivity {
 
                                     ImageGalleryStorage.getInstance().removeGalleryImageById(recordId);
                                     compare.setImageDrawable(null);
+                                    ImageGallery gallery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
+                                    if(gallery == null || gallery.getImageCount() <= 0) {
+                                        View galeryContainer = findViewById(R.id.image_galery_container);
+                                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
+                                        layoutParams.weight = 0;
+                                    }
                                 }
                                 result = true;
                             }
