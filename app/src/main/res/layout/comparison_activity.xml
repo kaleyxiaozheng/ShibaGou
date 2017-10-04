@@ -87,17 +87,17 @@
 
         <RelativeLayout
             android:id="@+id/rl_image_2"
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="210dp" >
 
             <com.example.yihanwang.myapplication.TouchImageView
                 android:id="@+id/plantPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                />
+                android:scaleType="fitXY"/>
 
             <!--<ImageView-->
                 <!--android:id="@+id/pin_2"-->

@@ -1,6 +1,5 @@
 package com.example.yihanwang.myapplication;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,8 +7,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.yihanwang.myapplication.entities.TextProgressBar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 /**
@@ -19,6 +20,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class ScoreActivity extends AppCompatActivity {
     //private TextView nexLevel;
     private ImageView gallery;
+    private ImageView house;
     private TextView userScore;
     private TextView levelTxt;
     boolean check = false;
@@ -39,8 +41,10 @@ public class ScoreActivity extends AppCompatActivity {
         userScore = (TextView) findViewById(R.id.displayScore);
         userScore.setText(String.valueOf(total));
         levelTxt = (TextView) findViewById(R.id.level);
-        levelTxt.setText("You are level " + ScoreUtils.getCurrentLevel(total));
+        //levelTxt.setText("You are level " + ScoreUtils.getCurrentLevel(total));
+        levelTxt.setText("Your score " + total);
         levelTxt.setTypeface(font);
+
 //        nexLevel = (TextView) findViewById(R.id.nextLevel);
 //        nexLevel.setText("next level " + (ScoreUtils.getCurrentLevel(total) + 1));
 //        nexLevel.setTypeface(font);
@@ -54,7 +58,16 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
+        house = (ImageView)  findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circleBar);
         circularProgressBar.setColor(ContextCompat.getColor(this, R.color.progressBarColor));
         circularProgressBar.setBackgroundColor(ContextCompat.getColor(this, R.color.backgroundProgressBarColor));
         circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));

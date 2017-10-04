@@ -14,14 +14,14 @@
         android:required="true" />
 
     <application
-        tools:replace="icon, label"
-        android:allowBackup="true"
         android:name=".MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/app_logo"
         android:label="Flora Friend"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.ActionBar.Transparent">
+        android:theme="@style/AppTheme.ActionBar.Transparent"
+        tools:replace="icon, label">
         <activity android:name=".LogoAnimation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,18 +37,27 @@
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ComparisonActivity"></activity>
-        <activity android:name=".AppAdActivity"
+        <activity
+            android:name=".AppAdActivity"
             android:screenOrientation="landscape"></activity>
         <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".GalleryActivity"></activity>
         <activity android:name=".GalleryImageViewActivity"></activity>
         <activity android:name="PhotoImageActivity"></activity>
-        <activity android:name="EnvelopeActivity" android:theme="@style/Theme.Transparent"></activity>
+        <activity
+            android:name="EnvelopeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".OneListActivity"></activity>
-        <activity android:name=".TipActivity"></activity>
+        <activity
+            android:name=".TipActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".GalleryMessage"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -27,11 +27,11 @@ public class LogoAnimation extends AppCompatActivity {
         setContentView(R.layout.activity_logo_animation);
 
         gifImageView = (GifImageView) findViewById(R.id.gifImageView);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.circleBar);
         progressBar.setVisibility(progressBar.VISIBLE);
 
         try {
-            InputStream inputStream = getAssets().open("boot_animation.gif");
+            InputStream inputStream = getAssets().open("loading.gif");
             byte[] bytes = IOUtils.toByteArray(inputStream);
             gifImageView.setBytes(bytes);
             gifImageView.startAnimation();

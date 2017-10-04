@@ -4,30 +4,96 @@
     android:background="#b5defd"
     android:layout_height="match_parent">
 
-    <!--<Button-->
-        <!--android:id="@+id/delete_btn"-->
-        <!--android:gravity="right"-->
-        <!--android:enabled="false"-->
-        <!--android:text="@string/delete"-->
-        <!--android:textAlignment="center"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-    <ImageButton
-        android:id="@+id/delete_btn"
-        android:gravity="right"
-        android:enabled="false"
-        android:text="@string/delete"
-        android:textAlignment="center"
-        android:layout_width="55dp"
-        android:layout_height="63dp"
-        android:src="@drawable/trash"/>
+    <RelativeLayout
+        android:id="@+id/imageNumInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imageNumBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/select_imagenumbers" />
+
+        <TextView
+            android:id="@+id/gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageNumBackground"
+            android:layout_alignLeft="@id/imageNumBackground"
+            android:layout_alignRight="@id/imageNumBackground"
+            android:layout_alignTop="@id/imageNumBackground"
+            android:layout_marginTop="68dp"
+            android:gravity="center_horizontal"
+            android:textColor="#fffcfb"
+            android:textStyle="bold"
+            android:textSize="24dp"/>
+    </RelativeLayout>
     <GridView
         android:id="@+id/gallery_view"
         android:numColumns="3"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="250dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp">
 
     </GridView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/grass"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="bottom|center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@drawable/select_grass"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/house"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/house_3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/instruction"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/wooden_board_5"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/house"
+            android:layout_toEndOf="@+id/house"
+            android:layout_marginLeft="62dp"
+            android:layout_marginStart="62dp" />
+
+        <ImageView
+            android:id="@+id/delete_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:src="@drawable/trash"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 </LinearLayout>

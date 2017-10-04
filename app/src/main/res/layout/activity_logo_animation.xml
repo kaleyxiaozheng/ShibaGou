@@ -18,7 +18,7 @@
         android:layout_height="match_parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/circleBar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"

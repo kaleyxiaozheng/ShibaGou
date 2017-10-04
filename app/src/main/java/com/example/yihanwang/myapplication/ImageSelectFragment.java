@@ -61,31 +61,33 @@ public class ImageSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
-                message = (TextView) view.findViewById(R.id.message);
-                message.setTypeface(font);
-
-                int cur = ScoreUtils.getCurrentScores();
-                int nex = ScoreUtils.getNextLevelImageNumber(cur);
-                int dif = nex - cur/10;
-                if(dif > 1){
-                    message.setText("After finding " + dif + " plants in your area, you will go to next level");
-                } else {
-                    message.setText("After finding " + dif + " plant in your area, you will go to next level");
-                }
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                builder.setView(view);
-                builder.show();
+                startActivity(new Intent(getActivity(), EnvelopeActivity.class));
+//
+//                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
+//
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
+//                message = (TextView) view.findViewById(R.id.message);
+//                message.setTypeface(font);
+//
+//                int cur = ScoreUtils.getCurrentScores();
+//                int nex = ScoreUtils.getNextLevelImageNumber(cur);
+//                int dif = nex - cur/10;
+//                if(dif > 1){
+//                    message.setText("After finding " + dif + " plants in your area, you will go to next level");
+//                } else {
+//                    message.setText("After finding " + dif + " plant in your area, you will go to next level");
+//                }
+//
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                builder.setView(view);
+//                builder.show();
             }
         });
 

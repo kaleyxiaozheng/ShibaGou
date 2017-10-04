@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
@@ -35,7 +37,10 @@ public class GalleryActivity extends AppCompatActivity {
 
     private int deviceWidth = 1024;
     private ImageAdapter adapter;
-    private ImageButton deleteBtn;
+    private ImageView deleteBtn;
+    private ImageView house;
+    private ImageView mess;
+    private TextView gallery;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class GalleryActivity extends AppCompatActivity {
         adapter = new ImageAdapter(this, allRecords, deviceWidth);
         gridView.setAdapter(adapter);
 
-        this.deleteBtn = (ImageButton) findViewById(R.id.delete_btn);
+        this.deleteBtn = (ImageView) findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +69,29 @@ public class GalleryActivity extends AppCompatActivity {
                 adapter.loadImageData(records);
                 gridView.setAdapter(null);
                 gridView.setAdapter(adapter);
+            }
+        });
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
+
+        gallery = (TextView) findViewById(R.id.gallery);
+        gallery.setText("Your gallery");
+        gallery.setTypeface(font);
+
+        house = (ImageView) findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mess = (ImageView) findViewById(R.id.instruction);
+        mess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), GalleryMessage.class));
             }
         });
     }

@@ -119,23 +119,24 @@ public class PhotoImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "teen.ttf");
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(PhotoImageActivity.this);
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tip_activity, null);
-                tip = (TextView) view.findViewById(R.id.tip);
-                tip.setTypeface(font);
-
-                    tip.setText("1. Clicking on a photo you just took to go to the comparison page \n 2. Swiping up the photo you just took to remove it");
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                builder.setView(view);
-                builder.show();
+                startActivity(new Intent(getApplicationContext(), TipActivity.class));
+//                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "teen.ttf");
+//
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(PhotoImageActivity.this);
+//                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tip_activity, null);
+//                tip = (TextView) view.findViewById(R.id.tip);
+//                tip.setTypeface(font);
+//
+//                    tip.setText("1. Clicking on a photo you just took to go to the comparison page \n 2. Swiping up the photo you just took to remove it");
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                builder.setView(view);
+//                builder.show();
             }
         });
 

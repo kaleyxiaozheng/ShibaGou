@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.GeofenceTransitionService;
@@ -76,6 +77,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     private View tempView;
     private int PLACE_PICKER_REQUEST = 1;
     private Marker marker;
+    private ImageView house;
 
     private static final String TAG = MapFragment.class.getSimpleName();
     private GoogleApiClient googleApiClient;
@@ -155,6 +157,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, fragment).addToBackStack(ListFragment.class.getName()).commit();
+            }
+        });
+
+        house = (ImageView) view.findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 

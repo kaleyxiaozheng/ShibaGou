@@ -1,10 +1,12 @@
 package com.example.yihanwang.myapplication;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class OneListActivity extends AppCompatActivity {
     private ImageView plant;
     private TextView name;
     private TextView info;
+    private ImageView house;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +59,15 @@ public class OneListActivity extends AppCompatActivity {
             sb.append(words[0]);
             info.setText(sb);
         }
+
+        house = (ImageView)  findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
