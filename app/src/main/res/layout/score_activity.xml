@@ -34,7 +34,7 @@
             android:layout_alignLeft="@id/imageNumBackground"
             android:layout_alignRight="@id/imageNumBackground"
             android:layout_alignTop="@id/imageNumBackground"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="63dp"
             android:gravity="center_horizontal"
             android:textColor="#fffcfb"
             android:textSize="24dp"

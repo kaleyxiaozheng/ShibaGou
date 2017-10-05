@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commit();
+                        .replace(R.id.frame_container, fragment).addToBackStack(ImageFragment.class.getName()).commitAllowingStateLoss();
             }
         });
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.frame_container, fragment).commit();
+                .add(R.id.frame_container, fragment).commitAllowingStateLoss();
     }
 
     private void checkPermission() {

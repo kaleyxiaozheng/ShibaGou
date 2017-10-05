@@ -91,14 +91,14 @@ public class ImageSelectFragment extends Fragment {
             }
         });
 
-        house = (ImageView) view.findViewById(R.id.house);
-        house.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        house = (ImageView) view.findViewById(R.id.house);
+//        house.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         int score = ScoreUtils.getCurrentScores();

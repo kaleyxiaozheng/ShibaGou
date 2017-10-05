@@ -15,11 +15,13 @@ public class ScoreUtils {
     public static String[] level_title = new String[20];
 
     public static void setScoresLevels() {
-        level_score[0] = 20;
+        level_score[0] = 0;
+        level_score[1] = 20;
+
         level_title[0] = "Level 1";
 
-        for (int i = 1; i < level_score.length; i++) {
-            level_score[i] = i * 10 + level_score[0] + level_score[i - 1];
+        for (int i = 2; i < level_score.length; i++) {
+            level_score[i] = i * 10 + level_score[1] + level_score[i - 1];
             level_title[i] = "Level " + (i + 1);
         }
     }
@@ -51,7 +53,7 @@ public class ScoreUtils {
         for (int i = 0; i < 20; i++) {
             if (currentScore < level_score[i]) {
                 if (i == 0) {
-                    return i;
+                    return 1;
                 }
                 return i;
             }

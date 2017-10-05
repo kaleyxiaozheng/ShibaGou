@@ -114,7 +114,7 @@ public class PhotoImageActivity extends AppCompatActivity {
             }
         });
 
-        leaf = (ImageView) findViewById(R.id.yellow_leaf);
+        leaf = (ImageView) findViewById(R.id.bird);
         leaf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
