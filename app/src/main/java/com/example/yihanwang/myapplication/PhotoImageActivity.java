@@ -101,6 +101,7 @@ public class PhotoImageActivity extends AppCompatActivity {
                 args.putDouble("image_info_id", imageInfo.getId());
                 intent.putExtras(args);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -108,15 +109,7 @@ public class PhotoImageActivity extends AppCompatActivity {
         next_plant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new ImageSelectFragment();
-                Bundle args = new Bundle();
-                args.putDouble("location_lat", LocationService.getInstance().getCurrentLat());
-                args.putDouble("location_lon", LocationService.getInstance().getCurrentLon());
-                fragment.setArguments(args);
-                fragment.setArguments(args);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment).addToBackStack(ImageSelectFragment.class.getName()).commit();
+                finish();
             }
         });
 
@@ -237,6 +230,7 @@ public class PhotoImageActivity extends AppCompatActivity {
                         switch (motionEvent.getAction()) {
                             case MotionEvent.ACTION_UP:
                                 showComparisonActivity();
+                                finish();
                         }
                         return false;
                     }

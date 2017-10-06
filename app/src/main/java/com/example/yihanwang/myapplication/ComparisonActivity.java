@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 public class ComparisonActivity extends AppCompatActivity {
     private ImageView plantImage;
     private ImageView plantPhoto;
+    private ImageView nextPlant;
 
     private TextView plant;
     private TextView photo;
@@ -37,6 +39,14 @@ public class ComparisonActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.title);
         title.setText("Comparison");
         photo.setText("Your photo:");
+
+        nextPlant = (ImageView) findViewById(R.id.nextPlant);
+        nextPlant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         title.setTypeface(font1);
         photo.setTypeface(font2);

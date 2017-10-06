@@ -30,13 +30,13 @@ public class ScoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Typeface font = Typeface.createFromAsset(getAssets(),"teen.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
 
         int total = ScoreUtils.getCurrentScores();
-        float imageNumber = ScoreUtils.getNextLevelImageNumber(total)*10;
+        float imageNumber = ScoreUtils.getNextLevelImageNumber(total) * 10;
         int level = ScoreUtils.getCurrentLevel(total);
-        float percent = level/imageNumber;
-        float progress = percent*100;
+        float percent = (level-1) / imageNumber;
+        float progress = percent * 100;
         userScore = (TextView) findViewById(R.id.score);
         userScore.setText("Your score: " + total);
         levelTxt = (TextView) findViewById(R.id.level);
@@ -57,7 +57,7 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        home = (ImageView)  findViewById(R.id.home);
+        home = (ImageView) findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +72,8 @@ public class ScoreActivity extends AppCompatActivity {
         circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));
         circularProgressBar.setBackgroundProgressBarWidth(getResources().getDimension(R.dimen.backgroundProgressBarWidth));
         int animationDuration = 2500; // 2500ms = 2,5s
-        for(int i =0; i < 20; i++){
-            if(total == ScoreUtils.getLevel_score()[i]){
+        for (int i = 0; i < 20; i++) {
+            if (total == ScoreUtils.getLevel_score()[i]) {
                 check = true;
             }
         }
@@ -83,6 +83,7 @@ public class ScoreActivity extends AppCompatActivity {
         //}
         //else {
         circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+
         //}
     }
 

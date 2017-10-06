@@ -88,11 +88,11 @@ public class ImageStorage {
                     Location l2 = new Location("l2");
                     l2.setLatitude(lat1);
                     l2.setLongitude(lon1);
-                    if (Math.abs(l1.distanceTo(l2)) <= 10 * DISTANCE) {
+                    if (Math.abs(l1.distanceTo(l2)) <= 2 * DISTANCE) {
                         rangeImages.add(imageInfo);
-                        if(rangeImages.size() >= 30){
-                            return rangeImages;
-                        }
+//                        if(rangeImages.size() >= 30){
+//                            return rangeImages;
+//                        }
                         break;
                     }
                 }
