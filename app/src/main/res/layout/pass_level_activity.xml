@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pass_level">
 
     <TextView
         android:id="@+id/textView"
@@ -13,8 +15,14 @@
         android:layout_marginLeft="20dp"
         android:textSize="20dp"
         android:textStyle="bold"/>
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/flower_2"/>
+        android:id="@+id/imageView"
+        android:layout_width="152dp"
+        android:layout_height="68dp"
+        android:src="@drawable/button_1"
+        android:layout_marginBottom="@id/pass_level"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
 </LinearLayout>

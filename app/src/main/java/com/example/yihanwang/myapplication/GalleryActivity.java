@@ -75,7 +75,7 @@ public class GalleryActivity extends AppCompatActivity {
         gallery.setText("Your gallery");
         gallery.setTypeface(font);
 
-        house = (ImageView) findViewById(R.id.nextPlant);
+        house = (ImageView) findViewById(R.id.home);
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

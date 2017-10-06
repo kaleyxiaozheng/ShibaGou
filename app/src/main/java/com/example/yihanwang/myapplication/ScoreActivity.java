@@ -18,7 +18,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class ScoreActivity extends AppCompatActivity {
     //private TextView nexLevel;
     private ImageView gallery;
-    private ImageView next_plant;
+    private ImageView home;
     private TextView userScore;
     private TextView levelTxt;
     boolean check = false;
@@ -57,8 +57,8 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        next_plant = (ImageView)  findViewById(R.id.nextPlant);
-        next_plant.setOnClickListener(new View.OnClickListener() {
+        home = (ImageView)  findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#b5defd"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/imageNumInfo"
@@ -32,20 +33,21 @@
             android:layout_marginTop="65dp"
             android:gravity="center_horizontal"
             android:textColor="#fffcfb"
-            android:textStyle="bold"
-            android:textSize="24dp"/>
+            android:textSize="24dp"
+            android:textStyle="bold" />
     </RelativeLayout>
+
     <GridView
         android:id="@+id/gallery_view"
-        android:numColumns="3"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp">
+        android:horizontalSpacing="10dp"
+        android:numColumns="3"
+        android:verticalSpacing="10dp">
 
     </GridView>
 
@@ -57,22 +59,25 @@
         <ImageView
             android:id="@+id/grass"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:gravity="bottom|center_horizontal"
             android:scaleType="fitXY"
-            android:src="@drawable/select_grass"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:src="@drawable/select_grass_2" />
 
         <ImageView
-            android:id="@+id/nextPlant"
+            android:id="@+id/delete_btn"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/next_plant"
+            android:layout_height="60dp"
+            android:src="@drawable/trash"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_alignTop="@+id/instruction" />
 
         <ImageView
             android:id="@+id/instruction"
@@ -80,18 +85,20 @@
             android:layout_height="60dp"
             android:src="@drawable/wooden_board_5"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/nextPlant"
-            android:layout_toEndOf="@+id/nextPlant"
-            android:layout_marginLeft="62dp"
-            android:layout_marginStart="62dp" />
+            android:layout_toRightOf="@+id/delete_btn"
+            android:layout_toEndOf="@+id/delete_btn"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_alignTop="@+id/nextPlant" />
+
 
         <ImageView
-            android:id="@+id/delete_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:src="@drawable/trash"
+            android:id="@+id/home"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/home"
+            android:layout_marginRight="33dp"
+            android:layout_marginEnd="33dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

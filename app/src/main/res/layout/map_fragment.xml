@@ -25,39 +25,50 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:layout_height="50dp"
         android:background="#fbe7e7">
 
         <ImageView
-            android:id="@+id/nextPlant"
-            android:layout_width="60dp"
+            android:id="@+id/grass"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="29dp"
-            android:layout_marginStart="29dp"
-            android:src="@drawable/next_plant" />
+            android:scaleType="fitXY"
+            android:src="@drawable/select_grass_2" />
 
-            <Button
-                android:id="@+id/findPlant"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_show_flora_button"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/findPlant"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_show_flora_button"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/plantList"
+            android:layout_toStartOf="@+id/plantList"
+            android:layout_marginRight="64dp"
+            android:layout_marginEnd="64dp" />
 
-            <Button
-                android:id="@+id/plantList"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_show_list_button"
-                android:layout_marginRight="70dp"
-                android:layout_marginEnd="41dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+        <Button
+            android:id="@+id/plantList"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_show_list_button"
+            android:layout_marginRight="49dp"
+            android:layout_marginEnd="49dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/home"
+            android:layout_toStartOf="@+id/home" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
+            android:src="@drawable/home"
+            android:layout_alignTop="@+id/grass"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </LinearLayout>

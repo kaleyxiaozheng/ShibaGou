@@ -62,17 +62,9 @@
                 android:id="@+id/plantImage"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp" />
-
-            <!--<ImageView-->
-            <!--android:id="@+id/pin_1"-->
-            <!--android:layout_width="70dp"-->
-            <!--android:layout_height="70dp"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:src="@drawable/red" />-->
         </RelativeLayout>
 
         <TextView
@@ -95,23 +87,15 @@
                 android:id="@+id/plantPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="fitXY" />
-
-            <!--<ImageView-->
-            <!--android:id="@+id/pin_2"-->
-            <!--android:layout_width="70dp"-->
-            <!--android:layout_height="70dp"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:src="@drawable/red" />-->
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true">
 
 
@@ -123,26 +107,13 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/select_grass" />
 
-            <!--<ImageView-->
-            <!--android:id="@+id/instruction"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="95dp"-->
-            <!--android:src="@drawable/select_instruction"-->
-            <!--android:layout_marginLeft="103dp"-->
-            <!--android:layout_marginStart="103dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-
-            <!--<ImageView-->
-            <!--android:id="@+id/bird"-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:src="@drawable/bird_1"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignRight="@+id/instruction"-->
-            <!--android:layout_alignEnd="@+id/instruction"-->
-            <!--android:layout_marginTop="5dp"/>-->
+            <ImageView
+                android:id="@+id/nextPlant"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="220dp"
+                android:src="@drawable/next_plant" />
         </RelativeLayout>
     </LinearLayout>
 

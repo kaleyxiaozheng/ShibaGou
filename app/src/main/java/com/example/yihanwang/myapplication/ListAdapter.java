@@ -20,6 +20,7 @@ public class ListAdapter extends RecyclerView.Adapter {
 
     private final FragmentActivity activity;
     private List<ImageInfo> items = new ArrayList<>();
+    private ImageView home;
 
     public ListAdapter(FragmentActivity activity, List<ImageInfo> imagesFromLocation) {
         this.items.addAll(imagesFromLocation);
