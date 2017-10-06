@@ -42,7 +42,7 @@ public class EnvelopeActivity extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .6), (int) (height * .3));
+        getWindow().setLayout((int) (width * .8), (int) (height * .3));
 
     }
 }

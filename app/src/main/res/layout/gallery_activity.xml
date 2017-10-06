@@ -66,10 +66,10 @@
             android:layout_alignParentStart="true" />
 
         <ImageView
-            android:id="@+id/house"
+            android:id="@+id/nextPlant"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/house_3"
+            android:src="@drawable/next_plant"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -80,8 +80,8 @@
             android:layout_height="60dp"
             android:src="@drawable/wooden_board_5"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/house"
-            android:layout_toEndOf="@+id/house"
+            android:layout_toRightOf="@+id/nextPlant"
+            android:layout_toEndOf="@+id/nextPlant"
             android:layout_marginLeft="62dp"
             android:layout_marginStart="62dp" />
 

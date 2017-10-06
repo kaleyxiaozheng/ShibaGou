@@ -31,7 +31,7 @@ public class GalleryMessage extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .6), (int) (height * .4));
+        getWindow().setLayout((int) (width * .6), (int) (height * .7));
 
     }
 }

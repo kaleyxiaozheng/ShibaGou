@@ -2,4 +2,6 @@
 <resources>
     <dimen name="progressBarWidth">10dp</dimen>
     <dimen name="backgroundProgressBarWidth">10dp</dimen>
+    <dimen name="sign_board_height">80dp</dimen>
+    <dimen name="sign_board_height_1">120dp</dimen>
 </resources>

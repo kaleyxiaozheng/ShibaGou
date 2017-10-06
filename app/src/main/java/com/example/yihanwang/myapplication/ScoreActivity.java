@@ -7,10 +7,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.yihanwang.myapplication.entities.TextProgressBar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 /**
@@ -20,7 +18,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class ScoreActivity extends AppCompatActivity {
     //private TextView nexLevel;
     private ImageView gallery;
-    private ImageView house;
+    private ImageView next_plant;
     private TextView userScore;
     private TextView levelTxt;
     boolean check = false;
@@ -36,7 +34,8 @@ public class ScoreActivity extends AppCompatActivity {
 
         int total = ScoreUtils.getCurrentScores();
         float imageNumber = ScoreUtils.getNextLevelImageNumber(total)*10;
-        float percent = total/imageNumber;
+        int level = ScoreUtils.getCurrentLevel(total);
+        float percent = level/imageNumber;
         float progress = percent*100;
         userScore = (TextView) findViewById(R.id.score);
         userScore.setText("Your score: " + total);
@@ -58,8 +57,8 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        house = (ImageView)  findViewById(R.id.house);
-        house.setOnClickListener(new View.OnClickListener() {
+        next_plant = (ImageView)  findViewById(R.id.nextPlant);
+        next_plant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -79,12 +78,12 @@ public class ScoreActivity extends AppCompatActivity {
             }
         }
 
-        if(check == true){
-            circularProgressBar.setProgressWithAnimation(100, animationDuration);
-        }
-        else {
-            circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
-        }
+        //if(check == true){
+        //    circularProgressBar.setProgressWithAnimation(100, animationDuration);
+        //}
+        //else {
+        circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+        //}
     }
 
 

@@ -1,17 +1,16 @@
 package com.example.yihanwang.myapplication;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +20,8 @@ import android.widget.TextView;
 import com.example.yihanwang.myapplication.entities.ImageGallery;
 import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
+import com.example.yihanwang.myapplication.gps.LocationService;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,16 +36,14 @@ public class PhotoImageActivity extends AppCompatActivity {
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
     private TextView scoreTitle;
-    private TextView tip;
     private ImageView background;
     private ImageView photo;
     private ImageView info;
     private ImageView plant;
-    private List<ImageInfo> images = new ArrayList<>();
     private ImageInfo imageInfo;
     private int currentSelectedGalaryIdx = -1;
     private ImageInfo selectedImage = null;
-    private ImageView house;
+    private ImageView next_plant;
     private ImageView leaf;
 
     @Override
@@ -105,12 +104,19 @@ public class PhotoImageActivity extends AppCompatActivity {
             }
         });
 
-        house = (ImageView) findViewById(R.id.house);
-        house.setOnClickListener(new View.OnClickListener() {
+        next_plant = (ImageView) findViewById(R.id.nextPlant);
+        next_plant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                Fragment fragment = new ImageSelectFragment();
+                Bundle args = new Bundle();
+                args.putDouble("location_lat", LocationService.getInstance().getCurrentLat());
+                args.putDouble("location_lon", LocationService.getInstance().getCurrentLon());
+                fragment.setArguments(args);
+                fragment.setArguments(args);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, fragment).addToBackStack(ImageSelectFragment.class.getName()).commit();
             }
         });
 

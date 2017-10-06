@@ -60,7 +60,7 @@ public class OneListActivity extends AppCompatActivity {
             info.setText(sb);
         }
 
-        house = (ImageView)  findViewById(R.id.house);
+        house = (ImageView)  findViewById(R.id.nextPlant);
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

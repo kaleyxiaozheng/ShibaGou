@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -27,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.GeofenceTransitionService;
 import com.example.yihanwang.myapplication.entities.LocationTracker;
@@ -160,7 +158,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
             }
         });
 
-        house = (ImageView) view.findViewById(R.id.house);
+        house = (ImageView) view.findViewById(R.id.nextPlant);
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

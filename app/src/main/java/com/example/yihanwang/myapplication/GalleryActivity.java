@@ -1,6 +1,5 @@
 package com.example.yihanwang.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,9 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,7 +75,7 @@ public class GalleryActivity extends AppCompatActivity {
         gallery.setText("Your gallery");
         gallery.setTypeface(font);
 
-        house = (ImageView) findViewById(R.id.house);
+        house = (ImageView) findViewById(R.id.nextPlant);
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

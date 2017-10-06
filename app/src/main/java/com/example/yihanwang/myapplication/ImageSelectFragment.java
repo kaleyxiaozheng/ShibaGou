@@ -23,6 +23,8 @@ import com.example.yihanwang.myapplication.entities.ImageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
+
 /**
  * Created by kaley on 18/9/17.
  */
@@ -31,12 +33,12 @@ public class ImageSelectFragment extends Fragment {
 
     private TextView image_number;
     private ImageView bird;
-    private ImageView house;
+    private ImageView instruction;
+    private ImageView next_plant;
     private List<ImageInfo> images = new ArrayList<>();
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
     private double lon;
-    private TextView message;
 
 
     public ImageSelectFragment() {
@@ -45,7 +47,7 @@ public class ImageSelectFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.select_image, container, false);
+        final View view = inflater.inflate(R.layout.select_image, container, false);
         Bundle args = getArguments();
         lat = args.getDouble("location_lat");
         lon = args.getDouble("location_lon");
@@ -55,6 +57,13 @@ public class ImageSelectFragment extends Fragment {
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
 
+        instruction = (ImageView) view.findViewById(R.id.instruction);
+        instruction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), InstructionActivity.class));
+            }
+        });
 
         bird = (ImageView) view.findViewById(R.id.bird);
         bird.setOnClickListener(new View.OnClickListener() {
@@ -62,44 +71,9 @@ public class ImageSelectFragment extends Fragment {
             public void onClick(View v) {
 
                 startActivity(new Intent(getActivity(), EnvelopeActivity.class));
-//
-//                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "teen.ttf");
-//
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                View view = LayoutInflater.from(getContext()).inflate(R.layout.envelope_activity, null);
-//                message = (TextView) view.findViewById(R.id.message);
-//                message.setTypeface(font);
-//
-//                int cur = ScoreUtils.getCurrentScores();
-//                int nex = ScoreUtils.getNextLevelImageNumber(cur);
-//                int dif = nex - cur/10;
-//                if(dif > 1){
-//                    message.setText("After finding " + dif + " plants in your area, you will go to next level");
-//                } else {
-//                    message.setText("After finding " + dif + " plant in your area, you will go to next level");
-//                }
-//
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                builder.setView(view);
-//                builder.show();
             }
+
         });
-
-//        house = (ImageView) view.findViewById(R.id.house);
-//        house.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
 
         int score = ScoreUtils.getCurrentScores();
         //Log.i("score", "current score " + score);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d3efd5"
@@ -123,55 +124,65 @@
                     android:src="@drawable/select_grass" />
 
                 <ImageView
-                    android:id="@+id/tree_stump"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/tree_stump_1"
-                    android:layout_alignParentBottom="true" />
-
-                <ImageView
                     android:id="@+id/bird"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/bird_1"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/tree_stump"
-                    android:layout_alignEnd="@+id/tree_stump"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginBottom="13dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp" />
+                <!--android:layout_alignLeft="@+id/nextPlant"-->
+                <!--android:layout_alignStart="@+id/nextPlant"-->
+                <!--android:layout_alignRight="@+id/tree_stump"-->
+                <!--android:layout_alignEnd="@+id/tree_stump"-->
 
                 <ImageView
                     android:id="@+id/camera"
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@mipmap/camera_2"
-                    android:layout_marginLeft="28dp"
-                    android:layout_marginStart="28dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/camera_2"
                     android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/tree_stump" />
+                    android:layout_toRightOf="@+id/bird"
+                    android:layout_toEndOf="@+id/bird"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp" />
+
+                <!--<ImageView-->
+                <!--android:id="@+id/tree_stump"-->
+                <!--android:layout_width="90dp"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:src="@drawable/tree_stump_1"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_toRightOf="@+id/camera"/>-->
+
 
                 <ImageView
                     android:id="@+id/book"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="60dp"
+                    android:layout_height="220dp"
                     android:src="@drawable/book_1"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginStart="23dp"
-                    android:layout_below="@+id/bird"
-                    android:layout_toRightOf="@+id/camera"
-                    android:layout_toEndOf="@+id/camera" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/nextPlant"
+                    android:layout_toStartOf="@+id/nextPlant"
+                    android:layout_marginRight="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:layout_alignTop="@+id/camera" />
+                <!--android:layout_toRightOf="@+id/tree_stump"-->
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/house"-->
-                    <!--android:layout_width="60dp"-->
-                    <!--android:layout_height="60dp"-->
-                    <!--android:src="@drawable/house_3"-->
-                    <!--android:layout_marginLeft="14dp"-->
-                    <!--android:layout_marginStart="14dp"-->
-                    <!--android:layout_alignTop="@+id/book"-->
-                    <!--android:layout_toRightOf="@+id/book"-->
-                    <!--android:layout_toEndOf="@+id/book" />-->
+
+                <ImageView
+                    android:id="@+id/nextPlant"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="43dp"
+                    android:layout_marginRight="43dp"
+                    android:src="@drawable/next_plant"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
             </RelativeLayout>
         </LinearLayout>
