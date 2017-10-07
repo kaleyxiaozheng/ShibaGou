@@ -2,6 +2,7 @@ package com.example.yihanwang.myapplication;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,6 +22,11 @@ import com.example.yihanwang.myapplication.gps.LocationService;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private Typeface font1;
+    private Typeface font2;
+    private View view;
+    static private boolean flag = true;
+    private TextView tip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +41,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertMessage() {
+        view = LayoutInflater.from(MainActivity.this).inflate(R.layout.maindialog, null);
+        font1 = Typeface.createFromAsset(getAssets(), "teen_bd_it.ttf");
+        font2 = Typeface.createFromAsset(getAssets(), "teen.ttf");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.maindialog, null);
-        Typeface font1 = Typeface.createFromAsset(getAssets(), "teen_bd_it.ttf");
-        Typeface font2 = Typeface.createFromAsset(getAssets(), "teen.ttf");
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView message = (TextView) view.findViewById(R.id.message);
+        TextView tip = (TextView) view.findViewById(R.id.tip);
         title.setTypeface(font1);
         message.setTypeface(font2);
+        tip.setTypeface(font2);
         title.setText("Flora Friend");
 
         List<ImageInfo> images = ImageStorage.getInstance().getImagesFromLocation(LocationService.getInstance().getCurrentLat(), LocationService.getInstance().getCurrentLon());
         message.setText("There are " + images.size() + " plants in your area, press play to begin");
-
+        tip.setText("Pat bird or sign board, you will get something interesting!");
         builder.setPositiveButton("Play", new DialogInterface.OnClickListener() {
 
             @Override
@@ -86,7 +95,16 @@ public class MainActivity extends AppCompatActivity {
                     1000);
         } else {
             LocationService.getInstance(this).locateCurrentLocation();
-            alertMessage();
+
+            if (flag) {
+                alertMessage();
+                flag = false;
+            } else {
+                Fragment fragment = new HomeFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.frame_container, fragment).commitAllowingStateLoss();
+            }
         }
     }
 
@@ -95,7 +113,16 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         if (requestCode == 1000) {
             LocationService.getInstance(this).locateCurrentLocation();
-            alertMessage();
+            if (flag) {
+                alertMessage();
+                flag = false;
+            } else {
+                Fragment fragment = new HomeFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.frame_container, fragment).commitAllowingStateLoss();
+            }
+
         }
     }
 }

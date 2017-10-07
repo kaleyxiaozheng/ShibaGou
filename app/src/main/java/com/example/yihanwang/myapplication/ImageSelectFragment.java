@@ -87,6 +87,8 @@ public class ImageSelectFragment extends Fragment {
         image_number.setTypeface(font);
         //current_level.setTypeface(font);
         //next_level.setTypeface(font);
+        int result = ScoreUtils.getCurrentScores();
+        int level = ScoreUtils.getCurrentLevel(result);
         image_number.setText("There are " + imageList.size() + " plants nearby!");
         int lev = ScoreUtils.getCurrentLevel(score);
         //current_level.setText("you are level: " + lev);
