@@ -41,6 +41,9 @@ public class AppAdActivity extends AppCompatActivity {
         sb.append("4. Google Maps Android \n");
         sb.append("Google Maps Android API is from https://developers.google.com/maps/documentation/android-api/reference Licensed under the Creative Commons Attribution 3.0 License");
         sb.append("\n\n");
+        sb.append("5. Icons of the project \n");
+        sb.append("Icons of the project occurrence download at https://openclipart.org. Licensed under Creative Commons Zero 1.0 Public Domain License");
+        sb.append("\n\n");
 
         video = (VideoView) findViewById(R.id.appAd);
         String path = "android.resource://com.example.yihanwang.myapplication/" + R.raw.app_ad;
