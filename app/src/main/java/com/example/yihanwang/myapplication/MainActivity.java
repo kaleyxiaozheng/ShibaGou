@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<ImageInfo> images = ImageStorage.getInstance().getImagesFromLocation(LocationService.getInstance().getCurrentLat(), LocationService.getInstance().getCurrentLon());
         message.setText("There are " + images.size() + " plants in your area, press play to begin");
-        tip.setText("Pat bird or sign board, you will get something interesting!");
+        tip.setText("touch the bird or sign for a hint!");
         builder.setPositiveButton("Play", new DialogInterface.OnClickListener() {
 
             @Override

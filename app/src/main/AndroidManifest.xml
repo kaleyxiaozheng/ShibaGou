@@ -45,7 +45,7 @@
         <activity android:name=".ComparisonActivity"></activity>
         <activity
             android:name=".AppAdActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".GalleryActivity"></activity>
         <activity android:name=".GalleryImageViewActivity"></activity>

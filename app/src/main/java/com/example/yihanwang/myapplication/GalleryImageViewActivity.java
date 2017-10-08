@@ -1,5 +1,6 @@
 package com.example.yihanwang.myapplication;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -23,6 +24,8 @@ import io.realm.RealmResults;
 
 public class GalleryImageViewActivity extends AppCompatActivity {
 
+    private ImageView home;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,15 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        home = (ImageView) findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         double imageId = bundle.getDouble("image_id");
@@ -50,7 +62,7 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         ImageInfo imageInfo = ImageStorage.getInstance().getImagebyId(imageId);
         if (imageInfo != null) {
             TextView textView = (TextView) findViewById(R.id.gallery_image_text);
-            Typeface font = Typeface.createFromAsset(getAssets(),"retganon.ttf");
+            Typeface font = Typeface.createFromAsset(getAssets(),"teen.ttf");
             textView.setText(imageInfo.getName());
             textView.setTypeface(font);
         } else {
