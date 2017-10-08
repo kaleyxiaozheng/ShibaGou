@@ -30,7 +30,7 @@ public class AppAdActivity extends AppCompatActivity {
 
         sb = new StringBuffer();
         sb.append("1. Plants Records \n");
-        sb.append("Atlas of Living Australia occurrence download at http://www.ala.org.au. Accessed 3 November 2015");
+        sb.append("Atlas of Living Australia occurrence download at http://www.ala.org.au. 4th September 2017");
         sb.append("\n\n");
         sb.append("2. Plants Images \n");
         sb.append("Atlas of Living Australia occurrence download at https://biocache.ala.org.au/. Accessed from http://www.ala.org.au");

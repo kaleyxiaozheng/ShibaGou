@@ -42,28 +42,45 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".ComparisonActivity"></activity>
+        <activity
+            android:name=".ComparisonActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".AppAdActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".ScoreActivity"></activity>
-        <activity android:name=".GalleryActivity"></activity>
-        <activity android:name=".GalleryImageViewActivity"></activity>
-        <activity android:name="PhotoImageActivity"></activity>
+        <activity
+            android:name=".ScoreActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".GalleryActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".GalleryImageViewActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="PhotoImageActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="EnvelopeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".OneListActivity"></activity>
+        <activity
+            android:name=".OneListActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".TipActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".GalleryMessage"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".PassLevel"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".InstructionActivity"
+        <activity
+            android:name=".InstructionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

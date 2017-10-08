@@ -43,10 +43,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_show_flora_button"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/plantList"
-            android:layout_toStartOf="@+id/plantList"
-            android:layout_marginRight="64dp"
-            android:layout_marginEnd="64dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="53dp"
+            android:layout_marginStart="53dp" />
 
         <Button
             android:id="@+id/plantList"
@@ -56,19 +56,19 @@
             android:layout_marginRight="49dp"
             android:layout_marginEnd="49dp"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/home"
-            android:layout_toStartOf="@+id/home" />
-
-        <ImageView
-            android:id="@+id/home"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:layout_marginRight="36dp"
-            android:src="@drawable/home"
-            android:layout_alignTop="@+id/grass"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/home"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="36dp"-->
+            <!--android:layout_marginRight="36dp"-->
+            <!--android:src="@drawable/home"-->
+            <!--android:layout_alignTop="@+id/grass"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true" />-->
     </RelativeLayout>
 
 </LinearLayout>

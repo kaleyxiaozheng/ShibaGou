@@ -18,7 +18,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class ScoreActivity extends AppCompatActivity {
     //private TextView nexLevel;
     private ImageView gallery;
-    private ImageView home;
+    //private ImageView home;
     private TextView userScore;
     private TextView levelTxt;
     boolean check = false;
@@ -57,14 +57,14 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        home = (ImageView) findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        home = (ImageView) findViewById(R.id.home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circleBar);
         circularProgressBar.setColor(ContextCompat.getColor(this, R.color.progressBarColor));

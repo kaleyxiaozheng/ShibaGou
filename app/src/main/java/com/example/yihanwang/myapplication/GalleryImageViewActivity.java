@@ -24,7 +24,7 @@ import io.realm.RealmResults;
 
 public class GalleryImageViewActivity extends AppCompatActivity {
 
-    private ImageView home;
+    //private ImageView home;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,14 +35,14 @@ public class GalleryImageViewActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        home = (ImageView) findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        home = (ImageView) findViewById(R.id.home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         Bundle bundle = getIntent().getExtras();
         double imageId = bundle.getDouble("image_id");

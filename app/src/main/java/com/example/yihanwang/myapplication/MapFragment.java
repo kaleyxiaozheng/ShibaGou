@@ -75,7 +75,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     private View tempView;
     private int PLACE_PICKER_REQUEST = 1;
     private Marker marker;
-    private ImageView home;
+    //private ImageView home;
 
     private static final String TAG = MapFragment.class.getSimpleName();
     private GoogleApiClient googleApiClient;
@@ -113,7 +113,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
 
         if (tempView != null) {
             return tempView;
@@ -158,14 +157,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Fragmen
             }
         });
 
-        home = (ImageView) view.findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        home = (ImageView) view.findViewById(R.id.home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         return view;

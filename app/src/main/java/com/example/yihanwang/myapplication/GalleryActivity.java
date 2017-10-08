@@ -35,7 +35,7 @@ public class GalleryActivity extends AppCompatActivity {
     private int deviceWidth = 1024;
     private ImageAdapter adapter;
     private ImageView deleteBtn;
-    private ImageView house;
+    //private ImageView house;
     private ImageView mess;
     private TextView gallery;
 
@@ -72,17 +72,17 @@ public class GalleryActivity extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
 
         gallery = (TextView) findViewById(R.id.gallery);
-        gallery.setText("Your gallery");
+        gallery.setText("Your Gallery");
         gallery.setTypeface(font);
 
-        house = (ImageView) findViewById(R.id.home);
-        house.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        house = (ImageView) findViewById(R.id.home);
+//        house.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         mess = (ImageView) findViewById(R.id.instruction);
         mess.setOnClickListener(new View.OnClickListener() {

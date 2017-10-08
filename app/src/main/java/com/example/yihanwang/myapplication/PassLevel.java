@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
@@ -19,6 +21,7 @@ import io.realm.RealmResults;
 public class PassLevel  extends Activity {
 
     private TextView text;
+    private ImageView nextPlant;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +42,16 @@ public class PassLevel  extends Activity {
         int currentLevel = ScoreUtils.getCurrentLevel(result);
         int nextLevel = ScoreUtils.getNextLevelImageNumber(result);
 
+//        nextPlant = (ImageView) findViewById(R.id.nextPlant);
+//        nextPlant.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+
         text = (TextView) findViewById(R.id.textView);
-        text.setText("Congratulations! You have completed level " + currentLevel);
+        text.setText("Congratulations! You have reached level  " + currentLevel);
         text.setTypeface(font);
         //map = (ImageView) findViewById(R.id.map);
         DisplayMetrics dm = new DisplayMetrics();
@@ -48,6 +59,6 @@ public class PassLevel  extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .9), (int) (height * .4));
+        getWindow().setLayout((int) (width * .9), (int) (height * .3));
     }
 }
