@@ -26,7 +26,7 @@ public class TipActivity extends Activity {
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "teen.ttf");
 
         tip = (TextView) findViewById(R.id.tip);
-        tip.setText("➤ Clicking on a photo you just took to go to the comparison page \n\n ➤ Swiping up the photo you just took to remove it");
+        tip.setText("➤ Click on a photo you have taken to compare \n\n ➤ Swipe up on a photo you just took to delete it");
         tip.setTypeface(font);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

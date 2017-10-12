@@ -75,34 +75,34 @@ public class ManageImage implements GestureDetector.OnGestureListener {
 
     @Override
     public void onLongPress(MotionEvent motionEvent) {
-        double[] imagesID = new double[imageViews.size()];
-
-        for(int j = 0; j < imageViews.size(); j++){
-            imagesID[j] = images.get(j).getId();
-            Log.i("imagesID", "id " + imagesID[j]);
-        }
-
-
-
-        Random r = new Random();
-        //Log.i("SwipeLocation", "Swipe location " + i);
-        images.remove(this.i);
-        //Log.i("remove images", "remove " + images.get(this.i).getId());
-        int i = r.nextInt(imageList.size() - 1);
-        //Log.i("add images", "add " + images.get(i).getId());
-        //Log.i("id", "image id " + imageList.get(i).getId());
-
-        if(imageList.size() > images.size()){
-            for(int n = 0; n < imagesID.length; n++){
-
-                if(imageList.get(i).getId() == imagesID[n]){
-                    i++;
-                }
-            }
-            images.add(this.i, imageList.get(i));
-            imageViews.get(this.i).setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), images.get(this.i)));
-            imageinfo = imageList.get(i);
-        }
+//        double[] imagesID = new double[imageViews.size()];
+//
+//        for(int j = 0; j < imageViews.size(); j++){
+//            imagesID[j] = images.get(j).getId();
+//            Log.i("imagesID", "id " + imagesID[j]);
+//        }
+//
+//
+//
+//        Random r = new Random();
+//        //Log.i("SwipeLocation", "Swipe location " + i);
+//        images.remove(this.i);
+//        //Log.i("remove images", "remove " + images.get(this.i).getId());
+//        int i = r.nextInt(imageList.size() - 1);
+//        //Log.i("add images", "add " + images.get(i).getId());
+//        //Log.i("id", "image id " + imageList.get(i).getId());
+//
+//        if(imageList.size() > images.size()){
+//            for(int n = 0; n < imagesID.length; n++){
+//
+//                if(imageList.get(i).getId() == imagesID[n]){
+//                    i++;
+//                }
+//            }
+//            images.add(this.i, imageList.get(i));
+//            imageViews.get(this.i).setImageDrawable(ImageStorage.getInstance().getDrawable(ctx.getAssets(), images.get(this.i)));
+//            imageinfo = imageList.get(i);
+//        }
     }
 
     @Override

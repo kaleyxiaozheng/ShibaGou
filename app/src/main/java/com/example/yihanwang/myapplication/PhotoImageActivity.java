@@ -1,5 +1,6 @@
 package com.example.yihanwang.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -32,7 +33,7 @@ import java.util.Random;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class PhotoImageActivity extends AppCompatActivity {
+public class PhotoImageActivity extends Activity {
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
     private TextView scoreTitle;
@@ -51,26 +52,11 @@ public class PhotoImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_image_activity);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        Realm realm = Realm.getDefaultInstance();
-
-        int total = 0;
-
-        realm.beginTransaction();
-        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-
-        for (ScoreRecord score : results) {
-            total = total + score.getScore();
-        }
-        realm.commitTransaction();
-
         Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
 
         background = (ImageView) findViewById(R.id.userBackground);
         scoreTitle = (TextView) findViewById(R.id.scoreTitle);
+        int total = ScoreUtils.getCurrentScores();
         scoreTitle.setText("Score: " + total + "          Level: " + ScoreUtils.getCurrentLevel(total));
         scoreTitle.setTypeface(font);
 
@@ -160,24 +146,18 @@ public class PhotoImageActivity extends AppCompatActivity {
             out.flush();
             out.close();
             showPhotos(plant);
-            int result = 0;
-            RealmResults<ScoreRecord> total = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
-            for (ScoreRecord score : total) {
-                //Log.i("score", "score " + score.getScore());
-                result += score.getScore();
-            }
 
-            scoreTitle.setText("Score: " + result + "          Level: " + ScoreUtils.getCurrentLevel(result));
+            int num = ScoreUtils.getCurrentScores();
+            scoreTitle.setText("Score: " + num + "          Level: " + ScoreUtils.getCurrentLevel(num));
 
             int[] score = ScoreUtils.getLevel_score();
 
-            for(int i = 0; i < 20; i++){
-                if(result == score[i]){
+            for (int i = 0; i < 20; i++) {
+                if (num == score[i]) {
                     startActivity(new Intent(getApplicationContext(), PassLevel.class));
                     finish();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,6 +181,7 @@ public class PhotoImageActivity extends AppCompatActivity {
                 View galeryContainer = findViewById(R.id.image_galery_container);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
                 layoutParams.weight = 1;
+                layoutParams.leftMargin = 150;
             }
 
             for (int i = 0; i < viewIds.length; i++) {
@@ -267,7 +248,7 @@ public class PhotoImageActivity extends AppCompatActivity {
                                     ImageGalleryStorage.getInstance().removeGalleryImageById(recordId);
                                     compare.setImageDrawable(null);
                                     ImageGallery gallery = ImageGalleryStorage.getInstance().getImageGallery(imageInfo.getId());
-                                    if(gallery == null || gallery.getImageCount() <= 0) {
+                                    if (gallery == null || gallery.getImageCount() <= 0) {
                                         View galeryContainer = findViewById(R.id.image_galery_container);
                                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) galeryContainer.getLayoutParams();
                                         layoutParams.weight = 0;
@@ -275,6 +256,9 @@ public class PhotoImageActivity extends AppCompatActivity {
                                 }
                                 result = true;
                             }
+
+                            int res = ScoreUtils.getCurrentScores();
+                            scoreTitle.setText("Score: " + res + "          Level: " + ScoreUtils.getCurrentLevel(res));
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -302,6 +286,5 @@ public class PhotoImageActivity extends AppCompatActivity {
             imageView.setImageDrawable(ImageStorage.getInstance().getDrawable(getAssets(), imageInfo));
         }
     }
-
 }
 

@@ -24,7 +24,7 @@ public class InstructionActivity extends Activity {
 
         mess = (TextView) findViewById(R.id.message);
 
-        mess.setText("➤ Click on a plant to take a photo \n\n ➤ Hold the plant to skip it");
+        mess.setText("➤ Click on a plant to take a photo");
         mess.setTypeface(font);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -32,7 +32,7 @@ public class InstructionActivity extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .4));
+        getWindow().setLayout((int) (width * .8), (int) (height * .3));
 
     }
 }

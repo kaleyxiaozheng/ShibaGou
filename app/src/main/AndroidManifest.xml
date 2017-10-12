@@ -82,6 +82,8 @@
             android:name=".InstructionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".GalleryComparisonActivity"></activity>
     </application>
 
 </manifest>

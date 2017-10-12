@@ -35,8 +35,11 @@ public class ScoreActivity extends AppCompatActivity {
         int total = ScoreUtils.getCurrentScores();
         float imageNumber = ScoreUtils.getNextLevelImageNumber(total) * 10;
         int level = ScoreUtils.getCurrentLevel(total);
-        float percent = (level-1) / imageNumber;
+//        float percent = (level-1) / imageNumber;
+        float totalLevel = 20.00f;
+        float percent = level / totalLevel;
         float progress = percent * 100;
+
         userScore = (TextView) findViewById(R.id.score);
         userScore.setText("Your score: " + total);
         levelTxt = (TextView) findViewById(R.id.level);
@@ -82,10 +85,72 @@ public class ScoreActivity extends AppCompatActivity {
         //    circularProgressBar.setProgressWithAnimation(100, animationDuration);
         //}
         //else {
-        circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+        if(level == 1){
+            circularProgressBar.setProgressWithAnimation(0, animationDuration);
+        }
+        else {
+            circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+        }
 
         //}
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Typeface font = Typeface.createFromAsset(getAssets(), "teen.ttf");
+        int total = ScoreUtils.getCurrentScores();
+        int level = ScoreUtils.getCurrentLevel(total);
+        float totalLevel = 20.00f;
+        float percent = level / totalLevel;
+        float progress = percent * 100;
+        userScore = (TextView) findViewById(R.id.score);
+        userScore.setText("Your score: " + total);
+        levelTxt = (TextView) findViewById(R.id.level);
+        //levelTxt.setText("You are level " + ScoreUtils.getCurrentLevel(total));
+        levelTxt.setText("Level\n" + ScoreUtils.getCurrentLevel(total));
+        levelTxt.setTypeface(font);
+
+
+        gallery = (ImageView) findViewById(R.id.gallery);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent subscription = new Intent(getApplicationContext(), GalleryActivity.class);
+                startActivity(subscription);
+            }
+        });
+
+//        home = (ImageView) findViewById(R.id.home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circleBar);
+        circularProgressBar.setColor(ContextCompat.getColor(this, R.color.progressBarColor));
+        circularProgressBar.setBackgroundColor(ContextCompat.getColor(this, R.color.backgroundProgressBarColor));
+        circularProgressBar.setProgressBarWidth(getResources().getDimension(R.dimen.progressBarWidth));
+        circularProgressBar.setBackgroundProgressBarWidth(getResources().getDimension(R.dimen.backgroundProgressBarWidth));
+        int animationDuration = 2500; // 2500ms = 2,5s
+        for (int i = 0; i < 20; i++) {
+            if (total == ScoreUtils.getLevel_score()[i]) {
+                check = true;
+            }
+        }
+        if(level == 1){
+            circularProgressBar.setProgressWithAnimation(0, animationDuration);
+        }
+        else {
+            circularProgressBar.setProgressWithAnimation(progress, animationDuration); // Default duration = 1500ms
+        }
+
+    }
 }

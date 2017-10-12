@@ -64,7 +64,7 @@ public class ComparisonActivity extends AppCompatActivity {
             if (com.isEmpty()) {
                 plant.setText(first.getName() + ":");
             } else {
-                plant.setText(com + " (" + first.getName() +"):");
+                plant.setText(com + " (" + first.getName() + "):");
             }
 
             plant.setTypeface(font2);

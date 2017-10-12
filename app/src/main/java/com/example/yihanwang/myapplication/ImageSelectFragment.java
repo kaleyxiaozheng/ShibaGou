@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,9 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yihanwang.myapplication.entities.ImageInfo;
+import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
@@ -39,7 +45,7 @@ public class ImageSelectFragment extends Fragment {
     private List<ImageView> imageViews = new ArrayList<>();
     private double lat;
     private double lon;
-
+    private List<ImageInfo> imageList;
 
     public ImageSelectFragment() {
     }
@@ -76,25 +82,20 @@ public class ImageSelectFragment extends Fragment {
         });
 
         int score = ScoreUtils.getCurrentScores();
-        //Log.i("score", "current score " + score);
         int imageNumber = ScoreUtils.getNextLevelImageNumber(score);
         Log.i("image", "next level image number " + imageNumber);
         image_number = (TextView) view.findViewById(R.id.image_number);
-        //TextView current_level = (TextView) view.findViewById(R.id.current_level);
-        //TextView next_level = (TextView) view.findViewById(R.id.next_level);
 
-        final List<ImageInfo> imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
+
+        imageList = ImageStorage.getInstance().getImagesFromLocation(lat, lon);
+
         image_number.setTypeface(font);
-        //current_level.setTypeface(font);
-        //next_level.setTypeface(font);
         int result = ScoreUtils.getCurrentScores();
         int level = ScoreUtils.getCurrentLevel(result);
         image_number.setText("There are " + imageList.size() + " plants nearby!");
         int lev = ScoreUtils.getCurrentLevel(score);
-        //current_level.setText("you are level: " + lev);
 
-        //next_level.setText("go to next Level, you need to take " + (imageNumber) + " more plants");
-        imageNumber = Math.min(imageList.size(), imageNumber);
+        imageNumber = imageList.size();
         for (int i = 0; i < imageNumber; i++) {
             ImageView image = new ImageView((getContext()));
             imageViews.add(image);
@@ -114,7 +115,7 @@ public class ImageSelectFragment extends Fragment {
             imageViews.get(i).setLayoutParams(layoutParams);
             scrollImageLayout.addView(imageViews.get(i));
             imageViews.get(i).setImageDrawable(ImageStorage.getInstance().getDrawable(getActivity().getAssets(), images.get(i)));
-            //imageViews.get(i).setOnClickListener(new ImageClickListener(imageViews.get(i), getContext(), i));
+
             final ImageInfo imageinfo = images.get(i);
 
             ManageImage manageImage = new ManageImage(imageinfo, getActivity(), lat, lon, i, images, imageList, imageViews);
@@ -128,6 +129,65 @@ public class ImageSelectFragment extends Fragment {
                 }
             });
         }
+        List<Double> databaseImagesId = new ArrayList<>(getImagesDatabase());
+//        List<Double> nearbyId = new ArrayList<>();
+//        for (int i = 0; i < images.size(); i++) {
+//            nearbyId.add(images.get(i).getId());
+//        }
+
+//        for (int i = 0; i < databaseImagesId.size(); i++) {
+//            if (nearbyId.contains(databaseImagesId.get(i))) {
+//                imageViews.get(i).setAlpha((float) 0.3);
+//            }
+//        }
+        for (int i = 0; i < databaseImagesId.size(); i++) {
+            if (databaseImagesId.contains(imageList.get(i).getId())) {
+                imageViews.get(i).setAlpha((float) 0.3);
+            }
+        }
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        List<Double> databaseImagesId = new ArrayList<>(getImagesDatabase());
+//        List<Double> nearbyId = new ArrayList<>();
+////        List<Double>checkList = new ArrayList<>();
+//        for (int i = 0; i < images.size(); i++) {
+//            nearbyId.add(images.get(i).getId());
+//        }
+
+//        if(imageViews.size() > databaseImagesId.size() ) {
+        for (int i = 0; i < databaseImagesId.size(); i++) {
+            if (databaseImagesId.contains(imageList.get(i).getId())) {
+                    imageViews.get(i).setAlpha((float) 0.3);
+            }
+        }
+//        }
+//        if(imageViews.size() < databaseImagesId.size()) {
+//            for (int c = 0; c < images.size(); c++) {
+//                if (databaseImagesId.contains(nearbyId.get(c))) {
+//                    imageViews.get(c).setAlpha((float) 0.3);
+//                }
+//            }
+//        }
+    }
+
+    public List<Double> getImagesDatabase() {
+
+        Realm realm = Realm.getDefaultInstance();
+        List<Double> imagesId = new ArrayList<>();
+
+        realm.beginTransaction();
+        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+        for (ScoreRecord score : results) {
+            if (!imagesId.contains(score.getImageId())) {
+                imagesId.add(score.getImageId());
+            }
+        }
+        realm.commitTransaction();
+
+        return imagesId;
     }
 }

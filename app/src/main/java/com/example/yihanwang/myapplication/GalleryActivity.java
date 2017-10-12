@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.yihanwang.myapplication.entities.ImageInfo;
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
 import java.io.File;
@@ -176,16 +177,28 @@ public class GalleryActivity extends AppCompatActivity {
             } else {
                 imageView = (ImageView) convertView;
             }
+
+//            final ImageInfo imageInfo = ImageStorage.getInstance().getImageInfoById(imageIds.get(position));
+
             imageView.setImageBitmap(images.get(position));
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, GalleryImageViewActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putDouble("image_id", imageIds.get(position));
-                    bundle.putInt("image_gallery_id", imageGalleryIds.get(position));
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    Intent intent = new Intent(context, GalleryComparisonActivity.class);
+                    Bundle b = new Bundle();
+                    b.putDouble("image_id", imageIds.get(position));
+                    b.putDouble("firstImage", imageIds.get(position));
+                    b.putInt("image_gallery_id", imageGalleryIds.get(position));
+                    intent.putExtras(b);
+                    startActivity(intent);
+
+
+//                    Intent intent = new Intent(context, GalleryImageViewActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putDouble("image_id", imageIds.get(position));
+//                    bundle.putInt("image_gallery_id", imageGalleryIds.get(position));
+//                    intent.putExtras(bundle);
+//                    context.startActivity(intent);
 
                 }
             });

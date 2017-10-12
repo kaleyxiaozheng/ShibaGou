@@ -31,9 +31,9 @@ public class EnvelopeActivity extends Activity {
                 int nex = ScoreUtils.getNextLevelImageNumber(cur);
                 int dif = nex - cur/10;
                 if(dif > 1){
-                    tip.setText("After finding " + dif + " plants in your area, you will go to next level");
+                    tip.setText("Find " + dif + " more plants in your area to level up");
                 } else {
-                    tip.setText("After finding " + dif + " plant in your area, you will go to next level");
+                    tip.setText("Find 1 more plant in your area to level up");
                 }
         tip.setTypeface(font);
 

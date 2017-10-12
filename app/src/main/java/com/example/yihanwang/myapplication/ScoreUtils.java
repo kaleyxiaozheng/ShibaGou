@@ -2,6 +2,9 @@ package com.example.yihanwang.myapplication;
 
 import com.example.yihanwang.myapplication.entities.ScoreRecord;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -25,14 +28,21 @@ public class ScoreUtils {
         }
     }
 
-
     public static int getCurrentScores() {
-        int total = 0;
-        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+        Realm realm = Realm.getDefaultInstance();
 
+        int total = 0;
+
+        realm.beginTransaction();
+        RealmResults<ScoreRecord> results = Realm.getDefaultInstance().where(ScoreRecord.class).findAll();
+        List<Double> scoreIds = new ArrayList<>();
         for (ScoreRecord score : results) {
-            total = total + score.getScore();
+            if (!scoreIds.contains(score.getImageId())) {
+                scoreIds.add(score.getImageId());
+                total += 10;
+            }
         }
+        realm.commitTransaction();
         return total;
     }
 
