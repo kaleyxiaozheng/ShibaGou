@@ -130,19 +130,17 @@ public class ImageSelectFragment extends Fragment {
             });
         }
         List<Double> databaseImagesId = new ArrayList<>(getImagesDatabase());
-//        List<Double> nearbyId = new ArrayList<>();
-//        for (int i = 0; i < images.size(); i++) {
-//            nearbyId.add(images.get(i).getId());
-//        }
-
-//        for (int i = 0; i < databaseImagesId.size(); i++) {
-//            if (nearbyId.contains(databaseImagesId.get(i))) {
-//                imageViews.get(i).setAlpha((float) 0.3);
-//            }
-//        }
-        for (int i = 0; i < databaseImagesId.size(); i++) {
-            if (databaseImagesId.contains(imageList.get(i).getId())) {
-                imageViews.get(i).setAlpha((float) 0.3);
+        if(imageViews.size() > databaseImagesId.size()){
+            for (int i = 0; i < imageViews.size(); i++) {
+                if (databaseImagesId.contains(imageList.get(i).getId())) {
+                    imageViews.get(i).setAlpha((float) 0.3);
+                }
+            }
+        } else {
+            for (int i = 0; i < databaseImagesId.size(); i++) {
+                if (databaseImagesId.contains(imageList.get(i).getId())) {
+                    imageViews.get(i).setAlpha((float) 0.3);
+                }
             }
         }
         return view;
@@ -152,26 +150,20 @@ public class ImageSelectFragment extends Fragment {
     public void onStart() {
         super.onStart();
         List<Double> databaseImagesId = new ArrayList<>(getImagesDatabase());
-//        List<Double> nearbyId = new ArrayList<>();
-////        List<Double>checkList = new ArrayList<>();
-//        for (int i = 0; i < images.size(); i++) {
-//            nearbyId.add(images.get(i).getId());
-//        }
 
-//        if(imageViews.size() > databaseImagesId.size() ) {
-        for (int i = 0; i < databaseImagesId.size(); i++) {
-            if (databaseImagesId.contains(imageList.get(i).getId())) {
+        if(imageViews.size() > databaseImagesId.size()){
+            for (int i = 0; i < imageViews.size(); i++) {
+                if (databaseImagesId.contains(imageList.get(i).getId())) {
                     imageViews.get(i).setAlpha((float) 0.3);
+                }
+            }
+        } else {
+            for (int i = 0; i < databaseImagesId.size(); i++) {
+                if (databaseImagesId.contains(imageList.get(i).getId())) {
+                    imageViews.get(i).setAlpha((float) 0.3);
+                }
             }
         }
-//        }
-//        if(imageViews.size() < databaseImagesId.size()) {
-//            for (int c = 0; c < images.size(); c++) {
-//                if (databaseImagesId.contains(nearbyId.get(c))) {
-//                    imageViews.get(c).setAlpha((float) 0.3);
-//                }
-//            }
-//        }
     }
 
     public List<Double> getImagesDatabase() {

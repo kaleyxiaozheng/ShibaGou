@@ -4,33 +4,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/appAd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <VideoView
+            android:id="@+id/appAd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:text="Attribution"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attribution"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
 
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#eff0f1">
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/attribution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:background="#eff0f1"/>
     </ScrollView>
 </LinearLayout>

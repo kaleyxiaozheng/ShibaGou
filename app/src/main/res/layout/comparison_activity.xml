@@ -7,14 +7,11 @@
 
     <RelativeLayout
         android:id="@+id/imageNumInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1">
+        android:layout_marginTop="5dp">
 
         <ImageView
             android:id="@+id/imageNumBackground"
@@ -33,7 +30,7 @@
             android:layout_alignLeft="@id/imageNumBackground"
             android:layout_alignRight="@id/imageNumBackground"
             android:layout_alignTop="@id/imageNumBackground"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="65dp"
             android:gravity="center_horizontal"
             android:textColor="#fffcfb"
             android:textSize="24dp"
@@ -43,8 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="0.2">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/plantname"
@@ -60,13 +56,12 @@
         <RelativeLayout
             android:id="@+id/rl_image_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3">
+            android:layout_height="190dp">
 
             <com.example.yihanwang.myapplication.TouchImageView
                 android:id="@+id/plantImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="190dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp" />
@@ -86,13 +81,12 @@
         <RelativeLayout
             android:id="@+id/rl_image_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3">
+            android:layout_height="190dp">
 
             <com.example.yihanwang.myapplication.TouchImageView
                 android:id="@+id/plantPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="190dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp"
@@ -103,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true">
+
 
             <ImageView
                 android:id="@+id/grass"
@@ -116,9 +111,9 @@
                 android:id="@+id/nextPlant"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/next_plant"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_marginLeft="220dp"
+                android:src="@drawable/next_plant" />
         </RelativeLayout>
     </LinearLayout>
 

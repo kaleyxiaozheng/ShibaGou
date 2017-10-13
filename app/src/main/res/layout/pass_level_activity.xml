@@ -1,46 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pass_level"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:id="@+id/pass_level">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
         android:layout_marginTop="40dp"
-        android:textColor="#b23322"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="120dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginLeft="35dp"-->
-        <!--android:layout_marginRight="35dp">-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Press the bottom of the screen to go to the next level!"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#b23322"/>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/grass"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@drawable/select_grass_2" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/nextPlant"-->
-            <!--android:layout_width="148dp"-->
-            <!--android:layout_height="120dp"-->
-            <!--android:layout_marginLeft="50dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:src="@drawable/next_level"-->
-            <!--android:textColor="#b23322"-->
-            <!--android:textSize="20dp"-->
-            <!--android:textStyle="bold" />-->
-    <!--</RelativeLayout>-->
 </LinearLayout>
