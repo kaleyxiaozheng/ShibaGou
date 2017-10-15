@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="110dp">
+        android:layout_marginTop="60dp">
 
         <ImageView
             android:id="@+id/grass"
